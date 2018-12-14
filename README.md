@@ -6,7 +6,7 @@ El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
 
 - composer install    --> para instalar todas las dependencias del json
 
-- cp .env.example .env
+- cp .env.example .env / copy .env.example .env
 
 - php artisan key:generate
 
