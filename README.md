@@ -14,6 +14,8 @@ El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
 
 - php artisan config:cache
 
+- php artisan serve
+
 - abrir navegador http:\\localhost:8000
 
 --------------------importantes que siempre vamos a usar -------------------
