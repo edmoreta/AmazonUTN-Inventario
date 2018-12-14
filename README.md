@@ -4,8 +4,19 @@ El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
 # Instalación
 - git clone https://github.com/MrSoundMaurix/AmazonUTN-Inventario.git
 
-- composer install    --> para instalar todas las dependencias del json 
-- --------------------importantes que siempre vamos a usar -------------------
+- composer install    --> para instalar todas las dependencias del json
+
+- cp .env.example .env
+
+- php artisan key:generate
+
+- php artisan cache:clear
+
+- php artisan config:cache
+
+- abrir navegador http:\\localhost:8000
+
+--------------------importantes que siempre vamos a usar -------------------
 
 - git add .    -->Agrega todos los archivos
 
