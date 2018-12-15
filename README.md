@@ -37,3 +37,6 @@ El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
 - git commit -m "su mensaje"  -----> guarda el commit o cambios del proyecto con el mensaje
 
 - git push origin master   ----> le sube al repositorio virtual nuestro
+...............................
+........
+
