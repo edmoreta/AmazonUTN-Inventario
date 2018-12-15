@@ -16,5 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/elvis', function () {    
-    return view('elvis');
+    return view('elvis');       
+});
+
+Route::get('/luz', function () {
+    return view('luz');
+    
 });
