@@ -13,4 +13,9 @@
 
 Route::get('/', function () {
     return view('welcome');
+    
+});
+Route::get('/luz', function () {
+    return view('luz');
+    
 });
