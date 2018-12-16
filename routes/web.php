@@ -27,3 +27,8 @@ Route::get('/silva', function () {
     return view('silva');
     
 });
+
+Route::get('/pinchao', function () {
+    return view('pinchao');
+    
+});
