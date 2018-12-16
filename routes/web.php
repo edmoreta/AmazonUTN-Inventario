@@ -23,3 +23,7 @@ Route::get('/luz', function () {
     return view('luz');
     
 });
+Route::get('/silva', function () {
+    return view('silva');
+    
+});
