@@ -1,24 +1,52 @@
 # AmazonUTN-Inventario
-El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
+Proyecto de fin de semestre de las materias:
+- Ingenieria de Software II
+- Aplicaciones Informáticas I
 
 # Instalación
-- git clone https://github.com/MrSoundMaurix/AmazonUTN-Inventario.git
+Para instalar el proyecto en su máquina, descargue o clone el repositorio.
 
-- composer install    --> para instalar todas las dependencias del json
+```
+git clone https://github.com/MrSoundMaurix/AmazonUTN-Inventario.git
+```
 
-- cp .env.example .env / copy .env.example .env
+Una vez descargado, a través de consola acceder a la carpeta del proyecto
 
-- php artisan key:generate
+```
+cd AmazonUTN-Inventario
+```
 
-- php artisan cache:clear
+Y proceder a instalar todas las dependencias del proyecto
+```
+composer install
+```
 
-- php artisan config:cache
+Luego generar el archivo de configuración `.env`
+```
+cp .env.example .env        //GNU / Linux Distributions
+copy .env.example .env      //Windows
+```
 
-- php artisan serve
+La aplicación necesita una llave de cifrado que se obtiene con el comando
+```
+php artisan key:generate
+```
 
-- abrir navegador http:\\localhost:8000
+Por si acaso
+```
+php artisan cache:clear
+php artisan config:cache
+```
 
---------------------importantes que siempre vamos a usar -------------------
+Para visualizar el proyecto en un navegador, iniciar el servidor web de PHP
+```
+php artisan serve
+```
+
+Por último abrir el navegador [http:\\localhost:8000] o [http:\\127.0.0.1:8000]
+
+
+# Comandos git
 
 - git add .    -->Agrega todos los archivos
 
@@ -37,6 +65,5 @@ El proyecto de Ingenieria de software 2 y aplicaciones informaticas 1
 - git commit -m "su mensaje"  -----> guarda el commit o cambios del proyecto con el mensaje
 
 - git push origin master   ----> le sube al repositorio virtual nuestro
-...............................
-........
+
 
