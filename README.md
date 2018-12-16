@@ -43,7 +43,7 @@ Para visualizar el proyecto en un navegador, iniciar el servidor web de PHP
 php artisan serve
 ```
 
-Por último abrir el navegador [http:\\localhost:8000] o [http:\\127.0.0.1:8000]
+Por último abrir el navegador [http:\\localhost:8000]() o [http:\\127.0.0.1:8000]()
 
 
 # Comandos git
