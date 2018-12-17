@@ -21,14 +21,19 @@ Route::get('/elvis', function () {
 
 Route::get('/luz', function () {
     return view('luz');
-    
 });
 Route::get('/silva', function () {
     return view('silva');
-    
 });
 
 Route::get('/pinchao', function () {
     return view('pinchao');
-    
+});
+
+Route::get('/inicio', function () {
+    return view('inicio');
+});
+
+Route::get('/a', function () {    
+    return view('a');       
 });
