@@ -74,13 +74,13 @@
             <li class="header"></li>
             
             <li>
-             <a href="#">
+             <a href="{{ url('proveedores') }}">
              <span>Inicio</span>
                 <small class="label pull-right "><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-              <a href="#">
+            <a href="{{ url('proveedores/lista') }}">
                  <span>Proveedores</span>
                 <small class="label pull-right "><i class="fa fa-user" style="font-size: 18px;"></i></small>
               </a>
@@ -139,8 +139,6 @@
                   <h3 class="box-title">Sistema de Ventas</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div>
                 <!-- /.box-header -->

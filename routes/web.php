@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +9,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('proveedores/lista', 'PrincipalController@lista')->name('lista');
+Route::get('proveedores/estado/{id}/{est}', 'PrincipalController@estado')->name('estado');
+Route::resource('proveedores', 'PrincipalController');
 
 Route::get('/', function () {
     return view('welcome');    
