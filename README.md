@@ -47,23 +47,43 @@ Por último abrir el navegador http:\\localhost:8000 o http:\\127.0.0.1:8000
 
 
 # Comandos git
+Para agregar todos los archivos
+```
+git add .
+```
+Guardar el commit o cambios del proyecto con un mensaje de descripción
+```
+git commit -m "su mensaje"
+```
 
-- git add .    -->Agrega todos los archivos
-
-- git commit -m "su mensaje"  -----> guarda el commit o cambios del proyecto con el mensaje
-
-- git push origin master   ----> le sube al repositorio virtual nuestro
-
-
-- ---Para subir los cambios de tu proyecto debe ----------
-- Verificar que los cambios se han subido y evitar conflictos, primero se manda el comando
-- git pull origin master
-
-- Para se manda el comando de nuevo para que se agrege los cambios suyos y el del compañero
-- git add .    -->Agrega todos los archivos
-
-- git commit -m "su mensaje"  -----> guarda el commit o cambios del proyecto con el mensaje
-
-- git push origin master   ----> le sube al repositorio virtual nuestro
+Subir al repositorio virtual 'AmazonUTN-Inventario'
+```
+git push origin master
+```
 
 
+Para subir los cambios realizados en el proyecto. Primero se debe verificar que los cambios se han subido y evitar conflictos, con el comando
+```
+git pull origin master
+```
+
+Agregar los cambios personales y de los demás compañeros
+```
+git add .
+```
+
+Guardar el commit o cambios del proyecto con un mensaje de descripción
+```
+git commit -m "su mensaje"
+```
+
+Subir al repositorio virtual 'AmazonUTN-Inventario'
+```
+git push origin master
+```
+
+# Librerías
+Instalar la librería de formularios
+```
+composer require laravelcollective/html
+```

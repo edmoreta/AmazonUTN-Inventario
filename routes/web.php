@@ -14,7 +14,7 @@ Route::get('proveedores/estado/{id}/{est}', 'PrincipalController@estado')->name(
 Route::resource('proveedores', 'PrincipalController');
 
 Route::get('/', function () {
-    return view('welcome');    
+    return view('auth/login');    
 });
 
 Route::get('/elvis', function () {    
@@ -39,3 +39,6 @@ Route::get('/inicio', function () {
 Route::get('/a', function () {    
     return view('a');       
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
