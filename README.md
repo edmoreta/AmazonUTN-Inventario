@@ -82,8 +82,12 @@ Subir al repositorio virtual 'AmazonUTN-Inventario'
 git push origin master
 ```
 
-# Librerías
+## Librerías
 Instalar la librería de formularios
 ```
 composer require laravelcollective/html
+```
+## Creación de la Base de Datos
+```
+php artisan migrate
 ```
