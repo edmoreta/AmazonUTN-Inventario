@@ -44,7 +44,13 @@ class ProveedoresController extends Controller
      */
     public function create(Request $request)
     {
-        return view('Proveedores.create');
+        $proveedores = DB::select('SELECT * FROM inv_proveedores ORDER BY prv_id');
+        foreach ($proveedores as $prv) {
+            $proveedor=$prv;
+        }
+        $cod = substr($proveedor->prv_codigo, 4);
+        $cod+=1;
+        return view('Proveedores.create', ["cod" => $cod]);
     }
 
     /**

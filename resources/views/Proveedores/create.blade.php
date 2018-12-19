@@ -14,7 +14,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_codigo">Código</label>
-						<input type="text" name="prv_codigo" maxlength="10" required value="{{old('prv_codigo')}}" class="form-control" placeholder="Codigo...">
+						<input type="text" name="codigo" value="{{ 'PRV-'.$cod }}" disabled class="form-control">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -68,6 +68,9 @@
 						</select>
 					</div>
 				</div>
+
+				<input type="hidden" name="prv_codigo" value="{{ 'PRV-'.$cod }}">
+
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">Crear</button>
