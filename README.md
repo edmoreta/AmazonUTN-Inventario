@@ -47,6 +47,7 @@ Por último abrir el navegador http:\\localhost:8000 o http:\\127.0.0.1:8000
 
 
 # Comandos git
+Se utiliza solo para agregar datos de cada uno, sin bajar de otro respitorio de otro compañero
 Para agregar todos los archivos
 ```
 git add .
@@ -60,7 +61,7 @@ Subir al repositorio virtual 'AmazonUTN-Inventario'
 ```
 git push origin master
 ```
-#Comandos git frecuentes y recomendados
+# Comandos git frecuentes y recomendados
 
 Para subir los cambios realizados en el proyecto. Primero se debe bajar los cambios del repositorio del GITHUB, con el comando
 ```
