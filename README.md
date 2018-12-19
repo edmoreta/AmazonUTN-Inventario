@@ -49,8 +49,9 @@ Por último abrir el navegador http:\\localhost:8000 o http:\\127.0.0.1:8000
 # Comandos git
 Configurar el email y el nombre de usuario de la cuenta GitHub
 ```
-config user.email "email"
-config user.name  "name"
+git config user.email "email"
+git config user.name  "name"
+
 ```
 Se utiliza solo para agregar datos de cada uno, sin bajar de otro respitorio de otro compañero
 Para agregar todos los archivos
