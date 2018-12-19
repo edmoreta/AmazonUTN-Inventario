@@ -1,6 +1,6 @@
 # AmazonUTN-Inventario
 Proyecto de fin de semestre de las materias:
-- Ingenieria de Software II
+- Ingeniería de Software II
 - Aplicaciones Informáticas I
 
 # Instalación
