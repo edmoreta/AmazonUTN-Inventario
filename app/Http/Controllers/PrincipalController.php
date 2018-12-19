@@ -16,7 +16,7 @@ class PrincipalController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('index');
     }
 
     /**
@@ -33,7 +33,7 @@ class PrincipalController extends Controller
             ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
             ->orderby('prv_id')
             ->paginate(7);
-            return view('proveedores', ["proveedores" => $proveedores, "searchText" => $query]);
+            return view('Proveedores.proveedores', ["proveedores" => $proveedores, "searchText" => $query]);
         }
     }
 
@@ -44,7 +44,7 @@ class PrincipalController extends Controller
      */
     public function create(Request $request)
     {
-        return view('create');
+        return view('Proveedores.create');
     }
 
     /**
@@ -93,6 +93,18 @@ class PrincipalController extends Controller
         }
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $proveedor = Proveedor::findOrFail($id);
+        return view("Proveedores.show", compact('proveedor'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -114,6 +126,46 @@ class PrincipalController extends Controller
                 return redirect('proveedores/lista')->with('success', 'Proveedor Activado con éxito');
             }
             
+        } catch (Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $proveedor = Proveedor::findOrFail($id);
+        return view("Proveedores.edit", compact('proveedor'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ProveedorRequest $request, $id)
+    {
+
+        try {
+            $proveedor = Proveedor::findOrFail($id);
+            $proveedor->prv_codigo = $request->get('prv_codigo');
+            $proveedor->prv_nombre = $request->get('prv_nombre');
+            $proveedor->prv_descripcion = $request->get('prv_descripcion');
+            $proveedor->prv_identificacion = $request->get('prv_identificacion');
+            $proveedor->prv_tipo_identificacion = $request->get('prv_tipo_identificacion');
+            $proveedor->prv_direccion = $request->get('prv_direccion');
+            $proveedor->prv_email = $request->get('prv_email');
+            $proveedor->prv_telefono = $request->get('prv_telefono');
+            $proveedor->prv_celular = $request->get('prv_celular');
+            $proveedor->update();
+            return redirect('proveedores/lista')->with('success', 'Proveedor Actualizado con éxito');
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }

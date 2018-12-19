@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h3>Proveedores <a href="{{ url('proveedores/create') }}"><button class="btn btn-success">Nuevo</button></a></h3>
-		@include('search')
+		@include('Proveedores.search')
 	</div>
 </div>
 <div class="row">
@@ -30,8 +30,8 @@
                     <td>{{ $pr->prv_identificacion }}</td>
                     <td>{{ $pr->prv_tipo_identificacion }}</td>	
 					<td>
-						<a href="#"><button class="btn btn-primary">Ver</button></a>
-						<a href="#"><button class="btn btn-success">Editar</button></a>
+						<a href="{{URL::action('PrincipalController@show',$pr->prv_id)}}"><button class="btn btn-primary">Ver</button></a>
+						<a href="{{URL::action('PrincipalController@edit',$pr->prv_id)}}"><button class="btn btn-success">Editar</button></a>
 					</td>
                     <td><?php
                     if ($pr->prv_estado==1) {
@@ -40,12 +40,12 @@
                     <?php
                     }else{
                     ?>
-                        <a href="{{ url('proveedores/estado/'.$pr->prv_id.'/t') }}"><i class="fa fa-toggle-off" style="font-size:36px;color:green"></i></a>
+                        <a href="{{ url('proveedores/estado/'.$pr->prv_id.'/t') }}"><i class="fa fa-toggle-off" style="font-size:36px;color:gray"></i></a>
                     <?php
                         }
                     ?>
                     </td>
-					@include('modal')
+					@include('Proveedores.modal')
 				</tr>		
 				@endforeach
 			</table>
