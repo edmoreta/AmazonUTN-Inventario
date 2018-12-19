@@ -7,7 +7,7 @@ USE DB;
 use App\Proveedor;
 use App\Http\Requests\ProveedorRequest;
 
-class PrincipalController extends Controller
+class ProveedoresController extends Controller
 {
     /**
      * Show the application dashboard.
@@ -33,7 +33,7 @@ class PrincipalController extends Controller
             ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
             ->orderby('prv_id')
             ->paginate(7);
-            return view('Proveedores.proveedores', ["proveedores" => $proveedores, "searchText" => $query]);
+            return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query]);
         }
     }
 
@@ -67,23 +67,33 @@ class PrincipalController extends Controller
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
             $proveedor->prv_estado=true;
-            $prov_buscar = DB::table('inv_proveedores')
-            ->orWhere('prv_codigo', '=', $proveedor->prv_codigo)
-            ->orWhere('prv_identificacion', '=', $proveedor->prv_identificacion)
-            ->orWhere('prv_email', '=', $proveedor->prv_email)
-            ->paginate();
+            if ($proveedor->prv_identificacion=='CI') {
+                $prov_buscar = DB::table('inv_proveedores')
+                ->orWhere('prv_codigo', '=', $proveedor->prv_codigo)
+                ->orWhere('prv_identificacion', '=', $proveedor->prv_identificacion)
+                ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
+                ->orWhere('prv_email', '=', $proveedor->prv_email)
+                ->paginate();
+            }else{
+                $prov_buscar = DB::table('inv_proveedores')
+                ->orWhere('prv_codigo', '=', $proveedor->prv_codigo)
+                ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
+                ->orWhere('prv_email', '=', $proveedor->prv_email)
+                ->paginate();
+            }
             $cont = 0;
             $estdo = 0;
             $nombre = '';
-            $aidi=1;
             foreach ($prov_buscar as $pr) {
                 $estdo = $pr->prv_estado;
                 $nombre = $pr->prv_nombre;
-                $aidi=$pr->prv_id;
                 $cont++;
             }
-            if ($estdo = 1 & $cont >= 1) {
-                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' este usando el codigo, identificación o correo electronico')->withInput();
+
+            if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
+                return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
+            } else if ($estdo = 1 & $cont >= 1) {
+                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' este usando el codigo, cedula, nombre o correo electronico')->withInput();
             } else {
                 $proveedor->save();
                 return redirect('proveedores/lista')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
@@ -164,8 +174,12 @@ class PrincipalController extends Controller
             $proveedor->prv_email = $request->get('prv_email');
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
-            $proveedor->update();
-            return redirect('proveedores/lista')->with('success', 'Proveedor Actualizado con éxito');
+            if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
+                return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
+            }else{
+                $proveedor->update();
+                return redirect('proveedores/lista')->with('success', 'Proveedor Actualizado con éxito');
+            }
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
