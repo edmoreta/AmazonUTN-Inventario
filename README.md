@@ -1,6 +1,6 @@
 # AmazonUTN-Inventario
 Proyecto de fin de semestre de las materias:
-- Ingenieria de Software II
+- Ingeniería de Software II
 - Aplicaciones Informáticas I
 
 # Instalación
@@ -47,6 +47,7 @@ Por último abrir el navegador http:\\localhost:8000 o http:\\127.0.0.1:8000
 
 
 # Comandos git
+Se utiliza solo para agregar datos de cada uno, sin bajar de otro respitorio de otro compañero
 Para agregar todos los archivos
 ```
 git add .
@@ -60,19 +61,19 @@ Subir al repositorio virtual 'AmazonUTN-Inventario'
 ```
 git push origin master
 ```
+# Comandos git frecuentes y recomendados
 
-
-Para subir los cambios realizados en el proyecto. Primero se debe verificar que los cambios se han subido y evitar conflictos, con el comando
+Para subir los cambios realizados en el proyecto. Primero se debe bajar los cambios del repositorio del GITHUB, con el comando
 ```
 git pull origin master
 ```
 
-Agregar los cambios personales y de los demás compañeros
+Agregar los archivos creados y cambios personales 
 ```
 git add .
 ```
 
-Guardar el commit o cambios del proyecto con un mensaje de descripción
+Guardar el commit o cambios del proyecto con un mensaje de descripción y se combina con los cambios bajados del repositorio de GITHUB
 ```
 git commit -m "su mensaje"
 ```
@@ -88,6 +89,18 @@ Instalar la librería de formularios
 composer require laravelcollective/html
 ```
 ## Creación de la Base de Datos
+Configurar el archivo .env
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=modulo_inventario
+DB_USERNAME=postgres
+DB_PASSWORD=********
+```
+Crear la base de datos en PostgreSQL con el nombre "modulo_inventario"
+
+Luego creo las tablas con el siguiente comando
 ```
 php artisan migrate
 ```

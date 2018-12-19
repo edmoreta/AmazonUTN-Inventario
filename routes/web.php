@@ -33,7 +33,7 @@ Route::get('/pinchao', function () {
 });
 
 Route::get('/inicio', function () {
-    return view('inicio');
+    return view('layouts/inicio');
 });
 
 Route::get('/a', function () {    

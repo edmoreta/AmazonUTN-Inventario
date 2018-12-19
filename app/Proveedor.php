@@ -11,8 +11,11 @@ class Proveedor extends Authenticatable
     protected $guard='prov';
     protected $primaryKey="prv_id" ;
     protected $table="inv_proveedores" ;
-    public $timestamps=false; 
-    protected $dates = ['prv_updated_at'];
+    public $timestamps=true; 
+    protected $dates = ['prv_created_at','prv_updated_at'];
+
+    const CREATED_AT="prv_created_at";
+    const UPDATED_AT="prv_updated_at";
 
     /**
      * The attributes that are mass assignable.
