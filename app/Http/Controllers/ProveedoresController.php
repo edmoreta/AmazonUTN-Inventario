@@ -97,9 +97,9 @@ class ProveedoresController extends Controller
             }
 
             if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
-                return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
+                return back()->with('error_prov', 'La cédula debe tener 10 dígitos')->withInput();
             } else if ($estdo = 1 & $cont >= 1) {
-                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' este usando el codigo, cedula, nombre o correo electronico')->withInput();
+                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' esté usando el código, cédula, nombre o correo electrónico')->withInput();
             } else {
                 $proveedor->save();
                 return redirect('proveedores/lista')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
