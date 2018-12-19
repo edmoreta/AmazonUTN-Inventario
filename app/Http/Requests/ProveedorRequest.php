@@ -26,7 +26,7 @@ class ProveedorRequest extends FormRequest
         return [
             'prv_codigo' => 'required|max:10',
             'prv_nombre' => 'required|max:100',
-            'prv_descripcion' => 'required|max:100',
+            'prv_descripcion' => 'max:100',
             'prv_identificacion' => 'required|max:13',
             'prv_tipo_identificacion' => 'required|max:20',
             'prv_direccion' => 'required|max:100',
@@ -40,12 +40,10 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'prv_codigo.unique' => 'El código ya ha sido ingresado',
-            'prv_nombre.required' => 'El campo nombres no debe estar vacío ',
-            'prv_descripcion.required' => 'El campo descripcion no debe estar vacío ',
-            'prv_identificacion.unique' => 'El numero cedula ya ha sido ingresada',
-            'prv_tipo_identificacion.required' => 'El campo Tipo Identificación no debe estar vacío ',
-            'prv_direccion.required' => 'El campo dirección no debe estar vacío ',
-            'prv_email.unique' => 'El e-mail ya ha sido ingresada',
+            'prv_nombre.required' => 'El campo nombres no debe estar vacío',
+            'prv_identificacion.unique' => 'La cédula ya ha sido ingresada',
+            'prv_direccion.required' => 'El campo dirección no debe estar vacío',
+            'prv_email.unique' => 'El e-mail ya ha sido ingresado',
         ];
     }
 }
