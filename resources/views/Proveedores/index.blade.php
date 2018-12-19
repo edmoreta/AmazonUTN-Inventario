@@ -16,9 +16,9 @@
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>					
-					<th>Codigo</th>
+					<th>Código</th>
 					<th>Nombre</th>
-					<th>Identificacion</th>
+					<th>Identificación</th>
 					<th>Tipo Id</th>
                     <th>Opciones</th>
                     <th>Estado</th>
@@ -30,8 +30,8 @@
                     <td>{{ $pr->prv_identificacion }}</td>
                     <td>{{ $pr->prv_tipo_identificacion }}</td>	
 					<td>
-						<a href="{{URL::action('PrincipalController@show',$pr->prv_id)}}"><button class="btn btn-primary">Ver</button></a>
-						<a href="{{URL::action('PrincipalController@edit',$pr->prv_id)}}"><button class="btn btn-success">Editar</button></a>
+						<a href="{{URL::action('ProveedoresController@show',$pr->prv_id)}}"><button class="btn btn-primary">Ver</button></a>
+						<a href="{{URL::action('ProveedoresController@edit',$pr->prv_id)}}"><button class="btn btn-success">Editar</button></a>
 					</td>
                     <td><?php
                     if ($pr->prv_estado==1) {

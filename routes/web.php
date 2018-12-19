@@ -9,9 +9,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('proveedores/lista', 'PrincipalController@lista')->name('lista');
-Route::get('proveedores/estado/{id}/{est}', 'PrincipalController@estado')->name('estado');
-Route::resource('proveedores', 'PrincipalController');
+Route::get('proveedores/lista', 'ProveedoresController@lista')->name('lista');
+Route::get('proveedores/estado/{id}/{est}', 'ProveedoresController@estado')->name('estado');
+Route::resource('proveedores', 'ProveedoresController');
 
 Route::get('/', function () {
     return view('auth/login');    
