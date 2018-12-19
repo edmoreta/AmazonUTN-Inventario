@@ -45,7 +45,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red">Online</small>
-                  <span class="hidden-xs">Juan Carlos Arcila Díaz</span>
+                  <span class="hidden-xs">LAREX SOLUTIONS</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
