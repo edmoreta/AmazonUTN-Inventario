@@ -88,6 +88,18 @@ Instalar la librería de formularios
 composer require laravelcollective/html
 ```
 ## Creación de la Base de Datos
+Configurar el archivo .env
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=modulo_inventario
+DB_USERNAME=postgres
+DB_PASSWORD=********
+```
+Crear la base de datos en PostgreSQL con el nombre "modulo_inventario"
+
+Luego creo las tablas con el siguiente comando
 ```
 php artisan migrate
 ```
