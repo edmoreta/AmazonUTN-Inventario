@@ -10,14 +10,14 @@
 		</div>
 	</div>	
 	{!! Form::open(['url' => 'proveedores','files'=>'true']) !!}
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<div class="form-group">
-				<label for="prv_codigo">Código</label>
-				<input type="text" name="codigo" value="{{ 'PRV-'.$cod }}" disabled class="form-control">
-			</div>
-		</div>
-	</div>		
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label for="prv_codigo">Código</label>
+						<input type="text" name="codigo" value="{{ 'PRV-'.$cod }}" disabled class="form-control">
+					</div>
+				</div>
+			</div>		
 			<div class="row">								
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
@@ -45,10 +45,14 @@
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
-						<label for="prv_telefono">Teléfono</label>
-						<input type="text" name="prv_telefono" maxlength="10" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
+						<label for="prv_tipo_identificacion">Tipo Identificación</label><label for="prv_tipo_identificacion" style="color:red">*</label>
+						<select name="prv_tipo_identificacion" class="form-control">
+							<option value="CI">CI</option>
+							<option value="RUC">RUC</option>
+						</select>
 					</div>
 				</div>
+				
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_identificacion">Identificación</label><label for="prv_identificacion" style="color:red">*</label>
@@ -63,11 +67,8 @@
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
-						<label for="prv_tipo_identificacion">Tipo Identificación</label><label for="prv_tipo_identificacion" style="color:red">*</label>
-						<select name="prv_tipo_identificacion" class="form-control">
-							<option value="CI">CI</option>
-							<option value="RUC">RUC</option>
-						</select>
+						<label for="prv_telefono">Teléfono</label>
+						<input type="text" name="prv_telefono" maxlength="10" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
 					</div>
 				</div>
 

@@ -28,12 +28,16 @@ class ProveedoresController extends Controller
     {
         if ($request) {
             $query = trim($request->get('searchText'));
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {
+                $pag=7;
+            }
             $proveedores = DB::table('inv_proveedores as ip')
             ->orWhere('ip.prv_nombre', 'LIKE', '%' . $query . '%')
             ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
-            ->orderby('prv_id')
-            ->paginate(7);
-            return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query]);
+            ->orderby('prv_updated_at','desc')
+            ->paginate($pag);
+            return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
     }
 
@@ -137,7 +141,7 @@ class ProveedoresController extends Controller
             $proveedor->prv_estado = $est;
             $proveedor->update();
             if ($est=='f') {
-                return redirect('proveedores/lista')->with('success', 'Proveedor Desactivado con éxito');
+                return redirect('proveedores/lista')->with('success', 'Proveedor Desactivado con éxito','3000');
             }else{
                 return redirect('proveedores/lista')->with('success', 'Proveedor Activado con éxito');
             }
