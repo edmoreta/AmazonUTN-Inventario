@@ -13,15 +13,24 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+        Schema::create('inv_usuarios', function (Blueprint $table) {
+            $table->increments('usu_id');
+            $table->string('usu_email')->unique();
+            $table->string('usu_nombre');
+            $table->string('usu_apellido');
+            $table->date('usu_fechaN');
+            $table->string('usu_direccion');
+            $table->string('usu_telefono')->nullable();
+            $table->string('usu_celular');                        
+            $table->string('usu_foto', 250)->nullable();
+            $table->string('usu_password');
+            $table->boolean('usu_estado')->default(1);            
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('usu_created_at');
+            $table->timestamp('usu_updated_at');
         });
+
     }
 
     /**
@@ -31,6 +40,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('inv_usuarios');
     }
 }

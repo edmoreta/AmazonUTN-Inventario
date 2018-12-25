@@ -14,17 +14,7 @@ class ProveedoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('index');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function lista(Request $request)
+    public function index(Request $request)
     {
         if ($request) {
             $query = trim($request->get('searchText'));
@@ -37,8 +27,18 @@ class ProveedoresController extends Controller
             ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
             ->orderby('prv_updated_at','desc')
             ->paginate($pag);
-            return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
+            return view('proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lista()
+    {
+        
     }
 
     /**
@@ -54,7 +54,7 @@ class ProveedoresController extends Controller
         }
         $cod = substr($proveedor->prv_codigo, 4);
         $cod+=1;
-        return view('Proveedores.create', ["cod" => $cod]);
+        return view('proveedores.create', ["cod" => $cod]);
     }
 
     /**
@@ -106,7 +106,7 @@ class ProveedoresController extends Controller
                 return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' esté usando el código, cédula, nombre o correo electrónico')->withInput();
             } else {
                 $proveedor->save();
-                return redirect('proveedores/lista')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
+                return redirect('proveedores')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
             }
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
@@ -122,7 +122,7 @@ class ProveedoresController extends Controller
     public function show($id)
     {
         $proveedor = Proveedor::findOrFail($id);
-        return view("Proveedores.show", compact('proveedor'));
+        return view("proveedores.show", compact('proveedor'));
     }
 
     /**
@@ -141,9 +141,9 @@ class ProveedoresController extends Controller
             $proveedor->prv_estado = $est;
             $proveedor->update();
             if ($est=='f') {
-                return redirect('proveedores/lista')->with('success', 'Proveedor Desactivado con éxito','3000');
+                return redirect('proveedores')->with('success', 'Proveedor Desactivado con éxito','3000');
             }else{
-                return redirect('proveedores/lista')->with('success', 'Proveedor Activado con éxito');
+                return redirect('proveedores')->with('success', 'Proveedor Activado con éxito');
             }
             
         } catch (Exception $e) {
@@ -160,7 +160,7 @@ class ProveedoresController extends Controller
     public function edit($id)
     {
         $proveedor = Proveedor::findOrFail($id);
-        return view("Proveedores.edit", compact('proveedor'));
+        return view("proveedores.edit", compact('proveedor'));
     }
 
     /**
@@ -188,7 +188,7 @@ class ProveedoresController extends Controller
                 return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
             }else{
                 $proveedor->update();
-                return redirect('proveedores/lista')->with('success', 'Proveedor Actualizado con éxito');
+                return redirect('proveedores')->with('success', 'Proveedor Actualizado con éxito');
             }
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
