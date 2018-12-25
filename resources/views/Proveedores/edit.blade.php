@@ -1,6 +1,6 @@
 @extends ('layouts.inicio')
 @section ('contenido')
-<div class="card-header"> <a class="btn btn-success" href="{{url('proveedores/lista')}}" title="Regresar al listado" role="button">
+<div class="card-header"> <a class="btn btn-success" href="{{url('proveedores')}}" title="Regresar al listado" role="button">
 	<i class="fa fa-reply" aria-hidden="true"></i>
 </a></div>
 	<div class="row">

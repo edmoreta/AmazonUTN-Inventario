@@ -37,6 +37,7 @@
             <span class="sr-only">Navegación</span>
           </a>
           <!-- Navbar Right Menu -->
+          @auth
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
@@ -44,20 +45,25 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <small class="bg-red">Online</small>
-                  <span class="hidden-xs">LAREX SOLUTIONS</span>
+                <i class="fa fa-circle" style="color:green" aria-hidden="true"></i>
+                <!-- <small class="">Online</small> -->
+                  <span class="hidden-xs">{{ Auth::user()->usu_nombre }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar</a>
+                      <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cerrar Sesión</a>
                     </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                    </form>
                   </li>
                 </ul>
               </li>
-              
+            @endauth  
             </ul>
           </div>
 
@@ -74,13 +80,13 @@
             <li class="header"></li>
             
             <li>
-             <a href="{{ url('proveedores') }}">
+             <a href="{{ url('home') }}">
              <span>Inicio</span>
                 <small class="label pull-right "><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-            <a href="{{ url('proveedores/lista') }}">
+            <a href="{{ url('proveedores') }}">
                  <span>Proveedores</span>
                 <small class="label pull-right "><i class="fa fa-user" style="font-size: 18px;"></i></small>
               </a>
@@ -110,7 +116,7 @@
               </a>
             </li>
             <li>
-            <a href="#">
+            <a href="{{url('usuarios')}}">
                  <span>Usuarios</span>
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
@@ -120,10 +126,6 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-
-
-
-
 
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -136,7 +138,7 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Sistema de Ventas</h3>
+                  <h3 class="box-title">Sistema de Inventario</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                   </div>

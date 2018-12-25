@@ -1,6 +1,6 @@
 @extends ('layouts.inicio')
 @section ('contenido')
-<div class="card-header"> <a class="btn btn-success" href="{{url('proveedores/lista')}}" title="Regresar al listado" role="button">
+<div class="card-header"> <a class="btn btn-success" href="{{url('proveedores')}}" title="Regresar al listado" role="button">
 	<i class="fa fa-reply" aria-hidden="true"></i>
 </a></div>
 	<div class="row">
@@ -77,7 +77,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">Crear</button>
-						<a class="btn btn-danger" href="{{url('proveedores/lista')}}">Cancelar</a>
+						<a class="btn btn-danger" href="{{url('proveedores')}}">Cancelar</a>
 					</div>
 				</div>
 			</div>
