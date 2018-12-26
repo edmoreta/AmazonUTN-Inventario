@@ -94,6 +94,16 @@ Instalar la librería de formularios
 ```
 composer require laravelcollective/html
 ```
+Instalar Entrust :                                                                                                        
+Primera alternativa:
+```
+composer require zizaco/entrust
+```
+segunda alternativa:
+```
+composer update
+```
+
 ## Creación de la Base de Datos
 Configurar el archivo .env
 ```
@@ -116,7 +126,7 @@ Si la consola regresa el mensaje `Nothing to migrate.` borrar todas las tablas y
 php artisan migrate:fresh
 ```
 
-## Creación del usuario admin
+## Creación del usuarios
 Para iniciar sesión es necesario crear un nuevo usuario a través de Tinker
 ```
 php artisan tinker
@@ -125,14 +135,63 @@ php artisan tinker
 En la consola del Tinker crear el nuevo usuario
 ```
 $user = new \App\User();
-$user->usu_nombre = 'admin';
-$user->usu_apellido = 'cordova';
+$user->usu_nombre = 'usuario1';
+$user->usu_apellido = 'apellido1';
 $user->usu_fechaN = '1999/01/01';
-$user->usu_direccion = 'direccion';
+$user->usu_direccion = 'Ibarra';
 $user->usu_telefono = '0912345678';
 $user->usu_celular = '0912345678';
-$user->usu_email = 'admin@hotmail.com';
+$user->usu_email = 'usuario1@hotmail.com';
+$user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
+$user->save();
+
+$user = new \App\User();
+$user->usu_nombre = 'usuario2';
+$user->usu_apellido = 'apellido2';
+$user->usu_fechaN = '1999/01/01';
+$user->usu_direccion = 'Otavalo';
+$user->usu_telefono = '0912345678';
+$user->usu_celular = '0912345678';
+$user->usu_email = 'usuario2@hotmail.com';
 $user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
 $user->save();
 ```
+## Creación de Roles
+```
+$admin = new \App\Role();
+$admin->name         = 'administrador';
+$admin->display_name = 'Administrador'; 
+$admin->description  = 'Administrador del sistema de inventario'; 
+$admin->save();
+
+$bodeguero = new \App\Role();
+$bodeguero->name         = 'bodeguero';
+$bodeguero->display_name = 'Bodeguero';
+$bodeguero->description  = 'Usuario bodeguero del sistema de inventario'; 
+$bodeguero->save();
+
+```
+## Asignación Roles: 
+Consulta de usuarios y roles para ser asignados:
+```
+$user1 = User::where('usu_id', '=', '1')->first();
+$user2 = User::where('usu_id', '=', '2')->first();
+
+$admin = Role::where('rol_id','=','1')->first();
+$bodeguero = Role::where('rol_id','=','2')->first();
+```
+Asignar roles:
+```
+$user1->roles()->attach($admin->id);
+$user2->roles()->attach($bodeguero->id);
+```
+Comprobar que devuelva true.
+```
+$user1->hasRole('administrador');
+$user2->hasRole('bodeguero');
+```
+ 
+
+
+
 
