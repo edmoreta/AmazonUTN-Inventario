@@ -94,6 +94,20 @@ Instalar la librería de formularios
 ```
 composer require laravelcollective/html
 ```
+Instalar Entrust (2 formas):                                                                                                        
+- Run el comando:
+```
+composer require zizaco/entrust
+```
+- Añadir lo siguiente en el archivo composer.json. 
+```
+"zizaco/entrust": "5.2.x-dev"
+ ``` 
+y después Run:
+```
+composer update
+```
+
 ## Creación de la Base de Datos
 Configurar el archivo .env
 ```
@@ -135,4 +149,8 @@ $user->usu_email = 'admin@hotmail.com';
 $user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
 $user->save();
 ```
+
+
+
+
 
