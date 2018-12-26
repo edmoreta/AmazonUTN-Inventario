@@ -94,12 +94,12 @@ Instalar la librería de formularios
 ```
 composer require laravelcollective/html
 ```
-Instalar Entrust (2 formas):                                                                                                        
-- Run el comando:
+Instalar Entrust :                                                                                                        
+Primera alternativa:
 ```
 composer require zizaco/entrust
 ```
-- O Run en comando:
+segunda alternativa:
 ```
 composer update
 ```
