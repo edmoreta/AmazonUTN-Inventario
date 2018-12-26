@@ -99,11 +99,7 @@ Instalar Entrust (2 formas):
 ```
 composer require zizaco/entrust
 ```
-- O añadir lo siguiente en el archivo composer.json. 
-```
-"zizaco/entrust": "5.2.x-dev"
- ``` 
-y después Run:
+- Run en comando:
 ```
 composer update
 ```
