@@ -187,7 +187,7 @@ $user2->roles()->attach($bodeguero->id);
 Comprobar que devuelva true.
 ```
 $user1->hasRole('administrador');
-$user1->hasRole('bodeguero');
+$user2->hasRole('bodeguero');
 ```
  
 
