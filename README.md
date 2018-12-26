@@ -99,7 +99,7 @@ Instalar Entrust (2 formas):
 ```
 composer require zizaco/entrust
 ```
-- Run en comando:
+- O Run en comando:
 ```
 composer update
 ```
