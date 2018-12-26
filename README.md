@@ -145,6 +145,21 @@ $user->usu_email = 'admin@hotmail.com';
 $user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
 $user->save();
 ```
+##Creación de Roles
+```
+$admin = new \App\Role();
+$admin->rol_name         = 'administrador';
+$admin->rol_display_name = 'Administrador'; 
+$admin->rol_description  = 'Administrador del sistema de inventario'; 
+$admin->save();
+
+$bodeguero = new \App\Role();
+$bodeguero->rol_name         = 'bodeguero';
+$bodeguero->rol_display_name = 'Bodeguero';
+$bodeguero->rol_description  = 'Usuario bodeguero del sistema de inventario'; 
+$bodeguero->save();
+
+```
 
 
 
