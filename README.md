@@ -180,7 +180,7 @@ $user2 = User::where('usu_id', '=', '2')->first();
 $admin = Role::where('id','=','1')->first();
 $bodeguero = Role::where('id','=','2')->first();
 ```
-Asignar roles:
+Asignar roles: Comprobar que devuela null
 ```
 $user1->roles()->attach($admin->id);
 $user2->roles()->attach($bodeguero->id);
