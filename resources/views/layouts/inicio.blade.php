@@ -116,7 +116,7 @@
               </a>
             </li>
             <li>
-            <a href="{{url('usuarios')}}">
+            <a href="{{ url('usuarios') }}">
                  <span>Usuarios</span>
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
