@@ -177,8 +177,8 @@ Consulta de usuarios y roles para ser asignados:
 $user1 = User::where('usu_id', '=', '1')->first();
 $user2 = User::where('usu_id', '=', '2')->first();
 
-$admin = Role::where('rol_id','=','1')->first();
-$bodeguero = Role::where('rol_id','=','2')->first();
+$admin = Role::where('id','=','1')->first();
+$bodeguero = Role::where('id','=','2')->first();
 ```
 Asignar roles:
 ```
