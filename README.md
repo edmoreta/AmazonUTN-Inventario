@@ -110,3 +110,29 @@ Luego creo las tablas con el siguiente comando
 ```
 php artisan migrate
 ```
+
+Si la consola regresa el mensaje `Nothing to migrate.` borrar todas las tablas y crear de nuevo con el comando
+```
+php artisan migrate:fresh
+```
+
+## Creación del usuario admin
+Para iniciar sesión es necesario crear un nuevo usuario a través de Tinker
+```
+php artisan tinker
+```
+
+En la consola del Tinker crear el nuevo usuario
+```
+$user = new \App\User();
+$user->usu_nombre = 'admin';
+$user->usu_apellido = 'cordova';
+$user->usu_fechaN = '1999/01/01';
+$user->usu_direccion = 'direccion';
+$user->usu_telefono = '0912345678';
+$user->usu_celular = '0912345678';
+$user->usu_email = 'admin@hotmail.com';
+$user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
+$user->save();
+```
+
