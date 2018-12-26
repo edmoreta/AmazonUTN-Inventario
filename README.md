@@ -145,7 +145,7 @@ $user->usu_email = 'admin@hotmail.com';
 $user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
 $user->save();
 ```
-##Creación de Roles
+# Creación de Roles
 ```
 $admin = new \App\Role();
 $admin->rol_name         = 'administrador';
