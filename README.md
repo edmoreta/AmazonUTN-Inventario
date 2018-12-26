@@ -159,16 +159,17 @@ $user->save();
 ## Creación de Roles
 ```
 $admin = new \App\Role();
-$admin->rol_name         = 'administrador';
-$admin->rol_display_name = 'Administrador'; 
-$admin->rol_description  = 'Administrador del sistema de inventario'; 
+$admin->name         = 'administrador';
+$admin->display_name = 'Administrador'; 
+$admin->description  = 'Administrador del sistema de inventario'; 
 $admin->save();
 
 $bodeguero = new \App\Role();
-$bodeguero->rol_name         = 'bodeguero';
-$bodeguero->rol_display_name = 'Bodeguero';
-$bodeguero->rol_description  = 'Usuario bodeguero del sistema de inventario'; 
+$bodeguero->name         = 'bodeguero';
+$bodeguero->display_name = 'Bodeguero';
+$bodeguero->description  = 'Usuario bodeguero del sistema de inventario'; 
 $bodeguero->save();
+
 ```
 ## Asignación Roles: 
 Consulta de usuarios y roles para ser asignados:
