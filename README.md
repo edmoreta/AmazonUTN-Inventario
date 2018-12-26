@@ -126,7 +126,7 @@ Si la consola regresa el mensaje `Nothing to migrate.` borrar todas las tablas y
 php artisan migrate:fresh
 ```
 
-## Creación del usuarios
+## Creación de usuarios
 Para iniciar sesión es necesario crear un nuevo usuario a través de Tinker
 ```
 php artisan tinker
@@ -171,7 +171,7 @@ $bodeguero->description  = 'Usuario bodeguero del sistema de inventario';
 $bodeguero->save();
 
 ```
-## Asignación Roles: 
+## Asignación de Roles: 
 Consulta de usuarios y roles para ser asignados:
 ```
 $user1 = User::where('usu_id', '=', '1')->first();
