@@ -17,4 +17,10 @@ class Producto extends Model
     protected $fillable = ['pro_nombre','pro_descripcion','pro_caracteristicas','pro_precio','pro_costo','pro_stock'];
 
     protected $hidden = ['pro_id'];
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Categoria');
+    }
+
 }
