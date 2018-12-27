@@ -17,4 +17,10 @@ class Categoria extends Model
     protected $fillable = ['cat_nombre','cat_codigop'];
 
     protected $hidden = ['cat_id'];
+
+    public function productos()
+    {
+        return $this->hasMany('App\Producto','cat_id');
+    }
+
 }

@@ -26,7 +26,7 @@ class CreateProductosTable extends Migration
             $table->boolean('pro_estado')->default(1);
             $table->timestamp('pro_created_at');
             $table->timestamp('pro_updated_at');
-            $table->foreign('pro_id')->references('cat_id')->on('inv_categorias');
+            $table->foreign('cat_id')->references('cat_id')->on('inv_categorias');
         });
     }
 
