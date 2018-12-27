@@ -20,7 +20,7 @@ class CreateMovimientosTable extends Migration
             $table->integer('mov_cantidad');
             $table->double('mov_costo',10,2);
             $table->double('mov_precio', 10, 2);
-            $table->boolean('mov_estado');
+            $table->boolean('mov_estado')->default(1);
             $table->foreign('pro_id')->references('pro_id')->on('inv_productos');
             $table->foreign('doc_id')->references('doc_id')->on('inv_documentos');
         });
