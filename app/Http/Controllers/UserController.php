@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Role;
+use App\User;
+use Auth;
+use Illuminate\Database\QueryException;
 
 use Illuminate\Http\Request;
 
@@ -11,9 +15,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('usuarios.index');
+
+        $usuarios = User::with("roles")->orderBy('usu_nombre')->get();
+        $roles = Role::orderBy('name')->get();
+        
+        return view('usuarios.index', compact('usuarios', 'roles'));
     }
 
     /**
@@ -23,7 +31,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::orderBy('name')->get();
+        return view("usuarios.create", compact('roles'));
+
     }
 
     /**

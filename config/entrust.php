@@ -40,7 +40,7 @@ return [
     | relation between permissions and roles & roles and users
     |
     */
-    'role_foreign_key' => 'role_id',
+    'role_foreign_key' => 'id',
 
     /*
     |--------------------------------------------------------------------------

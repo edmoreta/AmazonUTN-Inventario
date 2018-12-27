@@ -10,7 +10,7 @@
 |
 */
 Route::get('/', function () {
-    return view('auth/login');    
+    return view('welcome');    
 });
 
 Auth::routes();
@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(["middleware" => "auth"], function () {
     Route::get('proveedores/estado/{id}/{est}', 'ProveedoresController@estado')->name('estado');
     Route::resource('proveedores', 'ProveedoresController'); 
-    Route::resource('usuarios', 'UserController');   
+    Route::resource('usuarios', 'UserController')->middleware('role:administrador');   
     
     Route::get('/inicio', function () {
         return view('layouts/inicio');

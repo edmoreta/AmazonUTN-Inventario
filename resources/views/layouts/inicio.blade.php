@@ -77,6 +77,7 @@
                     
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
+        
             <li class="header"></li>
             
             <li>
@@ -115,13 +116,15 @@
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
             </li>
-            <li>
-            <a href="{{ url('usuarios') }}">
-                 <span>Usuarios</span>
-                <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
-              </a>
-            </li>
-                
+            @role('administrador')
+              <li>
+                <a href="{{ url('usuarios') }}">
+                  <span>Usuarios</span>
+                  <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
+                </a>
+              </li>
+            @endrole 
+        
           </ul>
         </section>
         <!-- /.sidebar -->
