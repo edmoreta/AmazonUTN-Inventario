@@ -49,11 +49,16 @@ class ProveedoresController extends Controller
     public function create(Request $request)
     {
         $proveedores = DB::select('SELECT * FROM inv_proveedores ORDER BY prv_id');
+        $proveedor="0";
         foreach ($proveedores as $prv) {
             $proveedor=$prv;
         }
-        $cod = substr($proveedor->prv_codigo, 4);
-        $cod+=1;
+        $cod="1";
+        if ($proveedor!="0") {
+            $cod = substr($proveedor->prv_codigo, 4);
+            $cod+=1;
+        }
+        
         return view('proveedores.create', ["cod" => $cod]);
     }
 
@@ -77,16 +82,14 @@ class ProveedoresController extends Controller
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
             $proveedor->prv_estado=true;
-            if ($proveedor->prv_identificacion=='CI') {
+            if ($proveedor->prv_tipo_identificacion=='CI') {
                 $prov_buscar = DB::table('inv_proveedores')
-                ->orWhere('prv_codigo', '=', $proveedor->prv_codigo)
                 ->orWhere('prv_identificacion', '=', $proveedor->prv_identificacion)
                 ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
                 ->orWhere('prv_email', '=', $proveedor->prv_email)
                 ->paginate();
             }else{
                 $prov_buscar = DB::table('inv_proveedores')
-                ->orWhere('prv_codigo', '=', $proveedor->prv_codigo)
                 ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
                 ->orWhere('prv_email', '=', $proveedor->prv_email)
                 ->paginate();
@@ -103,7 +106,7 @@ class ProveedoresController extends Controller
             if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
                 return back()->with('error_prov', 'La cédula debe tener 10 dígitos')->withInput();
             } else if ($estdo = 1 & $cont >= 1) {
-                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' esté usando el código, cédula, nombre o correo electrónico')->withInput();
+                return back()->with('error_prov', 'Es posible que el usuario ' . $nombre . ' esté usando la cédula, nombre o correo electrónico')->withInput();
             } else {
                 $proveedor->save();
                 return redirect('proveedores')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
@@ -111,18 +114,6 @@ class ProveedoresController extends Controller
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
-    }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $proveedor = Proveedor::findOrFail($id);
-        return view("proveedores.show", compact('proveedor'));
     }
 
     /**
@@ -184,6 +175,7 @@ class ProveedoresController extends Controller
             $proveedor->prv_email = $request->get('prv_email');
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
+            $proveedor->prv_estado = $request->get('prv_estado');
             if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
                 return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
             }else{

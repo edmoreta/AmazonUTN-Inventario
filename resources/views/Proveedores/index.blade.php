@@ -21,56 +21,41 @@
 					<th>Nombre</th>
 					<th>Identificación</th>
 					<th>Tipo Id</th>
-                    <th>Estado</th>
 				</thead>
                @foreach ($proveedores as $pr)
 				<tr>
 					<td>
-						<a href="{{URL::action('ProveedoresController@show',$pr->prv_id)}}"><button class="btn btn-primary">Ver</button></a>
 						<a href="{{URL::action('ProveedoresController@edit',$pr->prv_id)}}"><button class="btn btn-success">Editar</button></a>
 					</td>
 					<td>{{ $pr->prv_codigo }}</td>
                     <td>{{ $pr->prv_nombre }}</td>
                     <td>{{ $pr->prv_identificacion }}</td>
                     <td>{{ $pr->prv_tipo_identificacion }}</td>	
-                    <td><?php
-                    if ($pr->prv_estado==1) {
-                        ?>
-                        <a href="" data-target="#modal-{{$pr->prv_id}}" data-name="{{$pr->prv_nombre}}" data-toggle="modal"><i class="fa fa-toggle-on" style="font-size:36px;color:green"></i></a>
-                    <?php
-                    }else{
-                    ?>
-                        <a href="{{ url('proveedores/estado/'.$pr->prv_id.'/t') }}"><i class="fa fa-toggle-off" style="font-size:36px;color:gray"></i></a>
-                    <?php
-                        }
-                    ?>
-                    </td>
-					@include('Proveedores.modal')
 				</tr>		
 				@endforeach
 			</table>
 		</div>
 		{{$proveedores->render()}}
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 				<div class="form-group">
 						<select name="formal" class="form-control" onchange="javascript:handleSelect(this)">
-								<option value="lista?pag=7"<?php 
+								<option value="proveedores?pag=7"<?php 
 								if ($pag=='7') {
 									echo 'selected';
 								}?>>7</option>
-								<option value="lista?pag=15"<?php 
+								<option value="proveedores?pag=15"<?php 
 								if ($pag=='15') {
 									echo 'selected';
 								}?>>15</option>
-								<option value="lista?pag=25"<?php 
+								<option value="proveedores?pag=25"<?php 
 								if ($pag=='25') {
 									echo 'selected';
 								}?>>25</option>
-								<option value="lista?pag=50"<?php 
+								<option value="proveedores?pag=50"<?php 
 								if ($pag=='50') {
 									echo 'selected';
 								}?>>50</option>
-								<option value="lista?pag=100"<?php 
+								<option value="proveedores?pag=100"<?php 
 								if ($pag=='100') {
 									echo 'selected';
 								}?>>100</option>
