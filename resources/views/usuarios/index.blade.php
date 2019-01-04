@@ -23,6 +23,7 @@
 					<th>Dirección</th>
 					<th>Celular</th>
 					<th>Email</th>
+					<th>Estado</th>
                     <th>Rol</th>
 				</thead>
 				<tbody>
@@ -30,12 +31,22 @@
 					<tr>
 						<td>
 							<a href="#"><button class="btn btn-primary">Ver</button></a>
-							<a href="#"><button class="btn btn-success">Editar</button></a>
+							<a href="{{URL::action('UserController@edit',$u->usu_id)}}"><button class="btn btn-success">Editar</button></a>
 						</td>
 						<td>{{$u->usu_nombre}}</td>
 						<td>{{$u->usu_direccion}}</td>
 						<td>{{$u->usu_celular}}</td>
 						<td>{{$u->usu_email}}</td>
+							@if($u->usu_estado)
+							<?php
+								$estado='activo';
+							?>
+							@elseif(!$u->usu_estado)
+							<?php
+								$estado='inactivo';
+							?>
+							@endif
+							<td>{{$estado}}</td>
                         
                         
                         <td>
