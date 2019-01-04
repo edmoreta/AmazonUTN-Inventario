@@ -49,6 +49,7 @@
 						<select name="prv_tipo_identificacion" class="form-control">
 							<option value="CI">CI</option>
 							<option value="RUC">RUC</option>
+							<option value="RISE">RISE</option>
 						</select>
 					</div>
 				</div>
@@ -68,7 +69,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_telefono">Teléfono</label>
-						<input type="text" name="prv_telefono" maxlength="10" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
+						<input type="text" name="prv_telefono" maxlength="9" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
 					</div>
 				</div>
 
@@ -76,8 +77,8 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit">Crear</button>
 						<a class="btn btn-danger" href="{{url('proveedores')}}">Cancelar</a>
+						<button class="btn btn-primary" type="submit">Guardar</button>
 					</div>
 				</div>
 			</div>
