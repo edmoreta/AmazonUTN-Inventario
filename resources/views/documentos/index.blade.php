@@ -9,9 +9,9 @@
 		
 	</div>
 	<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12 menu " >
-		<a href="{{ url('ajustes/create') }}"><button class="btn btn-success"> + Ajuste</button></a></h3>
-		<a href="{{ url('facturas_ingreso/create') }}"><button class="btn btn-success"> + F. Ingreso</button></a></h3>
-		<a href="{{ url('notas_de_credito/create') }}"><button class="btn btn-success"> + Nota Crédito</button></a></h3>
+		<a href="{{ url('ajustes/create') }}"><button class="btn btn-success"><strong>+</strong> Ajuste</button></a></h3>
+		<a href="{{ url('facturas_ingreso/create') }}"><button class="btn btn-success"> <strong>+</strong> F. Ingreso</button></a></h3>
+		<a href="{{ url('notas_de_credito/create') }}"><button class="btn btn-success"><strong>+</strong> Nota Crédito</button></a></h3>
 	</div>	
 </div>
 <div class="row">
@@ -57,29 +57,29 @@
 			</table>
 		</div>
 		{{$documentos->render()}}
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 				<div class="form-group">
-						<select name="formal" class="form-control" onchange="javascript:handleSelect(this)">
-								<option value="lista?pag=7"<?php 
+						<select style="width:70px" name="formal" class="form-control" onchange="javascript:handleSelect(this)">
+								<option value="documentos?pag=7"<?php 
 								if ($pag=='7') {
 									echo 'selected';
 								}?>>7</option>
-								<option value="lista?pag=15"<?php 
+								<option value="documentos?pag=15"<?php 
 								if ($pag=='15') {
 									echo 'selected';
-								}?>>15</option>
-								<option value="lista?pag=25"<?php 
+								}?>>15 </option>
+								<option value="documentos?pag=25"<?php 
 								if ($pag=='25') {
 									echo 'selected';
-								}?>>25</option>
-								<option value="lista?pag=50"<?php 
+								}?>>25 </option>
+								<option value="documentos?pag=50"<?php 
 								if ($pag=='50') {
 									echo 'selected';
-								}?>>50</option>
-								<option value="lista?pag=100"<?php 
+								}?>>50 </option>
+								<option value="documentos?pag=100"<?php 
 								if ($pag=='100') {
 									echo 'selected';
-								}?>>100</option>
+								}?>>100 </option>
 						</select>
 				</div>
 			</div>

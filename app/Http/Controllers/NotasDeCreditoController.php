@@ -23,7 +23,7 @@ class NotasDeCreditoController extends Controller
      */
     public function create()
     {
-        echo 'Llego nc';
+        echo 'Aqui todavia no programamos.....Te la creite we XD XD ';
     }
 
     /**
