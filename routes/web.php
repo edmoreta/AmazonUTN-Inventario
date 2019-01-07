@@ -21,8 +21,11 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('proveedores', 'ProveedoresController'); 
     Route::resource('usuarios', 'UserController')->middleware('role:administrador');
     Route::get('categorias/search','CategoriaController@search');
-    Route::resource('categorias', 'CategoriaController');
-    
+    Route::resource('categorias', 'CategoriaController');        
+    Route::resource('documentos', 'DocumentoController');
+    Route::resource('ajustes', 'AjustesController');
+    Route::resource('notas_de_credito', 'NotasDeCreditoController');
+    Route::resource('facturas_ingreso', 'FacturaIngresoController');
     
     Route::get('/inicio', function () {
         return view('layouts/inicio');

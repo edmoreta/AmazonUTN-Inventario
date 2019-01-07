@@ -18,6 +18,8 @@
   background: rgba(0, 0, 0, 0.1);
   color: #f6f6f6;
 }
+.menu{text-align: right;}
+
 .skin-blue .main-header .navbar .sidebar-toggle {
   color: #ffffff;
 }

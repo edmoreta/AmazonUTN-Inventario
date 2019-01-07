@@ -13,7 +13,8 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        //return Auth::user()->hasRole("administrador");
+        return Auth::user()->hasRole("administrador");
+       // return true;
     }
 
     /**
@@ -24,7 +25,19 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'usu_nombre'=>'required_without:usu_id|string|min:3|max:50',
+            'usu_email' => 'required_without:usu_id|string|email|min:10|max:50|',
+            'idRol'=>'required|integer|exists:roles,id',
+
+        
         ];
     }
+    public function messages()
+    {
+        return [
+           
+            'usu_email.unique' => 'El e-mail ya ha sido ingresado',
+        ];
+    }
+
 }

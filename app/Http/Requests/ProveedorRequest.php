@@ -27,12 +27,12 @@ class ProveedorRequest extends FormRequest
             'prv_codigo' => 'required|max:10',
             'prv_nombre' => 'required|max:100',
             'prv_descripcion' => 'max:100',
-            'prv_identificacion' => 'required|max:13',
+            'prv_identificacion' => 'required|digits_between:10,13',
             'prv_tipo_identificacion' => 'required|max:20',
             'prv_direccion' => 'required|max:100',
-            'prv_email' => 'required|max:50',
-            'prv_celular' => 'max:10',
-            'prv_telefono' => 'max:10'
+            'prv_email' => 'required|max:50|email',
+            'prv_celular' => 'nullable|digits:10',
+            'prv_telefono' => 'nullable|digits:9'
         ];
 
     }
@@ -40,10 +40,16 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'prv_codigo.unique' => 'El código ya ha sido ingresado',
-            'prv_nombre.required' => 'El campo nombres no debe estar vacío',
+            'prv_nombre.required' => 'El campo identificación no debe estar vacío',
+            'prv_identificacion.required' => 'El campo identificación no debe estar vacío',
             'prv_identificacion.unique' => 'La cédula ya ha sido ingresada',
+            'prv_identificacion.digits_between' => 'Identificación incorrecta',
             'prv_direccion.required' => 'El campo dirección no debe estar vacío',
+            'prv_email.required' => 'El campo e-mail no debe estar vacío',
             'prv_email.unique' => 'El e-mail ya ha sido ingresado',
+            'prv_email.email' => 'Formato de correo electrónico incorrecto',
+            'prv_celular.digits' => 'Celular incorrecto',
+            'prv_telefono.digits' => 'Teléfono incorrecto',
         ];
     }
 }

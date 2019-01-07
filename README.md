@@ -94,14 +94,13 @@ Instalar la librería de formularios
 ```
 composer require laravelcollective/html
 ```
-Instalar Entrust :                                                                                                        
-Primera alternativa:
+Instalar la librería Entrust                                                                                                        
 ```
 composer require zizaco/entrust
 ```
-segunda alternativa:
+Cada vez que se instala una nueva librería utilizar el siguiente comando
 ```
-composer update
+composer dump-autoload
 ```
 
 ## Creación de la Base de Datos
