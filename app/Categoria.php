@@ -23,4 +23,14 @@ class Categoria extends Model
         return $this->hasMany('App\Producto','cat_id');
     }
 
+    public function subcategoria()
+    {
+        return $this->hasOne('App\Categoria','cat_codigop');
+    }
+
+    public function categoriasuperior()
+    {
+        return $this->belongsTo('App\Categoria','cat_codigop');
+    }    
+
 }

@@ -62,11 +62,10 @@
                     </form>
                   </li>
                 </ul>
-              </li>
-            @endauth  
+              </li>            
             </ul>
           </div>
-
+          @endauth
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -81,29 +80,29 @@
             <li class="header"></li>
             
             <li>
-             <a href="{{ url('home') }}">
-             <span>Inicio</span>
-                <small class="label pull-right "><i class="fa fa-home" style="font-size: 18px;"></i></small>
+              <a href="{{ url('home') }}">
+                <span>Inicio</span>
+                <small class="label pull-right"><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-            <a href="{{ url('proveedores') }}">
-                 <span>Proveedores</span>
+              <a href="{{ url('proveedores') }}">
+                <span>Proveedores</span>
                 <small class="label pull-right "><i class="fa fa-user" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-              <a href="#">
-                 <span>Productos</span>
-                <small class="label pull-right "><i class="fa fa-folder" style="font-size: 18px;"></i></small>
+              <a href="{{ url('categorias') }}">
+                <span>Categorías</span>
+                <small class="label pull-right "><i class="fa fa-th" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-            <a href="#">
-                 <span>Categorías</span>
-                <small class="label pull-right "><i class="fa fa-vimeo" style="font-size: 18px;"></i></small>
+              <a href="#">
+                <span>Productos</span>
+                <small class="label pull-right "><i class="fa fa-folder" style="font-size: 18px;"></i></small>
               </a>
-            </li>
+            </li>            
             <li>
             <a href="#">
                  <span>Inventario</span>
@@ -174,8 +173,8 @@
       </footer>
 
       
-     <!-- jQuery 2.1.4 -->
-     <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
