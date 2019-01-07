@@ -9,7 +9,8 @@ use App\DetalleDocumento;
 use App\Documento;
 use App\Producto;
 use Carbon\Carbon;
-use Illuminate\Http\Request\AjusteRequest;
+use App\Proveedor;
+use App\Http\Requests\AjusteRequest;
 
 class AjustesController extends Controller
 {
@@ -30,12 +31,12 @@ class AjustesController extends Controller
      */
     public function create()
     {
-        $proveedores=DB::table('inv_proveedores')->get();
-        $productos=DB::table('inv_productos as art')
-        ->where('art.pro_estado','=',true)
-        ->get();
-        $fecha_actual=date("Y-m-d");
-        return view('documentos.ajustes.create',["proveedores"=>$proveedores, "productos"=>$productos, "fecha_actual"=>$fecha_actual]);
+        $proveedores = DB::table('inv_proveedores')->get();
+        $productos = DB::table('inv_productos as art')
+            ->where('art.pro_estado', '=', true)
+            ->get();
+        $fecha_actual = date("Y-m-d");
+        return view('documentos.ajustes.create', ["proveedores" => $proveedores, "productos" => $productos, "fecha_actual" => $fecha_actual]);
     }
 
     /**
@@ -44,69 +45,72 @@ class AjustesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AjusteRequest $request)
     {
         try {
             //Registrando Cabecera jiji
             DB::beginTransaction();
             $ajuste = new Documento;
-            $ajuste->doc_codigo='AJ-'.$request->get('doc_codigo');
-            $ajuste->doc_fecha=$request->get('doc_fecha');
-            $ajuste->doc_tipo="AJ";
-           $ajuste->prv_id='1';
-            
+            $ajuste->doc_codigo = 'AJ-' . $request->get('doc_codigo');
+            $ajuste->doc_fecha = $request->get('doc_fecha');
+            $ajuste->doc_tipo = "AJ";
+          // $ajuste->prv_id='1';
+
             $mytime = Carbon::now('America/Bogota');
-            $ajuste->doc_created_at=$mytime->toDateTimeString();
+            $ajuste->doc_created_at = $mytime->toDateTimeString();
 
-           
-            $ajuste->save();
+            $ajuste_buscar = DB::select('SELECT * FROM inv_documentos doc WHERE doc.doc_codigo=?  AND doc.doc_tipo=?', [$ajuste->doc_codigo, $ajuste->doc_tipo]);
+            if ($ajuste_buscar != null) {
+                return back()->with('errores', 'El Codigo del ajuste ya existe')->withInput();
+            } else {
+               $ajuste->save();
 
-            $pro_id = $request->get('pro_id');
-            $cantidad = $request->get('cantidad');
-            $tipo_ajuste = $request->get('tipo_ajuste');
-            $precio = $request->get('precio');
-            $costo = $request->get('costo');
+                $pro_id = $request->get('pro_id');
+                $cantidad = $request->get('cantidad');
+                $tipo_ajuste = $request->get('tipo_ajuste');
+                $precio = $request->get('precio');
+                $costo = $request->get('costo');
 
-            $cont = 0;
-           
-             
-            while ($cont<count($pro_id)) {
+                $cont = 0;
+
+
+                while ($cont < count($pro_id)) {
                 //Registrando Detalle jojo
-                
-               $movimiento=new DetalleDocumento();
-               $movimiento->doc_id=$ajuste->doc_id;
-                $movimiento->pro_id=$pro_id[$cont];
-                $movimiento->mov_cantidad=$cantidad[$cont];
-                $movimiento->mov_costo=$costo[$cont];
-                $movimiento->mov_precio=$precio[$cont];
-                $movimiento->mov_estado=true;       
-                
-                echo  $costo[$cont];
-                $movimiento->save();
+
+                    $movimiento = new DetalleDocumento();
+                    $movimiento->doc_id = $ajuste->doc_id;
+                    $movimiento->pro_id = $pro_id[$cont];
+                    $movimiento->mov_cantidad = $cantidad[$cont];
+                    $movimiento->mov_costo = $costo[$cont];
+                    $movimiento->mov_precio = $precio[$cont];
+                    $movimiento->mov_estado = true;
+
+                    echo $costo[$cont];
+                    $movimiento->save();
                 //Modificando producto JEJE xd
-                 $producto=Producto::findOrFail($pro_id[$cont]);
-                $producto->pro_precio=$precio[$cont];
-                if($tipo_ajuste[$cont]=="Positivo"){
-                    $producto->pro_stock=$producto->pro_stock+$cantidad[$cont];
-                }else{
-                    $producto->pro_stock=$producto->pro_stock-$cantidad[$cont];
-                }                
-                $producto->update();
+                    $producto = Producto::findOrFail($pro_id[$cont]);
+                    $producto->pro_precio = $precio[$cont];
+                    if ($tipo_ajuste[$cont] == "Positivo") {
+                        $producto->pro_stock = $producto->pro_stock + $cantidad[$cont];
+                    } else {
+                        $producto->pro_stock = $producto->pro_stock - $cantidad[$cont];
+                    }
+                    $producto->update();
 
-                $cont=$cont+1;  
+                    $cont = $cont + 1;
 
-                
+
+                }
+
+                DB::commit();
+                return redirect('documentos')->with('success', 'Ajuste ' . $ajuste->doc_codigo . ' registrado con éxito');
             }
-
-            DB::commit();
-            return redirect('documentos')->with('success', 'Ajuste ' . $ajuste->doc_codigo . ' registrado con éxito');
-        } catch (Exception $e) 
-        {
-           DB::rollback();
-           return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        } catch (Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
 
-       
+
 
     }
 

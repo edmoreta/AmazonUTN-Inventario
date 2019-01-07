@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Validator;
 
 class FacturaIngresoRequest extends FormRequest
 {
@@ -23,15 +25,20 @@ class FacturaIngresoRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'prv_id' =>'required',
+            'prv_id' =>'required|numeric',
             'doc_codigo' =>'required|max:8',
-            'doc_fecha' =>'required',
+            'doc_fecha' =>'required|date',
             'pro_id' =>'required',
             'cantidad' =>'required',
             'costo' => 'required',
             'precio'=>'required',
+         
 
         ];
+       
     }
+
+    
 }

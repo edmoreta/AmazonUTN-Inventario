@@ -11,7 +11,7 @@
 	<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12 menu " >
 		<a href="{{ url('ajustes/create') }}"><button class="btn btn-success"> + Ajuste</button></a></h3>
 		<a href="{{ url('facturas_ingreso/create') }}"><button class="btn btn-success"> + F. Ingreso</button></a></h3>
-		<a href="{{ url('notas_de_credito/create') }}"><button class="btn btn-success"> + Nota Credito</button></a></h3>
+		<a href="{{ url('notas_de_credito/create') }}"><button class="btn btn-success"> + Nota Crédito</button></a></h3>
 	</div>	
 </div>
 <div class="row">

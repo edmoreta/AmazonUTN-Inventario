@@ -22,7 +22,7 @@ class DocumentoController extends Controller
                 $pag=7;
             }
             $documentos = DB::table('inv_documentos as doc')
-            ->join('inv_proveedores as p','doc.prv_id','=','p.prv_id')
+            ->leftJoin('inv_proveedores as p','doc.prv_id','=','p.prv_id')
             ->select('p.prv_nombre','doc_codigo','doc.doc_tipo','doc_fecha','doc.doc_id')
             ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
             ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
@@ -62,7 +62,7 @@ class DocumentoController extends Controller
     public function show($id)
     {
         $documento=Documento::with('proveedor')->findOrFail($id);      
-       
+      
 
         $detalles=DB::table('inv_movimientos as mov')
         ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')

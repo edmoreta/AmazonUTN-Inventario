@@ -16,8 +16,14 @@
             <div class="row">
               <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <div class="form-group">
-                    <label for="nombre">Proveedor</label>
-                    <p>{{$documento->proveedor->prv_nombre}}</p>
+                   
+                   
+                    @if($documento->proveedor==null)
+                    
+                    @else
+                      <label for="nombre">Proveedor</label>
+                      <p>{{$documento->proveedor->prv_nombre}}</p>
+                    @endif
                 </div>
               </div>
             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
