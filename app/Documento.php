@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Documentos extends Model
+class Documento extends Model
 {
     protected $primaryKey="doc_id" ;
     protected $table="inv_documentos" ;
@@ -22,6 +22,15 @@ class Documentos extends Model
     {
         return $this->hasMany('App\Producto','cat_id');
     }
-    
 
+    public function proveedor()
+    {
+        return $this->belongsTo('App\Proveedor', 'prv_id');
+    }
+
+    public function detalles()
+    {
+        return $this->hasMany('App\DetalleDocumento', 'doc_id');
+    }
+    
 }

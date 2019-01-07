@@ -17,16 +17,16 @@ class CreateProveedoresTable extends Migration
             $table->increments('prv_id');
             $table->string('prv_codigo',10)->unique();
             $table->string('prv_nombre',100)->unique();
-            $table->string('prv_descripcion',100);
+            $table->string('prv_descripcion',100)->nullable();
             $table->string('prv_identificacion',13)->unique();
             $table->string('prv_tipo_identificacion',20);
             $table->string('prv_direccion',100);
             $table->string('prv_telefono',10)->nullable();
             $table->string('prv_celular',10)->nullable();
             $table->string('prv_email',50)->unique();
-            $table->boolean('prv_estado');
+            $table->boolean('prv_estado')->default(1);
             $table->timestamp('prv_created_at');
-            $table->timestamp('prv_updated_at');
+            $table->timestamp('prv_updated_at')->nullable();
         });
     }
 

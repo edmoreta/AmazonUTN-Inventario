@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <!-- Theme style -->
@@ -89,25 +90,25 @@
             <li>
             <a href="{{ url('proveedores') }}">
                  <span>Proveedores</span>
-                <small class="label pull-right "><i class="fa fa-user" style="font-size: 18px;"></i></small>
+                <small class="label pull-right "><i class="fa fa-truck" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
               <a href="#">
                  <span>Productos</span>
-                <small class="label pull-right "><i class="fa fa-folder" style="font-size: 18px;"></i></small>
+                <small class="label pull-right "><i class="fa fa-suitcase" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
             <a href="#">
                  <span>Categorías</span>
-                <small class="label pull-right "><i class="fa fa-vimeo" style="font-size: 18px;"></i></small>
+                <small class="label pull-right "><i class="fa fa-folder" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
-            <a href="#">
+            <a href="{{ url('documentos') }}">
                  <span>Inventario</span>
-                <small class="label pull-right "><i class="fa fa-money" style="font-size: 18px;"></i></small>
+                <small class="label pull-right "><i class="fa fa-pencil-square-o" style="font-size: 18px;"></i></small>
               </a>
             </li>
             <li>
@@ -120,7 +121,7 @@
               <li>
                 <a href="{{ url('usuarios') }}">
                   <span>Usuarios</span>
-                  <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
+                  <small class="label pull-right "><i class="	fa fa-group" style="font-size: 18px;"></i></small>
                 </a>
               </li>
             @endrole 
@@ -174,12 +175,17 @@
       </footer>
 
       
+  
      <!-- jQuery 2.1.4 -->
      <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
+     @stack('scripts')  
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap-select.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/app.min.js') }}"></script>
+
+
 
     @yield('script')
     

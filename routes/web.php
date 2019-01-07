@@ -18,7 +18,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(["middleware" => "auth"], function () {
     Route::get('proveedores/estado/{id}/{est}', 'ProveedoresController@estado')->name('estado');
-    Route::resource('proveedores', 'ProveedoresController'); 
+    Route::resource('proveedores', 'ProveedoresController');
+    Route::resource('documentos', 'DocumentoController');
+    Route::resource('ajustes', 'AjustesController');
+    Route::resource('notas_de_credito', 'NotasDeCreditoController');
+    Route::resource('facturas_ingreso', 'FacturaIngresoController');
     Route::resource('usuarios', 'UserController')->middleware('role:administrador');   
     
     Route::get('/inicio', function () {

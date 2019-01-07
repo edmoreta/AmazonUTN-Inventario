@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use DB;
+use App\Documento;
+
+class DocumentoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        if ($request) {
+            $query = trim($request->get('searchText'));
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {
+                $pag=7;
+            }
+            $documentos = DB::table('inv_documentos as doc')
+            ->join('inv_proveedores as p','doc.prv_id','=','p.prv_id')
+            ->select('p.prv_nombre','doc_codigo','doc.doc_tipo','doc_fecha','doc.doc_id')
+            ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
+            ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
+            ->orderby('doc.doc_created_at','desc')
+            ->paginate($pag);
+            return view('documentos.index', ["documentos" => $documentos, "searchText" => $query,"pag" => $pag]);
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $documento=Documento::with('proveedor')->findOrFail($id);      
+       
+
+        $detalles=DB::table('inv_movimientos as mov')
+        ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')
+        ->select('pro.pro_nombre', 'mov.mov_cantidad', 'mov.mov_precio',
+        'mov.mov_costo')
+        ->where('mov.doc_id','=',$id)
+        ->get();  
+        
+        
+       return view("documentos.show",["documento" => $documento, "detalles" => $detalles]);  
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
