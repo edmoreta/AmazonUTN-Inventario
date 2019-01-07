@@ -44,9 +44,7 @@ class EntrustSetupTables extends Migration
      * @return  void
      */
     public function down()
-    {
-        Schema::drop('permission_role');
-        Schema::drop('permissions');
+    {  
         Schema::drop('role_user');
         Schema::drop('roles');
     }
