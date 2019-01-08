@@ -23,9 +23,11 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('categorias/search','CategoriaController@search');
     Route::resource('categorias', 'CategoriaController');        
     Route::resource('documentos', 'DocumentoController');
-    Route::resource('ajustes', 'AjustesController');
+    Route::get('stock','DocumentoController@stock');
+    Route::resource('ajustes', 'AjustesController');    
     Route::resource('notas_de_credito', 'NotasDeCreditoController');
     Route::resource('facturas_ingreso', 'FacturaIngresoController');
+
     
     Route::get('/inicio', function () {
         return view('layouts/inicio');

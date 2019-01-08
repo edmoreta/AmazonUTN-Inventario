@@ -31,6 +31,27 @@ class DocumentoController extends Controller
             return view('documentos.index', ["documentos" => $documentos, "searchText" => $query,"pag" => $pag]);
         }
     }
+    public function stock(Request $request){
+
+        if ($request) {
+            $query = trim($request->get('searchText'));
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {
+                $pag=7;
+            }
+
+
+            $movimientos = DB::table('inv_movimientos as mov')
+             ->join('inv_documentos as doc','mov.doc_id','=','doc.doc_id')
+             ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')
+             ->select('doc.doc_tipo as tipo','doc.doc_codigo as codigo','doc.doc_fecha as fecha','pro.pro_nombre as producto','mov_cantidad as cantidad','mov_precio as precio','mov_costo as costo')
+             ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
+             ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
+             ->orderby('doc.doc_created_at','desc')
+             ->paginate($pag);
+            return view('documentos.stock', ["movimientos" => $movimientos, "searchText" => $query,"pag" => $pag]);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

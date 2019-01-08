@@ -111,7 +111,7 @@
               </a>
             </li>
             <li>
-            <a href="#">
+            <a href="{{ url('stock') }}">
                  <span>Stock</span>
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
