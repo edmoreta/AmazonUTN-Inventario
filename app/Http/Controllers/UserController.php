@@ -6,9 +6,11 @@ use App\Notifications\NewUserNotification;
 use App\Role;
 use App\User;
 use Auth;
+USE DB;
 use Faker;
 use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 
@@ -19,11 +21,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::with("roles")->orderBy('usu_nombre')->get();
-        $roles = Role::orderBy('name')->get();       
-        return view('usuarios.index', compact('usuarios', 'roles'));
+        if ($request) {
+            $query = trim($request->get('searchText'));
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {
+                $pag=7;
+            }
+            $usuarios = DB::table('inv_usuarios as usu')
+            ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+            ->join('roles as r', 'ru.id', '=', 'r.id')
+            ->orWhere('usu.usu_nombre', 'LIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_email', 'LIKE', '%' . $query . '%')
+            ->orderby('usu.usu_nombre','desc')
+            ->paginate($pag);
+            return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);
+        }
     }
 
     /**
@@ -44,19 +58,25 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    protected $email;
     public function store(UserRequest $request)
     {
         try {
-           
             $user = new User;
             $user->fill($request->except('idRol'));
             $faker = Faker\Factory::create();
             $password = $faker->password();
-            info($password);
+            $data = array(
+                "password" => $password,
+            );
+            $this->email=$user->usu_email;
             $user->usu_password = bcrypt($password);
             $user->save();
-        
             $user->roles()->attach($request->idRol);
+            Mail::send('emails.sentpassword', $data, function ($m) {
+                $m->from('example@gmail.com', 'Su contraseña');
+                $m->to($this->email, "User")->subject('Your Reminder!');
+            });
             return redirect('usuarios')->with('success', 'Usuario registrado');
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
