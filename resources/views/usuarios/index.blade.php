@@ -21,7 +21,7 @@
 					<th style="width:130px">Opciones</th>
 					<th>Nombre</th>
 					<th>Dirección</th>
-					<th>Celular</th>
+					<th>Cedula</th>
 					<th>Email</th>
 					<th>Estado</th>
                     <th>Rol</th>
@@ -34,7 +34,7 @@
 						</td>
 						<td>{{$u->usu_nombre}}</td>
 						<td>{{$u->usu_direccion}}</td>
-						<td>{{$u->usu_celular}}</td>
+						<td>{{$u->usu_cedula}}</td>
 						<td>{{$u->usu_email}}</td>
 							@if($u->usu_estado)
 							<?php

@@ -13,8 +13,8 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->hasRole("administrador");
-       // return true;
+       // return Auth::user()->hasRole("administrador");
+        return true;
     }
 
     /**
@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
     {
         return [
             'usu_nombre'=>'required_without:usu_id|string|min:3|max:50',
+            'usu_cedula'=>'required_without:usu_id|string|min:10|max:13',
             'usu_email' => 'required_without:usu_id|string|email|min:10|max:50|',
             'idRol'=>'required|integer|exists:roles,id',
 
@@ -35,7 +36,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-           
+            'usu_cedula.unique' => 'la cedula ya ha sido ingresado',
             'usu_email.unique' => 'El e-mail ya ha sido ingresado',
         ];
     }
