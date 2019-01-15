@@ -124,7 +124,10 @@ Si la consola regresa el mensaje `Nothing to migrate.` borrar todas las tablas y
 ```
 php artisan migrate:fresh
 ```
-
+## Ejecutar Seeders
+```
+php artisan db:seed
+```
 ## Creación de usuarios
 Para iniciar sesión es necesario crear un nuevo usuario a través de Tinker
 ```
