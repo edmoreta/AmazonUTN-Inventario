@@ -26,7 +26,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_nombre">Nombre</label> <label for="usu_nombre" style="color:red">*</label>
-                                    <input type="text" name="usu_nombre" maxlength="50" minlength="5" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_nombre}}" required class="form-control" >
+                                    <input type="text" name="usu_nombre" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_nombre}}" required class="form-control" >
                                 </div>
                             </div>
                           
@@ -41,7 +41,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_apellido">Apellido</label> <label for="usu_apellido" style="color:red">*</label>
-                                    <input type="text" name="usu_apellido" maxlength="50" minlength="5" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_apellido}}" required class="form-control" >
+                                    <input type="text" name="usu_apellido" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_apellido}}" required class="form-control" >
                                 </div>
                             </div>
                             
@@ -63,11 +63,13 @@
                                 <label for="idRol">Rol</label> <label for="idRol" style="color:red">*</label>
                                 <select required class="form-control" id="idRol" name="idRol">
                                		@foreach ($roles as $r)
-										@if($r->id == $usuario->roles->first()->id)
-										<option value="{{$r->id}}" selected>{{$r->display_name}}</option>
-										@else
-										<option value="{{$r->id}}" >{{$r->display_name}}</option>
-										@endif
+                                        @if($r->display_name!='Root')
+                                            @if($r->id == $usuario->roles->first()->id)
+                                                <option value="{{$r->id}}" selected>{{$r->display_name}}</option>
+                                            @else
+                                                <option value="{{$r->id}}" >{{$r->display_name}}</option>
+                                            @endif
+                                        @endif
                                 	@endforeach
                            		</select>
                             </div>
@@ -100,12 +102,14 @@
 									</select>
                                 </div>
                             </div>	
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<button class="btn btn-primary" type="submit">Guardar</button>
-							
-						</div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="form-group">
+						<a class="btn btn-danger" href="{{url('usuarios')}}">Cancelar</a>
+						<button class="btn btn-primary" type="submit">Guardar</button>
 					</div>
+				</div>
+
+
 				</div>
 			</div>
 			{!!Form::close()!!}		

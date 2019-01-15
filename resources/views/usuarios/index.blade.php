@@ -28,6 +28,7 @@
 				</thead>
 				<tbody>
 				@foreach ($usuarios as $u)
+					@if($u->display_name!='Root')
 					<tr>
 						<td>
 							<a href="{{URL::action('UserController@edit',$u->usu_id)}}"><button class="btn btn-success">Editar</button></a>
@@ -49,7 +50,8 @@
                         <td>
                             {{$u->display_name}}
                         </td>
-					</tr>		
+					</tr>	
+					@endif	
 				@endforeach
 				</tbody>
 			</table>

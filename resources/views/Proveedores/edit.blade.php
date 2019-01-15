@@ -38,7 +38,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 					<label for="prv_nombre">Nombre</label> <label for="prv_nombre" style="color:red">*</label>
-						<input type="text" name="prv_nombre" maxlength="100" minlength="5" value="{{ $proveedor->prv_nombre }}" required class="form-control">
+						<input type="text" name="prv_nombre" maxlength="100" minlength="3" value="{{ $proveedor->prv_nombre }}" required class="form-control">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

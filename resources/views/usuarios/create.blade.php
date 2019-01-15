@@ -27,7 +27,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_nombre">Nombre</label> <label for="usu_nombre" style="color:red">*</label>
-                                    <input type="text" name="usu_nombre" maxlength="50" minlength="5" pattern="([a-zA-Z]| )+" value="{{old('usu_nombre')}}" required class="form-control" placeholder="Nombre...">
+                                    <input type="text" name="usu_nombre" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{old('usu_nombre')}}" required class="form-control" placeholder="Nombre...">
                                 </div>
                             </div>
                             
@@ -42,7 +42,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_apellido">Apellido</label> <label for="usu_apellido" style="color:red">*</label>
-                                    <input type="text" name="usu_apellido" maxlength="50" minlength="5" pattern="([a-zA-Z]| )+" value="{{old('usu_apellido')}}" required class="form-control" placeholder="Apellido...">
+                                    <input type="text" name="usu_apellido" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{old('usu_apellido')}}" required class="form-control" placeholder="Apellido...">
                                 </div>
                             </div>
                        							
@@ -65,7 +65,9 @@
                                 <select required class="form-control" id="idRol" name="idRol">
                                 <option value="">-- Seleccionar --</option>
                                 @foreach ($roles as $r)
-                                <option value="{{$r->id}}">{{$r->display_name}}</option>
+                                    @if($r->display_name!='Root')
+                                        <option value="{{$r->id}}">{{$r->display_name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             </div>
@@ -83,13 +85,12 @@
                                     <input type="file" name="usu_foto"   value="{{old('usu_direccion')}}" class="form-control">
                                 </div>
                          </div>
-                            	 
-
-                            <div class="form-group row">
-                                    <div class="col-sm-10">
-                                      <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                            </div>
+                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="form-group">
+						<a class="btn btn-danger" href="{{url('usuarios')}}">Cancelar</a>
+						<button class="btn btn-primary" type="submit">Guardar</button>
+					</div>
+				</div>
                         {!! Form::close() !!}
                     </div>
                 </div>

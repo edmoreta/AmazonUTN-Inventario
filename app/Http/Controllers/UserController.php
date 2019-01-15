@@ -103,6 +103,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if ($id==1) {
+            return redirect('usuarios');
+        }
         /*$usuario=User::where('usu_id','=','1')->first();*/
         $usuario = User::findOrFail($id);
         $roles = Role::orderBy('name')->get();

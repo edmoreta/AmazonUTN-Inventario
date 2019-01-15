@@ -25,8 +25,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'usu_nombre'=>'required|min:5|max:50',
-            'usu_apellido'=>'required|min:5|max:50',
+            'usu_nombre'=>'required|min:3|max:50',
+            'usu_apellido'=>'required|min:3|max:50',
             'usu_cedula'=>'required|digits:10',
             'usu_email' => 'required|max:50|email',
             'idRol'=>'required|integer|exists:roles,id',

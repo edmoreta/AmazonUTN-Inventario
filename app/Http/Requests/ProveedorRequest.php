@@ -25,7 +25,7 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'prv_codigo' => 'required|max:10',
-            'prv_nombre' => 'required|min:5|max:100',
+            'prv_nombre' => 'required|min:3|max:100',
             'prv_descripcion' => 'max:100',
             'prv_identificacion' => 'required|digits_between:10,13',
             'prv_tipo_identificacion' => 'required|max:20',
