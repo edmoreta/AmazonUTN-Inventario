@@ -191,7 +191,22 @@ Comprobar que devuelva true.
 $user1->hasRole('administrador');
 $user2->hasRole('bodeguero');
 ```
- 
+## Configuración del correo para permitir el acceso de aplicaciones poco seguras
+Nos dirigimos a:
+```
+Cuenta > Seguridad > Acceso de aplicaciones poco seguras > Activar acceso >
+Activa la opción Permitir el acceso de aplicaciones poco seguras
+```
+## Creación para la notificación del correo
+Configurar el archivo .env
+```
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=ejemplo@gmail.com
+MAIL_PASSWORD=********
+MAIL_ENCRYPTION=tls
+ ```
 
 
 
