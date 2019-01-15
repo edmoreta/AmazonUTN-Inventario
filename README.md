@@ -194,8 +194,8 @@ $user2->hasRole('bodeguero');
 ## Configuración del correo para permitir el acceso de aplicaciones poco seguras
 Nos dirigimos a:
 ```
-Cuenta > Seguridad > Acceso de aplicaciones poco seguras > 
-Activar acceso > activa la opción Permitir el acceso de aplicaciones poco seguras
+Cuenta > Seguridad > Acceso de aplicaciones poco seguras > Activar acceso >
+Activa la opción Permitir el acceso de aplicaciones poco seguras
 ```
 ## Creación para la notificación del correo
 Configurar el archivo .env
