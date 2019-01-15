@@ -11,7 +11,6 @@ use Faker;
 use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
-
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,6 +33,7 @@ class UserController extends Controller
             ->join('roles as r', 'ru.id', '=', 'r.id')
             ->orWhere('usu.usu_nombre', 'LIKE', '%' . $query . '%')
             ->orWhere('usu.usu_email', 'LIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_cedula', 'LIKE', '%' . $query . '%')
             ->orderby('usu.usu_nombre','desc')
             ->paginate($pag);
             return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);
