@@ -17,7 +17,7 @@ class CreateCategoriasTable extends Migration
             $table->increments('cat_id');
             $table->string('cat_codigo',10)->unique();
             $table->integer('cat_codigop')->nullable();
-            $table->string('cat_nombre',100);
+            $table->string('cat_nombre',100)->unique();
             $table->boolean('cat_estado')->default(1);
             $table->timestamp('cat_created_at');
             $table->timestamp('cat_updated_at');
