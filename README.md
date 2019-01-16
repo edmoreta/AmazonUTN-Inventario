@@ -124,7 +124,10 @@ Si la consola regresa el mensaje `Nothing to migrate.` borrar todas las tablas y
 ```
 php artisan migrate:fresh
 ```
-
+## Ejecutar Seeders
+```
+php artisan db:seed
+```
 ## Creación de usuarios
 Para iniciar sesión es necesario crear un nuevo usuario a través de Tinker
 ```
@@ -134,6 +137,7 @@ php artisan tinker
 En la consola del Tinker crear el nuevo usuario
 ```
 $user = new \App\User();
+$user->usu_cedula = '10034567832';
 $user->usu_nombre = 'usuario1';
 $user->usu_apellido = 'apellido1';
 $user->usu_fechaN = '1999/01/01';
@@ -145,6 +149,7 @@ $user->usu_password = \Illuminate\Support\Facades\Hash::make('12345678');
 $user->save();
 
 $user = new \App\User();
+$user->usu_cedula = '1004356785';
 $user->usu_nombre = 'usuario2';
 $user->usu_apellido = 'apellido2';
 $user->usu_fechaN = '1999/01/01';
@@ -189,7 +194,22 @@ Comprobar que devuelva true.
 $user1->hasRole('administrador');
 $user2->hasRole('bodeguero');
 ```
- 
+## Configuración del correo para permitir el acceso de aplicaciones poco seguras
+Nos dirigimos a:
+```
+Cuenta > Seguridad > Acceso de aplicaciones poco seguras > Activar acceso >
+Activa la opción Permitir el acceso de aplicaciones poco seguras
+```
+## Creación para la notificación del correo
+Configurar el archivo .env
+```
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=ejemplo@gmail.com
+MAIL_PASSWORD=********
+MAIL_ENCRYPTION=tls
+ ```
 
 
 

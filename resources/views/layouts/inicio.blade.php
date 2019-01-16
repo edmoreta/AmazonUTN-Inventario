@@ -116,14 +116,14 @@
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
             </li>
-            @role('administrador')
+            @role(['administrador','root'])
               <li>
                 <a href="{{ url('usuarios') }}">
                   <span>Usuarios</span>
                   <small class="label pull-right "><i class="	fa fa-group" style="font-size: 18px;"></i></small>
                 </a>
               </li>
-            @endrole 
+            @endrole            
         
           </ul>
         </section>
@@ -152,7 +152,8 @@
 	                  	<div class="col-md-12">
 		                         <!--Contenido-->
                              @yield('contenido')
-		                          <!--Fin Contenido-->
+                              <!--Fin Contenido-->
+                              
                            </div>
                         </div>
 		                    
@@ -175,9 +176,10 @@
 
       
   
-     <!-- jQuery 2.1.4 -->
-     <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
-     @stack('scripts')  
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
+    @stack('modals')
+    @stack('scripts')  
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('dist/js/bootstrap-select.min.js') }}"></script>
@@ -187,6 +189,7 @@
 
 
     @yield('script')
+    
     
   </body>
 </html>

@@ -22,7 +22,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_nombre">Nombre</label> <label for="prv_nombre" style="color:red">*</label>
-						<input type="text" name="prv_nombre" maxlength="100" value="{{old('prv_nombre')}}" required class="form-control" placeholder="Nombre...">
+						<input type="text" name="prv_nombre" maxlength="100" minlength="3" pattern="([a-zA-Z]| )+" value="{{old('prv_nombre')}}" required class="form-control" placeholder="Nombre...">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -57,19 +57,19 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_identificacion">Identificación</label><label for="prv_identificacion" style="color:red">*</label>
-						<input type="text" name="prv_identificacion" maxlength="13" pattern="[0-9]+" value="{{old('prv_identificacion')}}" required class="form-control" placeholder="Identificación...">
+						<input type="text" name="prv_identificacion" maxlength="13" minlength="10" pattern="[0-9]+" value="{{old('prv_identificacion')}}" required class="form-control" placeholder="Identificación...">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_celular">Celular</label>
-						<input type="text" name="prv_celular" maxlength="10" pattern="[0-9]+" value="{{old('prv_celular')}}" class="form-control" placeholder="Celular...">
+						<input type="text" name="prv_celular" maxlength="10" minlength="10" pattern="[0-9]+" value="{{old('prv_celular')}}" class="form-control" placeholder="Celular...">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label for="prv_telefono">Teléfono</label>
-						<input type="text" name="prv_telefono" maxlength="9" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
+						<input type="text" name="prv_telefono" maxlength="9" minlength="9" pattern="[0-9]+" value="{{old('prv_telefono')}}" class="form-control" placeholder="Teléfono...">
 					</div>
 				</div>
 

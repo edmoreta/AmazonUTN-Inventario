@@ -14,9 +14,9 @@ class Categoria extends Model
     const CREATED_AT="cat_created_at";
     const UPDATED_AT="cat_updated_at";
 
-    protected $fillable = ['cat_nombre','cat_codigop'];
+    protected $fillable = ['cat_nombre','cat_codigop','cat_estado'];
 
-    protected $hidden = ['cat_id'];
+    protected $hidden = ['pivot'];
 
     public function productos()
     {
