@@ -40,7 +40,7 @@ class DocumentoController extends Controller
                 $pag=7;
             }
 
-
+            
             $movimientos = DB::table('inv_movimientos as mov')
              ->join('inv_documentos as doc','mov.doc_id','=','doc.doc_id')
              ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')
