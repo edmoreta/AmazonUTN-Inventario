@@ -21,7 +21,7 @@
 					<th style="width:130px">Opciones</th>
 					<th>Nombre</th>
 					<th>Dirección</th>
-					<th>Cedula</th>
+					<th>Cédula</th>
 					<th>Email</th>
 					<th>Estado</th>
                     <th>Rol</th>
