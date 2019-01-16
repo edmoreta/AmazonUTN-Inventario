@@ -41,8 +41,8 @@ class UserRequest extends FormRequest
         return [
             'usu_nombre.required' => 'El campo Nombre no debe estar vacío',
             'usu_apellido.required' => 'El campo Apellido no debe estar vacío',
-            'usu_cedula.required' => 'El campo Cedula no debe estar vacío',
-            'usu_cedula.digits' => 'Formato de Cedual incorrecto',
+            'usu_cedula.required' => 'El campo Cédula no debe estar vacío',
+            'usu_cedula.digits' => 'Formato de Cédual incorrecto',
             'usu_email.required' => 'El campo e-mail no debe estar vacío',
             'usu_email.email' => 'Formato de correo electrónico incorrecto',
             'idRol.required' => 'Debe seleccionar un Rol',
