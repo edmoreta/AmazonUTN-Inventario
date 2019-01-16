@@ -17,18 +17,21 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::latest()->paginate(7);
+        $categorias = Categoria::orderByDesc('cat_updated_at')->paginate(7);
         if (Categoria::all()->isEmpty()) {
             $cod = 1;
+            $cats = null;
+            $id = null;
         } else {
             $cat = Categoria::latest()->first();
+            $id = $cat->cat_id;
             $cod = substr($cat->cat_codigo,4) + 1;
+            $cats = Categoria::doesntHave('categoriasuperior')->get();
+            foreach ($cats as $c) {
+                //info($c);
+            }
         }
-        $cats = Categoria::doesntHave('categoriasuperior')->get();
-        foreach ($cats as $c) {
-            //info($c);
-        }
-        return view('categorias.index',compact('categorias','cod','cats'));
+        return view('categorias.index',compact('categorias','cod','cats','id'));
     }
 
     public function search(Request $request)
@@ -110,20 +113,24 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        try{                       
-            $categoria = Categoria::findOrFail($id);            
-            $categoria->cat_codigo = $request->cat_codigo;
+    public function update(CategoriaRequest $request, $id)
+    {                        
+        try{            
             if ($request->cat_codigop != -1) {
-                $categoria->cat_codigop = $request->cat_codigop;
+                //info('updatecontroller!!!!!!! '.$id);
+                if ($request->cat_id != $request->cat_codigop) {
+                    $categoria=Categoria::updateOrCreate(['cat_id'=>$id],$request->all());
+                } else {
+                    return redirect('categorias')->withErrors(['Categoría no actualizada']);
+                }                
             } else {
-                $categoria->cat_codigop = null;
-            }            
-            $categoria->cat_nombre = $request->cat_nombre;
-            //info($request->cat_codigo);
-            $categoria->save();                        
-            return redirect('categorias')->with('success','Categoría creada');
+                $categoria=Categoria::updateOrCreate(['cat_id'=>$id],
+                    ['cat_codigop' => null, 'cat_nombre' => $request->cat_nombre, 'cat_estado' => $request->cat_estado, ]);
+                info($request->cat_codigo.'/'.$request->cat_nombre.'**'.$request->cat_estado);
+                //$categoria->cat_codigop = null;
+            }
+            
+            return redirect('categorias')->with('success','Categoría actualizada');
         }catch(Exception | QueryException $e){
             return back()->withErrors(['exception'=>$e->getMessage()]);
         }

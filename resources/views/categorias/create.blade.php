@@ -10,7 +10,7 @@ role="dialog" tabindex="-1" id="modalCreate">
                 </button>
                 <h4 class="modal-title">Nueva Categoría</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body">                
 				<div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
@@ -33,9 +33,11 @@ role="dialog" tabindex="-1" id="modalCreate">
                             <label for="cat_codigop">Categoría Superior</label> <label for="cat_codigop" style="color:red"></label>
                             <select name="cat_codigop" class="form-control">
                                 <option value="-1">--   Seleccione  --</option>
-                                @foreach ($cats as $c)
-                                    <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
-                                @endforeach                                
+                                @if($cats != null)
+                                    @foreach ($cats as $c)
+                                        <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                     </div>
