@@ -31,7 +31,6 @@ class FacturaIngresoController extends Controller
      */
     public function create()
     {
-       
         $proveedores = DB::table('inv_proveedores as prv')
             ->where('prv.prv_estado', '=', true)
             ->get();
