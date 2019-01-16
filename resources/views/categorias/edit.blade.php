@@ -14,7 +14,7 @@ role="dialog" tabindex="-2" id="modalEdit">
             {{-- <form action="{{ route('categorias.update', 4) }}" method="PATCH"> --}}
             {{ Form::open(array('route' => ['categorias.update',''], 'method' => 'PATCH')) }}
 			<div class="modal-body">
-                <input type="text" id="id" value="" name="cat_id">
+                <input type="hidden" id="id" value="" name="cat_id">
 				<div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
@@ -61,7 +61,7 @@ role="dialog" tabindex="-2" id="modalEdit">
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 				<button type="submit" class="btn btn-primary">Guardar</button>
             </div>
             {!! Form::close() !!}

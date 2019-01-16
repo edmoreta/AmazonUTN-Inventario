@@ -35,8 +35,7 @@
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
-					<th style="width:130px">Opciones</th>
-                    <th>id</th>
+					<th style="width:130px">Opciones</th>                    
                     <th>Estado</th>
                     <th>Código</th>
 					<th>Categoría Superior</th>
@@ -55,8 +54,7 @@
 								data-codigop="{{ $cat->cat_codigop == null ? "":$cat->cat_codigop }}"
 								data-estado="{{ $cat->cat_estado == true ? 1:0 }}"
 								data-toggle="modal"><button class="btn btn-success">Editar</button></a>
-						</td>
-						<td>{{$cat->cat_id}}</td>
+						</td>						
 						@if($cat->cat_estado)						
 							<td>Activo</td>
 						@else
