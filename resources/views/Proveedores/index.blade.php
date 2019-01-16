@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h3>Proveedores <a href="{{ url('proveedores/create') }}"><button class="btn btn-success">Nuevo</button></a></h3>
-		@include('Proveedores.search')
+		@include('proveedores.search')
 	</div>
 </div>
 <div class="row">
@@ -38,7 +38,7 @@
 		{{$proveedores->render()}}
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 				<div class="form-group">
-						<select name="formal" class="form-control" onchange="javascript:handleSelect(this)">
+						<select style="width:70px" name="formal" class="form-control" onchange="javascript:handleSelect(this)">
 								<option value="proveedores?pag=7"<?php 
 								if ($pag=='7') {
 									echo 'selected';

@@ -22,13 +22,34 @@ class DocumentoController extends Controller
                 $pag=7;
             }
             $documentos = DB::table('inv_documentos as doc')
-            ->join('inv_proveedores as p','doc.prv_id','=','p.prv_id')
+            ->leftJoin('inv_proveedores as p','doc.prv_id','=','p.prv_id')
             ->select('p.prv_nombre','doc_codigo','doc.doc_tipo','doc_fecha','doc.doc_id')
             ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
             ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
             ->orderby('doc.doc_created_at','desc')
             ->paginate($pag);
             return view('documentos.index', ["documentos" => $documentos, "searchText" => $query,"pag" => $pag]);
+        }
+    }
+    public function stock(Request $request){
+
+        if ($request) {
+            $query = trim($request->get('searchText'));
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {
+                $pag=7;
+            }
+
+
+            $movimientos = DB::table('inv_movimientos as mov')
+             ->join('inv_documentos as doc','mov.doc_id','=','doc.doc_id')
+             ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')
+             ->select('doc.doc_tipo as tipo','doc.doc_codigo as codigo','doc.doc_fecha as fecha','pro.pro_nombre as producto','mov_cantidad as cantidad','mov_precio as precio','mov_costo as costo')
+             ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
+             ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
+             ->orderby('doc.doc_created_at','desc')
+             ->paginate($pag);
+            return view('documentos.stock', ["movimientos" => $movimientos, "searchText" => $query,"pag" => $pag]);
         }
     }
 
@@ -62,7 +83,7 @@ class DocumentoController extends Controller
     public function show($id)
     {
         $documento=Documento::with('proveedor')->findOrFail($id);      
-       
+      
 
         $detalles=DB::table('inv_movimientos as mov')
         ->join('inv_productos as pro','mov.pro_id','=','pro.pro_id')

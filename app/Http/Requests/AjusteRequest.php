@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AjusteRequest extends FormRequest
 {
@@ -24,11 +25,11 @@ class AjusteRequest extends FormRequest
     public function rules()
     {
         return [
-           
             'doc_codigo' =>'required|max:8',
-            'doc_fecha' =>'required',
+            'doc_fecha' =>'required|date',
             'pro_id' =>'required',
             'cantidad' =>'required',
+            'tipo_ajuste' =>'required|max:10',
             'costo' => 'required',
             'precio'=>'required',
 

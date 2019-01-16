@@ -111,12 +111,20 @@
               </a>
             </li>
             <li>
-            <a href="#">
+            <a href="{{ url('stock') }}">
                  <span>Stock</span>
                 <small class="label pull-right "><i class="fa fa-line-chart" style="font-size: 18px;"></i></small>
               </a>
             </li>
             @role('administrador')
+              <li>
+                <a href="{{ url('usuarios') }}">
+                  <span>Usuarios</span>
+                  <small class="label pull-right "><i class="	fa fa-group" style="font-size: 18px;"></i></small>
+                </a>
+              </li>
+            @endrole
+            @role('root')
               <li>
                 <a href="{{ url('usuarios') }}">
                   <span>Usuarios</span>
