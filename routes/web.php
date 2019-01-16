@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(["middleware" => "auth"], function () {
     Route::get('proveedores/estado/{id}/{est}', 'ProveedoresController@estado')->name('estado');
     Route::resource('proveedores', 'ProveedoresController'); 
-    Route::resource('usuarios', 'UserController')->middleware('role:administrador');
+    Route::resource('usuarios', 'UserController')->middleware('role:administrador|root');
     Route::get('categorias/search','CategoriaController@search');
     Route::resource('categorias', 'CategoriaController');        
     Route::resource('documentos', 'DocumentoController');
@@ -27,10 +27,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('ajustes', 'AjustesController');    
     Route::resource('notas_de_credito', 'NotasDeCreditoController');
     Route::resource('facturas_ingreso', 'FacturaIngresoController');
-
-    
     Route::get('/inicio', function () {
         return view('layouts/inicio');
     });
-    
 });
