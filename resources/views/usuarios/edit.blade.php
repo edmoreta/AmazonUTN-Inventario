@@ -87,7 +87,7 @@
                                     <label for="usu_foto">Foto</label> <label for="usu_foto" ></label>
                                     <input type="file" name="usu_foto"   value="{{$usuario->usu_foto}}" class="form-control">
                                 </div>
-                         </div>
+                         </div>                         
 						 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_estado">Estado</label> <label for="usu_estado" style="color:red">*</label>

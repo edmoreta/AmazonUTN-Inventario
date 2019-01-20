@@ -31,7 +31,7 @@ role="dialog" tabindex="-1" id="modalCreate">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_codigop">Categoría Superior</label> <label for="cat_codigop" style="color:red"></label>
-                            <select name="cat_codigop" class="form-control">
+                            <select name="cat_codigop" class="form-control selectpicker">
                                 <option value="-1">--   Seleccione  --</option>
                                 @if($cats != null)
                                     @foreach ($cats as $c)
