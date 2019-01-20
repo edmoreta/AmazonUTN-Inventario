@@ -35,7 +35,7 @@ role="dialog" tabindex="-2" id="modalEdit">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_codigop">Categoría Superior</label> <label for="cat_codigop" style="color:red"></label>                            
-                            <select name="cat_codigop" class="form-control" id="cat_codigop">
+                            <select name="cat_codigop" class="form-control selectpicker" id="cat_codigop">
                                 <option value="-1">--   Seleccione  --</option> 
                                 @if($cats != null)
                                     @foreach ($cats as $c)                                        
@@ -51,7 +51,7 @@ role="dialog" tabindex="-2" id="modalEdit">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_estado">Estado</label> <label for="cat_estado" style="color:red"></label>                            
-                            <select name="cat_estado" class="form-control" id="cat_estado">                                
+                            <select name="cat_estado" class="form-control selectpicker" id="cat_estado">                                
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>                                                                 
                             </select>                            
