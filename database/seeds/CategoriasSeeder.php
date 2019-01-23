@@ -64,7 +64,6 @@ class CategoriasSeeder extends Seeder
             'cat_codigo' => 'CAT-1',
             'cat_codigop' => null,
             'cat_nombre' => 'Pantallas',
-        ]);
-        
+        ]);        
     }
 }
