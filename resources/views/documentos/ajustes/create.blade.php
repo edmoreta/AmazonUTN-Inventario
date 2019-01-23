@@ -23,7 +23,7 @@
 	 </div>
 	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 			   <div class="form-group">
-					  <label for="serieComprobante">Codigo De Ajuste</label>
+					  <label for="serieComprobante">Código De Ajuste</label>
 					  <input type="number" name="doc_codigo" id="doc_codigo" required value="{{old('doc_codigo')}}" class="form-control" placeholder="Serie del Comprobante..">
 			   </div>
 	 </div>
