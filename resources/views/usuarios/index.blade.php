@@ -5,8 +5,16 @@
 		<h3>Usuarios <a href="{{url('usuarios/create')}}"><button class="btn btn-success">Nuevo</button></a></h3>
 		@include('usuarios.search')
 	</div>
-		</div>
+</div>
+<a class="btn btn-link {{strpos(Request::fullUrl(), 'usuarios?display=todos') ? 'disabled' : ''}}" href="{{URL::action('UserController@index',['display'=>'todos'])}}">Todos</a> | 
+<a class="btn btn-link {{strpos(Request::fullUrl(), 'usuarios?display=activo') ? 'disabled' : ''}}" href="{{URL::action('UserController@index',['display'=>'activo'])}}">Activo</a> | 
+<a class="btn btn-link {{strpos(Request::fullUrl(), 'usuarios?display=inactivo') ? 'disabled' : ''}}" href="{{URL::action('UserController@index',['display'=>'inactivo'])}}">Inactivo</a>|
+<a class="btn btn-link {{strpos(Request::fullUrl(), 'usuarios?display=administrador') ? 'disabled' : ''}}" href="{{URL::action('UserController@index',['display'=>'administrador'])}}">Administrador</a>|
+<a class="btn btn-link {{strpos(Request::fullUrl(), 'usuarios?display=bodeguero') ? 'disabled' : ''}}" href="{{URL::action('UserController@index',['display'=>'bodeguero'])}}">Bodeguero</a>
+              
 <div class="row">
+				
+
 		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 				@include('includes.messages')
 		</div>
