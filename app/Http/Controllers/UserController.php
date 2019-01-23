@@ -12,6 +12,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator as LaravelValidator;
+use Tavo\ValidadorEc as ValidatorEcPackage;
 
 class UserController extends Controller
 {
@@ -71,6 +73,12 @@ class UserController extends Controller
             );
             $this->email=$user->usu_email;
             $user->usu_password = bcrypt($password);
+
+            $validatorEc = new ValidatorEcPackage();
+            $isValid = $validatorEc->validarCedula($user->usu_cedula);
+            if (!$isValid) {
+                return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
+            }
             $user->save();
             $user->roles()->attach($request->idRol);
             Mail::send('emails.sentpassword', $data, function ($m) {
