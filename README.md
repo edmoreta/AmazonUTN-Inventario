@@ -98,11 +98,14 @@ Instalar la librería Entrust
 ```
 composer require zizaco/entrust
 ```
+Instalar la librería de Validación de Cedula Ecuatoriana
+```
+composer require tavo1987/laravel-ec-validator
+```
 Cada vez que se instala una nueva librería utilizar el siguiente comando
 ```
 composer dump-autoload
 ```
-
 ## Creación de la Base de Datos
 Configurar el archivo .env
 ```
@@ -211,6 +214,9 @@ MAIL_PASSWORD=********
 MAIL_ENCRYPTION=tls
  ```
 
-
-
+## Configuración del Storage
+Para que funcione el almacenamiento de fotos en el CRUD de Productos se debe hacer pública la carpeta storage
+```
+php artisan storage:link
+```
 

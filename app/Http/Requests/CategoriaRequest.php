@@ -25,26 +25,7 @@ class CategoriaRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        //$categoria = Categoria::where('cat_codigo','=',$this->cat_codigo);
-        // if (!Categoria::all()->isEmpty()) {
-        //     $categoria = Categoria::find($this->cat_id);
-        //     info($this.'///'.$categoria);
-        //     return [
-        //         'cat_codigo'=>'required|string|max:10|unique:inv_categorias,cat_codigo,'.$categoria->cat_codigo.',cat_codigo',
-        //         'cat_codigop'=>'nullable|integer',
-        //         'cat_nombre'=>'required|string|max:100',  
-        //         //|unique:inv_categorias,cat_codigo,'.$categoria->cat_id.',cat_id', 
-        //         //Rule::unique('inv_categorias','cat_codigo')->ignore($categoria->cat_id),                         
-        //     ];
-        // } else {
-        //     return [
-        //         'cat_codigo'=>'required|string|max:10|unique:inv_categorias,cat_codigo',
-        //         'cat_codigop'=>'nullable|integer',
-        //         'cat_nombre'=>'required|string|max:100',                
-        //     ];
-        // }
-
+    {       
         switch($this->method())
         {
             case 'PATCH': //update
@@ -73,5 +54,15 @@ class CategoriaRequest extends FormRequest
             default:
                 break;
         }        
+    }
+
+    public function messages()
+    {
+        return [
+            'cat_codigo.unique' => 'El código ya ha sido ingresado',
+            'cat_codigo.required' => 'El campo código no debe estar vacío',
+            'cat_nombre.unique' => 'El nombre ya ha sido ingresado',
+            'cat_nombre.required' => 'El campo nombre no debe estar vacío',            
+        ];
     }
 }

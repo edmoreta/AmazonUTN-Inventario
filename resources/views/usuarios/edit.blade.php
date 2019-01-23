@@ -26,7 +26,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_nombre">Nombre</label> <label for="usu_nombre" style="color:red">*</label>
-                                    <input type="text" name="usu_nombre" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_nombre}}" required class="form-control" >
+                                    <input type="text" name="usu_nombre" maxlength="50" minlength="3" pattern="([a-zA-Z]| |ñ|Ñ|á|Á|é|É|í|Í|ó|Ó|ú|Ú)+" value="{{$usuario->usu_nombre}}" required class="form-control" >
                                 </div>
                             </div>
                           
@@ -41,7 +41,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_apellido">Apellido</label> <label for="usu_apellido" style="color:red">*</label>
-                                    <input type="text" name="usu_apellido" maxlength="50" minlength="3" pattern="([a-zA-Z]| )+" value="{{$usuario->usu_apellido}}" required class="form-control" >
+                                    <input type="text" name="usu_apellido" maxlength="50" minlength="3" pattern="([a-zA-Z]| |ñ|Ñ|á|Á|é|É|í|Í|ó|Ó|ú|Ú)+" value="{{$usuario->usu_apellido}}" required class="form-control" >
                                 </div>
                             </div>
                             
@@ -87,7 +87,7 @@
                                     <label for="usu_foto">Foto</label> <label for="usu_foto" ></label>
                                     <input type="file" name="usu_foto"   value="{{$usuario->usu_foto}}" class="form-control">
                                 </div>
-                         </div>
+                         </div>                         
 						 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_estado">Estado</label> <label for="usu_estado" style="color:red">*</label>
@@ -108,8 +108,6 @@
 						<button class="btn btn-primary" type="submit">Guardar</button>
 					</div>
 				</div>
-
-
 				</div>
 			</div>
 			{!!Form::close()!!}		

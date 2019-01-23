@@ -21,7 +21,9 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('proveedores', 'ProveedoresController'); 
     Route::resource('usuarios', 'UserController')->middleware('role:administrador|root');
     Route::get('categorias/search','CategoriaController@search');
-    Route::resource('categorias', 'CategoriaController');        
+    Route::resource('categorias', 'CategoriaController');
+    Route::get('productos/search','ProductoController@search');
+    Route::resource('productos', 'ProductoController');
     Route::resource('documentos', 'DocumentoController');
     Route::get('stock','DocumentoController@stock');
     Route::resource('ajustes', 'AjustesController');    

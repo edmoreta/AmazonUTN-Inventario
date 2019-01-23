@@ -99,7 +99,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ url('productos') }}">
                 <span>Productos</span>
                 <small class="label pull-right "><i class="fa fa-folder" style="font-size: 18px;"></i></small>
               </a>
