@@ -31,7 +31,6 @@ class FacturaIngresoController extends Controller
      */
     public function create()
     {
-       
         $proveedores = DB::table('inv_proveedores as prv')
             ->where('prv.prv_estado', '=', true)
             ->get();
@@ -63,12 +62,12 @@ class FacturaIngresoController extends Controller
             $mytime = Carbon::now('America/Bogota');
             $ingreso->doc_created_at = $mytime->toDateTimeString();
             $ingreso->doc_tipo = 'FA';
-           
-            $ingreso_buscar= DB::select('SELECT * FROM inv_documentos doc WHERE doc.doc_codigo=? AND doc.prv_id=? AND doc.doc_tipo=?',[$ingreso->doc_codigo,$ingreso->prv_id,$ingreso->doc_tipo]);
-            if( $ingreso_buscar!=null){
+
+            $ingreso_buscar = DB::select('SELECT * FROM inv_documentos doc WHERE doc.doc_codigo=? AND doc.prv_id=? AND doc.doc_tipo=?', [$ingreso->doc_codigo, $ingreso->prv_id, $ingreso->doc_tipo]);
+            if ($ingreso_buscar != null) {
                 return back()->with('errores', 'La factura ya existe')->withInput();
-            }else{               
-                    
+            } else {
+
                 $ingreso->save();
                 $pro_id = $request->get('pro_id');
                 $cantidad = $request->get('cantidad');

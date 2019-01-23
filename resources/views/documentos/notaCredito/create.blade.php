@@ -8,33 +8,37 @@
 			@include('includes.messages')        
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">		
-        <h3>Nueva Factura de Ingreso</h3>
+        <h3>Nueva Nota de Crédito</h3>
     </div>
  </div>
+   
    {!!Form::open(array('url'=>'facturas_ingreso','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
  <div class="row">
      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
          <div class="form-group">
-             <label for="nombre">Proveedor</label>
+             <label for="nombre">Código Factura</label>
+{{-- 
+             {{dd($documentosFa)}}  --}}
+             {{dd($proveedores)}}
              <select name="prv_id" id="prv_id" class="form-control selectpicker" data-live-search="true">
-               @foreach($proveedores as $prv)
-                  <option value="{{$prv->prv_id}}">{{$prv->prv_nombre}}</option>
-              @endforeach
+                @foreach($documentosFa as $doc)
+                  <option value="{{$doc->doc_codigo}}">{{$doc->doc_codigo}}</option>
+              @endforeach 
               </select>
           </div>
      </div>
 
       <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
-                 <label for="doc_codigo">Código Factura</label>
-                 <input type="text" required name="doc_codigo" id="doc_codigo" value="{{old('doc_codigo')}}" class="form-control" placeholder="Código Factura..">
+                 <label for="proveedor">Proveedor</label>
+            <input type="text" required name="proveedor" id="proveedor" value="" class="form-control" placeholder="Proveedor">
             </div>
       </div>
       <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
              <div class="form-group">
-                  <label for="num_comprobante">Fecha Factura</label>
-                  <input type="date" name="doc_fecha" id="doc_fecha" required value="{{$fecha_actual}}" class="form-control" placeholder="Número del Comprobante..">
+                  <label for="num_comprobante">Fecha</label>
+                  <input type="date" name="doc_fecha" id="doc_fecha" required value="" class="form-control" placeholder="Numero del Comprobante..">
             </div>
       </div>
  </div>
@@ -43,7 +47,7 @@
            <div class="panel-body">
                  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                       <div class="form-group">
-                          <label>Artículo</label>
+                          <label>Articulo</label>
                           <select name="pro_id" id="pro_id" class="form-control selectpicker" data-live-search="true">
                               @foreach($productos as $pro)
                               <option value="{{$pro->pro_id}}">{{$pro->pro_nombre}}</option>
