@@ -59,7 +59,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="pro_caracteristicas">Características</label> <label for="pro_caracteristicas" style="color:red">*</label>                    
-                    <textarea class="form-control" name="pro_caracteristicas" value="{{old('pro_caracteristicas')}}"></textarea><br>
+                    <textarea class="form-control" name="pro_caracteristicas" id="pro_caracteristicas">
+                        {{old('pro_caracteristicas')}}
+                    </textarea>
                     <script>
                         CKEDITOR.replace('pro_caracteristicas');
                     </script>
@@ -89,25 +91,20 @@
                     <input type="number" name="pro_precio" value="{{old('pro_precio')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Precio...">
                 </div>                
 
-                <div class="row"> 
+                {{-- <div class="row"> 
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label for="pro_stock">Stock</label> <label for="pro_stock" style="color:red">*</label>
                             <input type="number" name="pro_stock" value="{{old('pro_stock')}}" step="1" readonly min="0" max="2147483647" required class="form-control" placeholder="Stock...">
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         {{-- </div> --}}
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    @if(true)
-                        -
-                        <img src="" alt="">
-                    @else
-                        {{-- <img src="{{\Storage::url($pel->imagen)}}" style="max-width:75px;"> --}}
-                    @endif
+                    
                 </div>
             </div>
 

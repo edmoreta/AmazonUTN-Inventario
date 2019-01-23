@@ -13,12 +13,12 @@
         </div>
     </div>
     {!! Form::open(['url' => 'productos','files'=>'true']) !!}
-        <input type="hidden" name="pro_codigo" value="{{ 'PRO-'.$cod }}">
+        <input type="hidden" name="pro_codigo" value="{{ $producto->pro_codigo }}">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input type="text" name="codigo" value="{{ 'PRO-'.$cod }}" disabled class="form-control">
+                    <input type="text" name="codigo" value="{{ $producto->pro_codigo }}" disabled class="form-control">
                 </div>
             </div>
         </div>
@@ -31,7 +31,11 @@
                         <option value="-1">--   Seleccione  --</option>
                         @if($categorias != null)
                             @foreach ($categorias as $c)
-                                <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                                @if($c->cat_id == $producto->cat_id)
+                                    <option value="{{$c->cat_id}}" selected>{{$c->cat_nombre}}</option>
+                                @else
+                                    <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                                @endif
                             @endforeach
                         @endif
                     </select>                    
@@ -43,7 +47,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_nombre">Nombre</label> <label for="pro_nombre" style="color:red">*</label>
-                    <input type="text" name="pro_nombre" maxlength="200" value="{{old('pro_nombre')}}" required class="form-control" placeholder="Nombre...">
+                    <input type="text" name="pro_nombre" maxlength="200" value="{{ $producto->pro_nombre }}" required class="form-control" placeholder="Nombre...">
                 </div>
             </div>
         </div>
@@ -51,7 +55,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="pro_descripcion">Descripción</label> <label for="pro_descripcion" style="color:red">*</label>
-                    <input type="text" name="pro_descripcion" maxlength="300" value="{{old('pro_descripcion')}}" required class="form-control" placeholder="Descripción...">
+                    <input type="text" name="pro_descripcion" maxlength="300" value="{{ $producto->pro_descripcion }}" required class="form-control" placeholder="Descripción...">
                 </div>
             </div>
         </div>
@@ -59,9 +63,11 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="pro_caracteristicas">Características</label> <label for="pro_caracteristicas" style="color:red">*</label>                    
-                    <textarea class="form-control" name="pro_caracteristicas" value="{{old('pro_caracteristicas')}}"></textarea><br>
+                    <textarea class="form-control" name="pro_caracteristicas" id="pro_caracteristicas">
+                        {{ $producto->pro_caracteristicas }}
+                    </textarea>
                     <script>
-                        CKEDITOR.replace('pro_caracteristicas');
+                        CKEDITOR.replace('pro_caracteristicas');                        
                     </script>
                 </div>
             </div>
@@ -70,7 +76,7 @@
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_costo">Costo</label> <label for="pro_costo" style="color:red">*</label>
-                    <input type="number" name="pro_costo" value="{{old('pro_costo')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Costo...">
+                    <input type="number" name="pro_costo" value="{{ $producto->pro_costo }}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Costo...">
                 </div>
             </div>
         {{-- </div> --}}
@@ -86,14 +92,14 @@
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_precio">Precio</label> <label for="pro_precio" style="color:red">*</label>
-                    <input type="number" name="pro_precio" value="{{old('pro_precio')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Precio...">
+                    <input type="number" name="pro_precio" value="{{ $producto->pro_precio }}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Precio...">
                 </div>                
 
                 <div class="row"> 
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label for="pro_stock">Stock</label> <label for="pro_stock" style="color:red">*</label>
-                            <input type="number" name="pro_stock" value="{{old('pro_stock')}}" step="1" readonly min="0" max="2147483647" required class="form-control" placeholder="Stock...">
+                            <input type="number" name="pro_stock" value="{{ $producto->pro_stock }}" step="1" readonly min="0" max="2147483647" required class="form-control" placeholder="Stock...">
                         </div>
                     </div>
                 </div>
@@ -102,11 +108,10 @@
         {{-- </div> --}}
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    @if(true)
-                        -
-                        <img src="" alt="">
+                    @if($producto->pro_foto == null)
+                        -								
                     @else
-                        {{-- <img src="{{\Storage::url($pel->imagen)}}" style="max-width:75px;"> --}}
+                        <img src="{{\Storage::url($producto->pro_foto)}}" style="max-width:250px;">
                     @endif
                 </div>
             </div>

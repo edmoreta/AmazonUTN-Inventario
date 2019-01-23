@@ -22,9 +22,14 @@
 	{!! Form::close() !!}
 </div>
 <div class="row">
-		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-			@include('includes.messages')
-		</div>
+	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+		@include('includes.messages')
+	</div>
+</div>
+<div class="row">		
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'productos?display=all') ? 'disabled' : ''}}" href="{{url('productos?display=all')}}">Todos</a> | 
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'productos?display=activos') ? 'disabled' : ''}}" href="{{URL::action('ProductoController@index',['display'=>'activos'])}}">Activos</a> | 
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'productos?display=inactivos') ? 'disabled' : ''}}" href="{{URL::action('ProductoController@index',['display'=>'inactivos'])}}">Inactivos</a>
 </div>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

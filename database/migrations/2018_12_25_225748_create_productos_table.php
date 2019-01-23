@@ -22,7 +22,7 @@ class CreateProductosTable extends Migration
             $table->text('pro_caracteristicas');
             $table->double('pro_costo', 10, 2);
             $table->double('pro_precio', 10, 2);            
-            $table->integer('pro_stock');
+            $table->integer('pro_stock')->default(0);
             $table->boolean('pro_estado')->default(1);
             $table->string('pro_foto',255)->nullable();
             $table->timestamp('pro_created_at');
