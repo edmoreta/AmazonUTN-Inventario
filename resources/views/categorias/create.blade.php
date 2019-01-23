@@ -31,7 +31,7 @@ role="dialog" tabindex="-1" id="modalCreate">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_codigop">Categoría Superior</label> <label for="cat_codigop" style="color:red"></label>
-                            <select name="cat_codigop" class="form-control">
+                            <select name="cat_codigop" class="form-control selectpicker">
                                 <option value="-1">--   Seleccione  --</option>
                                 @if($cats != null)
                                     @foreach ($cats as $c)
@@ -44,8 +44,8 @@ role="dialog" tabindex="-1" id="modalCreate">
                 </div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Confirmar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</div>
 	</div>

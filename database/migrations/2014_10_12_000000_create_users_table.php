@@ -15,14 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('inv_usuarios', function (Blueprint $table) {
             $table->increments('usu_id');
-            $table->string('usu_email')->unique();
+            $table->string('usu_email',50)->unique();
             $table->string('usu_cedula',10)->unique();
-            $table->string('usu_nombre');
-            $table->string('usu_apellido');
-            $table->date('usu_fechaN');
-            $table->string('usu_direccion');
-            $table->string('usu_telefono')->nullable();
-            $table->string('usu_celular');                        
+            $table->string('usu_nombre',50);
+            $table->string('usu_apellido',50);
+            $table->date('usu_fechaN',50);
+            $table->string('usu_direccion',100);
+            $table->string('usu_telefono',10)->nullable();
+            $table->string('usu_celular',10);                        
             $table->string('usu_foto', 250)->nullable();
             $table->string('usu_password');
             $table->boolean('usu_estado')->default(1);            

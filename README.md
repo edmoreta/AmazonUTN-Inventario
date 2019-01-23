@@ -211,6 +211,9 @@ MAIL_PASSWORD=********
 MAIL_ENCRYPTION=tls
  ```
 
-
-
+## Configuración del Storage
+Para que funcione el almacenamiento de fotos en el CRUD de Productos se debe hacer pública la carpeta storage
+```
+php artisan storage:link
+```
 

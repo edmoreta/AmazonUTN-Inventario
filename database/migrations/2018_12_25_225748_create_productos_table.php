@@ -20,10 +20,11 @@ class CreateProductosTable extends Migration
             $table->string('pro_nombre',200);
             $table->string('pro_descripcion',300);
             $table->text('pro_caracteristicas');
-            $table->double('pro_precio', 10, 2);
             $table->double('pro_costo', 10, 2);
+            $table->double('pro_precio', 10, 2);            
             $table->integer('pro_stock');
             $table->boolean('pro_estado')->default(1);
+            $table->string('pro_foto',255)->nullable();
             $table->timestamp('pro_created_at');
             $table->timestamp('pro_updated_at');
             $table->foreign('cat_id')->references('cat_id')->on('inv_categorias');
