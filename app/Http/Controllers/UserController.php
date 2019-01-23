@@ -33,9 +33,9 @@ class UserController extends Controller
             $usuarios = DB::table('inv_usuarios as usu')
             ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
             ->join('roles as r', 'ru.id', '=', 'r.id')
-            ->orWhere('usu.usu_nombre', 'LIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_email', 'LIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_cedula', 'LIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
             ->orderby('usu.usu_nombre','desc')
             ->paginate($pag);
             return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);

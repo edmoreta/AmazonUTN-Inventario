@@ -25,8 +25,8 @@ class ProveedoresController extends Controller
                 $pag=7;
             }
             $proveedores = DB::table('inv_proveedores as ip')
-            ->orWhere('ip.prv_nombre', 'LIKE', '%' . $query . '%')
-            ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
+            ->orWhere('ip.prv_nombre', 'ILIKE', '%' . $query . '%')
+            ->orWhere('ip.prv_identificacion', 'ILIKE', '%' . $query . '%')
             ->orderby('prv_updated_at','desc')
             ->paginate($pag);
             return view('proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
