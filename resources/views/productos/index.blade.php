@@ -46,7 +46,7 @@
 					@foreach ($productos as $pro)
 					<tr>
 						<td>														
-							<a href=""><button class="btn btn-success">Editar</button></a>
+							<a href="{{route('productos.edit',$pro->pro_id)}}"><button class="btn btn-success">Editar</button></a>
 						</td>						
 						@if($pro->pro_estado)						
 							<td>Activo</td>

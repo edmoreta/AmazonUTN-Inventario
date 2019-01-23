@@ -56,14 +56,18 @@ class ProductoController extends Controller
     public function store(ProductoRequest $request)
     {
         try{
-            info($request);            
-            $producto = Producto::create($request->all());
+            info($request);
+            if ($request->cat_id != -1) {
+                $producto = Producto::create($request->all());
+                //$producto->pro_stock = 0;
+                //$producto->save();
 
-            if ($request->hasFile('pro_foto')) {
-                $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
-                $producto->save();
+                if ($request->hasFile('pro_foto')) {
+                    $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                    $producto->save();
+                }
+                
             }
-
             return redirect('productos')->with('success','Producto creado');
         }catch(Exception | QueryException $e){
             return back()->withErrors(['exception'=>$e->getMessage()]);
@@ -78,7 +82,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -89,7 +93,12 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+            $producto = Producto::findOrFail($id);
+            return view('productos.edit',compact('actor'));
+        }catch(Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }
     }
 
     /**
