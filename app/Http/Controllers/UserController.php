@@ -5,6 +5,7 @@ use App\Http\Requests\PasswordRequest;
 use App\Notifications\NewUserNotification;
 use App\Role;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Auth;
 USE DB;
 use Faker;
@@ -21,7 +22,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {    
         if ($request) {
             $query = trim($request->get('searchText'));
             $pag = trim($request->get('pag'));
@@ -36,7 +37,24 @@ class UserController extends Controller
             ->orWhere('usu.usu_cedula', 'LIKE', '%' . $query . '%')
             ->orderby('usu.usu_nombre','desc')
             ->paginate($pag);
-            return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);
+           info($request->display);
+            
+            if($request->display=="todos"){
+                info("if");
+                
+            } else if ($request->display == "activo") {
+                info("else");
+               
+             
+            } else if($request->display == "inactivo"){
+               
+            } else if($request->display == "administrador"){
+
+            } else if($request->display == "bodeguero"){
+                
+            }
+            return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);    
+
         }
     }
 
