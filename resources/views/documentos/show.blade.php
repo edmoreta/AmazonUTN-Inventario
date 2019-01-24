@@ -75,6 +75,9 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
+                                    @if($documento->doc_tipo=='AJ')
+                                    <th></th>
+                                    @endif
                                     <th><h4 id="total">$/ {{$total}}</h4></th>
                                 </tfoot>
                                 <tbody>   
