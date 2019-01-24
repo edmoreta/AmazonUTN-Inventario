@@ -23,14 +23,14 @@
 	 </div>
 	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 			   <div class="form-group">
-					  <label for="serieComprobante">Codigo De Ajuste</label>
-					  <input type="number" name="doc_codigo" id="doc_codigo" required value="{{old('doc_codigo')}}" class="form-control" placeholder="Serie del Comprobante..">
+					  <label for="serieComprobante">Código De Ajuste</label>
+					  <input type="text" name="doc_codig" id="doc_codig" disabled value="AJ-{{$codigo}}"  required value="{{old('doc_codigo')}}" class="form-control" placeholder="Serie del Comprobante..">
 			   </div>
 	 </div>
 	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 			   <div class="form-group">
 					 <label for="doc_fecha">Fecha De Ajuste</label>
-					 <input type="date" name="doc_fecha" id="doc_fecha" required value="{{$fecha_actual}}" class="form-control" placeholder="Numero del Comprobante..">
+					 <input type="date" name="doc_fecha" id="doc_fecha" required value="{{$fecha_actual}}" max="{{$fecha_actual}}" class="form-control" placeholder="Numero del Comprobante..">
 			   </div>
 	 </div>
 </div>
@@ -53,6 +53,7 @@
 									  <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad">
 								  </div>
 						</div>
+						<input type="hidden" name="doc_codigo" id="doc_codigo" value="AJ-{{$codigo}}"  required value="{{old('doc_codigo')}}" class="form-control">
 						<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								  <div class="form-group">
 									  <label for="stock">Stock</label>
@@ -149,23 +150,31 @@ function agregar(){
   stock=$('#pstock').val();
   if (pro_id!="" && cantidad!="" && cantidad>=1  && tipo_ajuste!="" && precio!="" && costo!="")
   {   
-	  if(parseInt(cantidad)<=parseInt(stock)){
+	  if(tipo_ajuste=="Positivo"){
 		 
-		var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="stock[]" value="'+stock+'"></td><td><input type="number" name="costo[]" value="'+costo+'"></td><td><input type="number" name="precio[]" value="'+precio+'"></td><td><input type="text" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
+		  var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" disabled name="cantida[]" value="'+cantidad+'"><input type="hidden" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" disabled name="stoc[]" value="'+stock+'"><input type="hidden" name="stock[]" value="'+stock+'"></td><td><input type="number" disabled name="cost[]" value="'+costo+'"><input type="hidden" name="costo[]" value="'+costo+'"></td><td><input type="number" disabled name="preci[]" value="'+precio+'"><input type="hidden" name="precio[]" value="'+precio+'"></td><td><input type="text" disabled name="tipo_ajust[]" value="'+tipo_ajuste+'"><input type="hidden" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
 		  cont++;
 		  limpiar();
 		  evaluar();
 		  $('#detalles').append(fila);
 	  }
+	  else if(tipo_ajuste=="Negativo" && parseInt(cantidad)<=parseInt(stock)){
+		  var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" disabled name="cantida[]" value="'+cantidad+'"><input type="hidden" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" disabled name="stoc[]" value="'+stock+'"><input type="hidden" name="stock[]" value="'+stock+'"></td><td><input type="number" disabled name="cost[]" value="'+costo+'"><input type="hidden" name="costo[]" value="'+costo+'"></td><td><input type="number" disabled name="preci[]" value="'+precio+'"><input type="hidden" name="precio[]" value="'+precio+'"></td><td><input type="text" disabled name="tipo_ajust[]" value="'+tipo_ajuste+'"><input type="hidden" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
+		  cont++;
+		  limpiar();
+		  evaluar();
+		  $('#detalles').append(fila);
+	  }
+	  
 	  else
 	  {
 
-		  alert('La cantidad de compra supera el stock');
+		  alert('La cantidad de ajuste supera el stock');
 	  }
   }
   else
   {
-	alert("Error al ingresar el detalle la venta, revise los datos del producto");
+	alert("Error al ingresar el detalle de ajuste, revise los datos del producto");
   }
 
 }

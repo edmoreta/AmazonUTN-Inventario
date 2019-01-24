@@ -17,6 +17,7 @@ class CreateMovimientosTable extends Migration
             $table->increments('mov_id');
             $table->integer('pro_id');
             $table->integer('doc_id');
+            $table->string('mov_ajuste',20)->nullable();
             $table->integer('mov_cantidad');
             $table->double('mov_costo',10,2);
             $table->double('mov_precio', 10, 2);

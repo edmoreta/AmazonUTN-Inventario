@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\DetalleDocumento;
+use App\Documento;
+use App\Producto;
+use Carbon\Carbon;
+use App\Http\Requests\FacturaIngresoRequest;
+use Illuminate\Validation\Rule;
 
 class NotasDeCreditoController extends Controller
 {
@@ -23,7 +30,23 @@ class NotasDeCreditoController extends Controller
      */
     public function create()
     {
-        echo 'Aqui todavia no programamos.....Te la creite we XD XD ';
+        $proveedores = DB::table('inv_proveedores as prv')
+            ->where('prv.prv_estado', '=', true)
+            ->get();
+
+        $documentosFa = DB::table('inv_documentos as doc')
+            ->where('doc.doc_tipo', '=', 'FA')
+            ->get();
+
+        $productos = DB::table('inv_productos as art')
+            ->where('art.pro_estado', '=', true)
+            ->get();
+
+
+
+
+        return view('documentos.notaCredito.create', ["proveedores" => $proveedores, "productos" => $productos, "documentosFa" => $documentosFa]);
+
     }
 
     /**

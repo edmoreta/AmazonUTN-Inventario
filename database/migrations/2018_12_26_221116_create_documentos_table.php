@@ -21,11 +21,11 @@ class CreateDocumentosTable extends Migration
             $table->date('doc_fecha');
             $table->timestamp('doc_created_at');
             $table->timestamp('doc_updated_at')->nullable();
-            
+
             $table->foreign('prv_id')->references('prv_id')->on('inv_proveedores');
-            $table->unique(['prv_id','doc_codigo','doc_tipo']);
+            $table->unique(['prv_id', 'doc_codigo', 'doc_tipo']);
            // $table->primary(['prv_id','doc_codigo','doc_tipo']);
-            
+
 
         });
     }
