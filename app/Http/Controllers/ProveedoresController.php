@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 USE DB;
 use App\Proveedor;
 use App\Http\Requests\ProveedorRequest;
+use Illuminate\Validation\Validator as LaravelValidator;
+use Tavo\ValidadorEc as ValidatorEcPackage;
 
 class ProveedoresController extends Controller
 {
@@ -23,8 +25,8 @@ class ProveedoresController extends Controller
                 $pag=7;
             }
             $proveedores = DB::table('inv_proveedores as ip')
-            ->orWhere('ip.prv_nombre', 'LIKE', '%' . $query . '%')
-            ->orWhere('ip.prv_identificacion', 'LIKE', '%' . $query . '%')
+            ->orWhere('ip.prv_nombre', 'ILIKE', '%' . $query . '%')
+            ->orWhere('ip.prv_identificacion', 'ILIKE', '%' . $query . '%')
             ->orderby('prv_updated_at','desc')
             ->paginate($pag);
             return view('proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
@@ -82,13 +84,24 @@ class ProveedoresController extends Controller
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
             $proveedor->prv_estado=true;
+            $validatorEc = new ValidatorEcPackage();
             if ($proveedor->prv_tipo_identificacion=='CI') {
+                $isValid = $validatorEc->validarCedula($proveedor->prv_identificacion);
+                if (!$isValid) {
+                    return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
+                }
                 $prov_buscar = DB::table('inv_proveedores')
                 ->orWhere('prv_identificacion', '=', $proveedor->prv_identificacion)
                 ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
                 ->orWhere('prv_email', '=', $proveedor->prv_email)
                 ->paginate();
             }else{
+                $isValid1 = $validatorEc->validarRucPersonaNatural($proveedor->prv_identificacion);
+                $isValid2 = $validatorEc->validarRucSociedadPublica($proveedor->prv_identificacion);
+                $isValid3 = $validatorEc->validarRucSociedadPrivada($proveedor->prv_identificacion);
+                if (!$isValid1&&!$isValid2&&!$isValid3) {
+                    return back()->with('error_prov', 'El RUC es INCORRECTA')->withInput();
+                }
                 $prov_buscar = DB::table('inv_proveedores')
                 ->orWhere('prv_nombre', '=', $proveedor->prv_nombre)
                 ->orWhere('prv_email', '=', $proveedor->prv_email)

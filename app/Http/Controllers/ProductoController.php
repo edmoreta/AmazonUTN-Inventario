@@ -15,10 +15,14 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
-        
+        if ($request->display == 'activos') {
+            $productos = Producto::where('pro_estado',1)->orderByDesc('pro_updated_at')->paginate(7);
+        } else if ($request->display == 'inactivos') {
+            $productos = Producto::where('pro_estado',0)->orderByDesc('pro_updated_at')->paginate(7);
+        }
         return view('productos.index',compact('productos'));
     }
 
@@ -56,14 +60,18 @@ class ProductoController extends Controller
     public function store(ProductoRequest $request)
     {
         try{
-            info($request);            
-            $producto = Producto::create($request->all());
+            info($request);
+            if ($request->cat_id != -1) {
+                $producto = Producto::create($request->all());
+                //$producto->pro_stock = 0;
+                //$producto->save();
 
-            if ($request->hasFile('pro_foto')) {
-                $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
-                $producto->save();
+                if ($request->hasFile('pro_foto')) {
+                    $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                    $producto->save();
+                }
+                
             }
-
             return redirect('productos')->with('success','Producto creado');
         }catch(Exception | QueryException $e){
             return back()->withErrors(['exception'=>$e->getMessage()]);
@@ -78,7 +86,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -89,7 +97,13 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try{
+            $categorias = Categoria::orderByDesc('cat_updated_at')->get();
+            $producto = Producto::findOrFail($id);
+            return view('productos.edit',compact('producto','categorias'));
+        }catch(Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }
     }
 
     /**

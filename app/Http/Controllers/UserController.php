@@ -5,6 +5,7 @@ use App\Http\Requests\PasswordRequest;
 use App\Notifications\NewUserNotification;
 use App\Role;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Auth;
 USE DB;
 use Faker;
@@ -12,6 +13,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator as LaravelValidator;
+use Tavo\ValidadorEc as ValidatorEcPackage;
 
 class UserController extends Controller
 {
@@ -21,7 +24,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {    
         if ($request) {
             $query = trim($request->get('searchText'));
             $pag = trim($request->get('pag'));
@@ -31,12 +34,29 @@ class UserController extends Controller
             $usuarios = DB::table('inv_usuarios as usu')
             ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
             ->join('roles as r', 'ru.id', '=', 'r.id')
-            ->orWhere('usu.usu_nombre', 'LIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_email', 'LIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_cedula', 'LIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
+            ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
             ->orderby('usu.usu_nombre','desc')
             ->paginate($pag);
-            return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);
+           info($request->display);
+            
+            if($request->display=="todos"){
+                info("if");
+                
+            } else if ($request->display == "activo") {
+                info("else");
+               
+             
+            } else if($request->display == "inactivo"){
+               
+            } else if($request->display == "administrador"){
+
+            } else if($request->display == "bodeguero"){
+                
+            }
+            return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);    
+
         }
     }
 
@@ -71,6 +91,12 @@ class UserController extends Controller
             );
             $this->email=$user->usu_email;
             $user->usu_password = bcrypt($password);
+
+            $validatorEc = new ValidatorEcPackage();
+            $isValid = $validatorEc->validarCedula($user->usu_cedula);
+            if (!$isValid) {
+                return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
+            }
             $user->save();
             $user->roles()->attach($request->idRol);
             Mail::send('emails.sentpassword', $data, function ($m) {

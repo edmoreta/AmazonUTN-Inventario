@@ -25,7 +25,32 @@ class UsersTableSeeder extends Seeder
             'usu_created_at' => Carbon::now(),
             'usu_updated_at' => Carbon::now()
         ]);
-        
+        DB::table('inv_usuarios')->insert([
+            'usu_cedula' => '1004003456',
+            'usu_nombre' => 'Admin',
+            'usu_apellido' => 'usuario',
+            'usu_fechaN' => '1998/11/13',
+            'usu_direccion' => 'Otavlo',
+            'usu_telefono' => '087654312',
+            'usu_celular' => '0898653425',
+            'usu_email' => 'admin@hotmail.com',
+            'usu_password' => bcrypt('12345678'),
+            'usu_created_at' => Carbon::now(),
+            'usu_updated_at' => Carbon::now()
+        ]);
+        DB::table('inv_usuarios')->insert([
+            'usu_cedula' => '107634953',
+            'usu_nombre' => 'Bodeguero',
+            'usu_apellido' => 'usuario',
+            'usu_fechaN' => '1992/1/3',
+            'usu_direccion' => 'Quito',
+            'usu_telefono' => '0987654321',
+            'usu_celular' => '0934543234',
+            'usu_email' => 'bodeguero@hotmail.com',
+            'usu_password' => bcrypt('12345678'),
+            'usu_created_at' => Carbon::now(),
+            'usu_updated_at' => Carbon::now()
+        ]);
         DB::table('roles')->insert([
             'name' => 'root',
             'display_name' => 'Root',
@@ -53,6 +78,14 @@ class UsersTableSeeder extends Seeder
         DB::table('role_user')->insert([
             'usu_id' => '1',
             'id' => '1',
+        ]);
+        DB::table('role_user')->insert([
+            'usu_id' => '2',
+            'id' => '2',
+        ]);
+        DB::table('role_user')->insert([
+            'usu_id' => '3',
+            'id' => '3',
         ]);
     }
 }
