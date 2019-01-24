@@ -53,7 +53,7 @@ class CategoriaRequest extends FormRequest
                 break; 
             default:
                 break;
-        }        
+        }
     }
 
     public function messages()

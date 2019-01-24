@@ -113,9 +113,20 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductoRequest $request, $id)
     {
-        //
+        try{
+            $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->all());
+            //$producto->generos()->sync($request->idGenero);
+            //$producto->actores()->sync($request->idActor);
+            if ($request->hasFile('pro_foto')) {
+                $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                $producto->save();
+            }
+            return redirect('productos')->with('success','Producto actualizado');
+        }catch(Exception $e){
+            return back()->withErrors(['exception'=>$e->getMessage()])->withInput();
+        }
     }
 
     /**

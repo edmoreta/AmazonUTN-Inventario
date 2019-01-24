@@ -12,8 +12,9 @@
             @include('includes.messages')
         </div>
     </div>
-    {!! Form::open(['url' => 'productos','files'=>'true']) !!}
+    {!! Form::open(['route' => ['productos.update', $producto->pro_id],'method' => 'PATCH','files' => 'true']) !!}
         <input type="hidden" name="pro_codigo" value="{{ $producto->pro_codigo }}">
+        <input type="hidden" name="pro_id" value="{{ $producto->pro_id }}">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
