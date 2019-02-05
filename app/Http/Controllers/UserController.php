@@ -71,6 +71,9 @@ class UserController extends Controller
         return view("usuarios.create", compact('roles'));
 
     }
+    public function setting(){
+        
+    }
 
     /**
      * Store a newly created resource in storage.

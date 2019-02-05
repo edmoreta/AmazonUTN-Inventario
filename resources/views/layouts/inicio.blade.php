@@ -63,9 +63,37 @@
                     </form>
                   </li>
                 </ul>
-              </li>            
+              </li>
+
+              
+
             </ul>
-          </div>
+                <ul class="nav navbar-nav">
+                  <li class="dropdown user user-menu">
+            
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ ('ddd') }}</a> 
+                   <ul class="dropdown-menu">
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    
+                    <div class="pull-right">
+                      <a href="#" onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cambiar contraseña</a>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                    </form>
+                  </li>
+                </ul>
+              </li>
+
+                 
+                 
+                 
+                 
+                  </li> 
+                </ul>
+                  </div>
           @endauth
         </nav>
       </header>
