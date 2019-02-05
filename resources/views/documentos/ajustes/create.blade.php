@@ -5,9 +5,9 @@
 	</a></div>
  <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			@include('includes.messages')        
+			@include('includes.messages')
 	</div>
-	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">		
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <h3>Nuevo Ajuste</h3>
     </div>
  </div>
@@ -78,11 +78,11 @@
 									  <label for="ptipo_ajuste">Tipo Ajuste</label><br>
 									  <select name="ptipo_ajuste" id="ptipo_ajuste" class="form-control selectpicker" data-live-search="true">
 											<option value="Positivo">Positivo</option>
-											<option value="Negativo">Negativo</option>											
+											<option value="Negativo">Negativo</option>
 									</select>
 								  </div>
 					   </div>
-					   <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">				
+					   <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
 						</div>
 					   <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								   <div class="form-group">
@@ -101,22 +101,22 @@
 												   <th>Precio</th>
 												   <th>Tipo Ajuste</th>
 											 </thead>
-											  <tbody>              
+											  <tbody>
 											  </tbody>
 										  </table>
 								   </div>
 						 </div>
 		</div>
   </div>
-  <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">         
+  <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
 		  <div class="form-group">
-				   <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>				  
+				   <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>
 				   <button class="btn btn-danger" type="reset">Cancelar</button>
 				   <button class="btn btn-primary" type="submit">Guardar</button>
 		  </div>
   </div>
 </div>
-{!!Form::close()!!}  
+{!!Form::close()!!}
 
 
 @push ('scripts')
@@ -134,7 +134,7 @@
 
  function mostrarValores(){
 	datosArticulo=document.getElementById('ppro_id').value.split('_');
-	$('#pprecio').val(datosArticulo[3]);  
+	$('#pprecio').val(datosArticulo[3]);
 	$('#pcosto').val(datosArticulo[2]);
 	$('#pstock').val(datosArticulo[1]);
   }
@@ -149,9 +149,9 @@ function agregar(){
   costo=$("#pcosto").val();
   stock=$('#pstock').val();
   if (pro_id!="" && cantidad!="" && cantidad>=1  && tipo_ajuste!="" && precio!="" && costo!="")
-  {   
+  {
 	  if(tipo_ajuste=="Positivo"){
-		 
+
 		  var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" disabled name="cantida[]" value="'+cantidad+'"><input type="hidden" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" disabled name="stoc[]" value="'+stock+'"><input type="hidden" name="stock[]" value="'+stock+'"></td><td><input type="number" disabled name="cost[]" value="'+costo+'"><input type="hidden" name="costo[]" value="'+costo+'"></td><td><input type="number" disabled name="preci[]" value="'+precio+'"><input type="hidden" name="precio[]" value="'+precio+'"></td><td><input type="text" disabled name="tipo_ajust[]" value="'+tipo_ajuste+'"><input type="hidden" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
 		  cont++;
 		  limpiar();
@@ -165,7 +165,7 @@ function agregar(){
 		  evaluar();
 		  $('#detalles').append(fila);
 	  }
-	  
+
 	  else
 	  {
 
@@ -197,12 +197,12 @@ function evaluar()
   }
   else
   {
-	$("#guardar").hide(); 
+	$("#guardar").hide();
   }
  }
 
  function eliminar(index){
-  
+
   $("#fila" + index).remove();
   cont--;
   evaluar();

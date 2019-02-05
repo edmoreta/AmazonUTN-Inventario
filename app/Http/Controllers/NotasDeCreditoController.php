@@ -20,7 +20,7 @@ class NotasDeCreditoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -34,9 +34,16 @@ class NotasDeCreditoController extends Controller
             ->where('prv.prv_estado', '=', true)
             ->get();
 
-        $documentosFa = DB::table('inv_documentos as doc')
-            ->where('doc.doc_tipo', '=', 'FA')
-            ->get();
+
+
+        $documentosJoin = DB::select('SELECT * FROM inv_documentos d INNER JOIN inv_proveedores p ON  d.prv_id=p.prv_id  AND d.doc_tipo = ?', ['FA']);
+       // $documentosJoin = DB::select('SELECT * FROM inv_documentos d INNER JOIN inv_proveedores p ON  d.prv_id=p.prv_id LEFT JOIN inv_movimientos m on d.doc_id=m.doc_id LEFT JOIN inv_productos prod on m.pro_id=prod.pro_id  AND d.doc_tipo = ?', ['FA']);
+
+        //dd($documentosJoin);
+
+
+        $ProveedorT = DB::table('inv_proveedores as p')
+            ->where('p.prv_id', '=', '');
 
         $productos = DB::table('inv_productos as art')
             ->where('art.pro_estado', '=', true)
@@ -45,7 +52,7 @@ class NotasDeCreditoController extends Controller
 
 
 
-        return view('documentos.notaCredito.create', ["proveedores" => $proveedores, "productos" => $productos, "documentosFa" => $documentosFa]);
+        return view('documentos.notaCredito.create', ["proveedores" => $proveedores, "productos" => $productos, "documentosJoin" => $documentosJoin]);
 
     }
 
@@ -68,6 +75,12 @@ class NotasDeCreditoController extends Controller
      */
     public function show($id)
     {
+
+        $documentosJo = DB::select('SELECT * FROM inv_documentos d WHERE d.doc_tipo=?   AND d.doc_codigo=?', ['FA', $id]);
+        dd($documentosJo);
+
+        return view('documentos.notaCredito.create', ["documentosJo" => $documentosJo]);
+
         //
     }
 
