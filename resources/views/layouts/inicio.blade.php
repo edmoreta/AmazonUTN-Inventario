@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('css/_all-skins.min.css') }}">
@@ -53,10 +55,22 @@
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    
+                    <div class="pull-right">
+                    <a href="{{ route('Config') }}" class="btn btn-info btn-flat" style="font-size:16px">
+                    Configuración 
+                    <i class="material-icons" style="font-size:16px">
+                    settings
+                    </i>
+                    </a>
+                    </div>
+                  </li>
+                  <li class="user-footer">
                     <div class="pull-right">
                       <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                      document.getElementById('logout-form').submit();" class="btn btn-info btn-flat" style="font-size:16px">
+                      Cerrar Sesión
+                      <span class="glyphicon glyphicon-off"></span>
+                      </a>
                     </div>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf

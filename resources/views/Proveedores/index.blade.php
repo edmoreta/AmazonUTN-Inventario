@@ -11,6 +11,9 @@
 				@include('includes.messages')
 		</div>
 </div>
+	<a class="btn btn-link" href="{{URL::action('ProveedoresController@index')}}">Todos</a> | 
+	<a class="btn btn-link" href="{{URL::action('ProveedoresController@index',['estado'=>'1'])}}">Activos</a> | 
+	<a class="btn btn-link" href="{{URL::action('ProveedoresController@index',['estado'=>'0'])}}">Inactivos</a>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">
