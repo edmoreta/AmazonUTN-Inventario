@@ -30,6 +30,11 @@
 			@include('includes.messages')
 		</div>
 </div>
+<div class="row">		
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'categorias?display=all') ? 'disabled' : ''}}" href="{{url('categorias?display=all')}}">Todos</a> | 
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'categorias?display=activos') ? 'disabled' : ''}}" href="{{URL::action('CategoriaController@index',['display'=>'activos'])}}">Activos</a> | 
+	<a class="btn btn-link {{strpos(Request::fullUrl(), 'categorias?display=inactivos') ? 'disabled' : ''}}" href="{{URL::action('CategoriaController@index',['display'=>'inactivos'])}}">Inactivos</a>
+</div>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">

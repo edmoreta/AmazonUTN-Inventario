@@ -31,13 +31,26 @@ class AjustesController extends Controller
      */
     public function create()
     {
-        $proveedores = DB::table('inv_proveedores')->get();
-        $productos = DB::table('inv_productos as art')
-            ->where('art.pro_estado', '=', true)
-            ->get();
-        $fecha_actual = date("Y-m-d");
-        return view('documentos.ajustes.create', ["proveedores" => $proveedores, "productos" => $productos, "fecha_actual" => $fecha_actual]);
-    }
+        try {
+            $proveedores = DB::table('inv_proveedores')->get();
+            $productos = DB::table('inv_productos as art')
+                ->where('art.pro_estado', '=', true)
+                ->get();
+            $fecha_actual = date("Y-m-d");
+            $ajustes=DB::table('inv_documentos as d')->where('d.doc_tipo','=','AJ')->get();
+           $codigo_ajuste="AJ-0";
+            foreach ($ajustes as $aj) {
+               $codigo_ajuste=$aj->doc_codigo;
+            }
+            $valores=explode("-",$codigo_ajuste);
+            $codigo=(integer)$valores[1]+1;
+            return view('documentos.ajustes.create', ["proveedores" => $proveedores, "codigo"=>$codigo, "productos" => $productos, "fecha_actual" => $fecha_actual]);
+    
+            
+        } catch (\Throwable $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
+           }
 
     /**
      * Store a newly created resource in storage.
@@ -51,7 +64,7 @@ class AjustesController extends Controller
             //Registrando Cabecera jiji
             DB::beginTransaction();
             $ajuste = new Documento;
-            $ajuste->doc_codigo = 'AJ-' . $request->get('doc_codigo');
+            $ajuste->doc_codigo =$request->get('doc_codigo');
             $ajuste->doc_fecha = $request->get('doc_fecha');
             $ajuste->doc_tipo = "AJ";
           // $ajuste->prv_id='1';
@@ -84,6 +97,7 @@ class AjustesController extends Controller
                     $movimiento->mov_costo = $costo[$cont];
                     $movimiento->mov_precio = $precio[$cont];
                     $movimiento->mov_estado = true;
+                    $movimiento->mov_ajuste = $tipo_ajuste[$cont];
 
                     echo $costo[$cont];
                     $movimiento->save();

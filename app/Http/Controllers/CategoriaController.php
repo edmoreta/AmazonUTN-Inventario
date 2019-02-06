@@ -15,9 +15,16 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $categorias = Categoria::orderByDesc('cat_updated_at')->paginate(7);
+        
+        if ($request->display == 'activos') {
+            $categorias = Categoria::where('cat_estado',1)->orderByDesc('cat_updated_at')->paginate(7);
+        } else if ($request->display == 'inactivos') {
+            $categorias = Categoria::where('cat_estado',0)->orderByDesc('cat_updated_at')->paginate(7);
+        }
+
         if (Categoria::all()->isEmpty()) {
             $cod = 1;
             $cats = null;

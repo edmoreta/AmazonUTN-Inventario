@@ -10,12 +10,13 @@ role="dialog" tabindex="-1" id="modalCreate">
                 </button>
                 <h4 class="modal-title">Nueva Categoría</h4>
 			</div>
-			<div class="modal-body">                
+			<div class="modal-body">
+                <input type="hidden" name="cat_codigo" value="{{ 'CAT-'.$cod }}">
 				<div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_codigo">Código</label>
-                            <input type="text" name="cat_codigo" value="{{ 'CAT-'.$cod }}" readonly class="form-control">
+                            <input type="text" name="cat_codigo" value="{{ 'CAT-'.$cod }}" disabled class="form-control">
                         </div>
                     </div>
                 </div>

@@ -16,8 +16,8 @@ class CreateDocumentosTable extends Migration
         Schema::create('inv_documentos', function (Blueprint $table) {
             $table->increments('doc_id');
             $table->integer('prv_id')->nullable();
-            $table->string('doc_codigo', 10);
-            $table->char('doc_tipo', 2);
+            $table->string('doc_codigo',50);
+            $table->char('doc_tipo',2);
             $table->date('doc_fecha');
             $table->timestamp('doc_created_at');
             $table->timestamp('doc_updated_at')->nullable();

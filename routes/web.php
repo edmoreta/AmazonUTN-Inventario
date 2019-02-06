@@ -31,6 +31,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('ajustes', 'AjustesController');    
     Route::resource('notas_de_credito', 'NotasDeCreditoController');
     Route::resource('facturas_ingreso', 'FacturaIngresoController');
+    Route::get('change', 'UserController@settings')->name('settings');
     Route::get('/inicio', function () {
         return view('layouts/inicio');
     });

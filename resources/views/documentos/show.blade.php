@@ -29,7 +29,17 @@
             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                <div class="form-group">
                   <label>Tipo Documento</label>
-                   <p>{{$documento->doc_tipo}}</p>
+                  @if($documento->doc_tipo=='FA')
+                      <p>FACTURA</p>
+                  @elseif($documento->doc_tipo=='AJ')
+                      <p>AJUSTE</p>
+                  @elseif($documento->doc_tipo=='NC')
+                      <p>NOTA DE CREDITO</p>
+                  @else
+                        <p>{{$documento->doc_tipo}}</p>
+                  @endif					
+           
+                  
               </div>
             </div>
                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -55,6 +65,9 @@
                                       <th>Cantidad</th>
                                       <th>Costo</th>
                                       <th>Precio</th>
+                                      @if($documento->doc_tipo=='AJ')
+                                      <th>Tipo Ajuste</th>
+                                      @endif
                                       <th>Subtotal</th>
                                 </thead>
                                 <tfoot>
@@ -62,6 +75,9 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
+                                    @if($documento->doc_tipo=='AJ')
+                                    <th></th>
+                                    @endif
                                     <th><h4 id="total">$/ {{$total}}</h4></th>
                                 </tfoot>
                                 <tbody>   
@@ -71,6 +87,9 @@
                                       <td>{{$det->mov_cantidad}}</td>
                                       <td>{{$det->mov_costo}}</td>
                                       <td>{{$det->mov_precio}}</td>
+                                      @if($documento->doc_tipo=='AJ')
+                                      <td>{{$det->mov_ajuste}}</td>
+                                      @endif
                                       <td>{{$det->mov_cantidad*$det->mov_costo}}</td>
 
                                    </tr>

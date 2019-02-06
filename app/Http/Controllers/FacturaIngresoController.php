@@ -31,15 +31,18 @@ class FacturaIngresoController extends Controller
      */
     public function create()
     {
-        $proveedores = DB::table('inv_proveedores as prv')
-            ->where('prv.prv_estado', '=', true)
-            ->get();
-        $productos = DB::table('inv_productos as art')
-            ->where('art.pro_estado', '=', true)
-            ->get();
-        $fecha_actual = date("Y-m-d");
-        return view('documentos.ingresos.create', ["proveedores" => $proveedores, "productos" => $productos, "fecha_actual" => $fecha_actual]);
-
+        try {
+            $proveedores = DB::table('inv_proveedores as prv')
+                ->where('prv.prv_estado', '=', true)
+                ->get();
+            $productos = DB::table('inv_productos as art')
+                ->where('art.pro_estado', '=', true)
+                ->get();
+            $fecha_actual = date("Y-m-d");
+            return view('documentos.ingresos.create', ["proveedores" => $proveedores, "productos" => $productos, "fecha_actual" => $fecha_actual]);
+        } catch (\Throwable $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
