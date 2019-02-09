@@ -20,10 +20,14 @@ $p="";
             <label for="nombre">Código Factura</label> {{-- {{dd($documentosFa)}} --}}
             <select name="prv_id" id="prv_id" class="form-control selectpicker" data-live-search="true">
                 @foreach($documentosJoin as $doc)
-                <option value="{{$doc->doc_codigo}}_{{$doc->prv_nombre}}_{{$doc->doc_fecha}}">{{$doc->doc_codigo}}</option>
+               <option value="{{$doc->doc_codigo}}_{{$doc->prv_nombre}}_{{$doc->doc_fecha}}">{{$doc->doc_codigo}}</option>
 
-                  @endforeach
-{{-- <option value="{{$doc->doc_codigo}}_{{$doc->prv_nombre}}_{{$doc->doc_fecha}}_{{$doc->pro_nombre}}_{{$doc->mov_cantidad}}_{{$doc->mov_costo}}_{{$doc->mov_precio}}">{{$doc->doc_codigo}}</option> @endforeach --}}
+               @endforeach
+  <?php
+  $p=$doc->doc_codigo;
+  ?>
+               {{-- <option value="{{$doc->doc_codigo}}_{{$doc->prv_nombre}}_{{$doc->doc_fecha}}_{{$doc->pro_nombre}}_{{$doc->mov_cantidad}}_{{$doc->mov_costo}}_{{$doc->mov_precio}}">{{$doc->doc_codigo}}</option>
+                  @endforeach --}}
 </select>
         </div>
     </div>
@@ -43,15 +47,13 @@ $p="";
     <script>
         let valo=document.getElementById('prv_id').value;
     console.log("log",valo);
-    </scrip0t>
-<?php
+    </script>
 
-?>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
         <div class="form-group">
             <label for="aceptar">.</label><br>
             <button class="btn btn-danger" type="button" id="bt_add">Aceptar</button>
-            <a href="{{URL::action('NotasDeCreditoController@show',1)}}" class="">Aceptar  M</a>
+            <a href="{{URL::action('NotasDeCreditoController@show',$p)}}" id="btn_aceptar" class="">Aceptar  M</a>
         </div>
     </div>
 
@@ -210,16 +212,25 @@ function mostrarValores(){
     datosArticulo=document.getElementById('prv_id').value.split('_');
     console.log(document.getElementById('prv_id').value, datosArticulo, $('#doc_fecha'), $('#proveedor'));
 
-// $('#mov_precio').val(datosArticulo[6]);
-// $('#mov_costo').val(datosArticulo[5]);
-// $('#mov_cantidad').val(datosArticulo[4]);
-// $('#pro_nombre').val(datosArticulo[3]);
+//  $('#mov_precio').val(datosArticulo[6]);
+//  $('#mov_costo').val(datosArticulo[5]);
+//   $('#mov_cantidad').val(datosArticulo[4]);
+//  $('#pro_nombre').val(datosArticulo[3]);
     $('#doc_fecha').val(datosArticulo[2]);
     $('#proveedor').val(datosArticulo[1]);
     $('#doc_codigo').val(datosArticulo[0]);
+    $('#btn_aceptar').attr("href","http://localhost:8000/notas_de_credito/"+datosArticulo[0]);
+
 }
 
 </script>
+
+
+
+
+
+
+
 
 
 
