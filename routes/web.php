@@ -19,11 +19,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(["middleware" => "auth"], function () {
     Route::get('proveedores/estado/{id}/{est}', 'ProveedoresController@estado')->name('estado');
     Route::resource('proveedores', 'ProveedoresController');
-<<<<<<< HEAD
-=======
     Route::get('User/Updates', 'UserController@Updates')->name('Updates');
     Route::get('User/Config', 'UserController@Config')->name('Config');
->>>>>>> a72e3a4548ec0f174787e2c36805ac4bcb8d33c3
     Route::resource('usuarios', 'UserController')->middleware('role:administrador|root');
     Route::get('categorias/search', 'CategoriaController@search');
     Route::resource('categorias', 'CategoriaController');
