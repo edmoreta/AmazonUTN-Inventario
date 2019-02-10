@@ -81,8 +81,24 @@ class UserController extends Controller
         return view("usuarios.create", compact('roles'));
 
     }
-    public function setting(){
-        
+    public function change_password()
+    {
+       // $usuario = Auth::user();
+        return view('usuarios.changePassword');
+    }
+
+    public function update_password(PasswordRequest $request)
+    {        
+        try {
+            $user = Auth::user();
+            $user->usu_password = bcrypt($request->password);
+            info($user->usu_password);
+            $user->save();
+
+            return redirect('User/change_password')->with('success', 'Contraseña actualizada');
+        } catch (Exception | QueryException $e) {
+            return back()->withErrors(['exception' => $e->getMessage()]);
+        }
     }
 
     /**

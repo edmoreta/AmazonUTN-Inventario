@@ -30,7 +30,10 @@ return [
         'array' => 'The :attribute must have between :min and :max items.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => 'Se debe ingresar la misma contraseña dos veces para confirmarla.',
+
+    'current_password' => 'La contraseña ingresada no coincide con la actual.',
+
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
@@ -110,6 +113,9 @@ return [
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values',
     'string' => 'The :attribute must be a string.',
+
+    'strong_password' => 'La contraseña debe tener al menos una letra mayúscula, una minúscula, un número y uno de los siguientes caracteres "!$%&?@#._-".',
+
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',

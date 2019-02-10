@@ -26,7 +26,7 @@ class PasswordRequest extends FormRequest
     {
         return [
             'password_now' => 'required|string|min:8|max:25|current_password',
-            'usu_password' => ['required', 'string', 'min:8', 'max:25', 'different:password_now', 'confirmed', new StrongPassword],
+            'password' => ['required', 'string', 'min:8', 'max:25', 'different:password_now', 'confirmed', new StrongPassword],
         ];
     }
 }
