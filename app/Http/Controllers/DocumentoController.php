@@ -116,7 +116,7 @@ class DocumentoController extends Controller
 
             return view("documentos.show", ["documento" => $documento, "detalles" => $detalles]);
         } catch (\Throwable $th) {
-            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+            return back()->withErrors(['exception' => $th->getMessage()])->withInput();
         }
     }
 
