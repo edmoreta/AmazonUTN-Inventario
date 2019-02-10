@@ -28,31 +28,68 @@ class UserController extends Controller
         if ($request) {
             $query = trim($request->get('searchText'));
             $pag = trim($request->get('pag'));
-            if ($pag=="") {
+            if ($pag=="") {  
                 $pag=7;
-            }
+            }            
             $usuarios = DB::table('inv_usuarios as usu')
-            ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
-            ->join('roles as r', 'ru.id', '=', 'r.id')
-            ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
-            ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
-            ->orderby('usu.usu_nombre','desc')
-            ->paginate($pag);
-           info($request->display);
-            
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
             if($request->display=="todos"){
                 info("if");
-                
+                $usuarios = DB::table('inv_usuarios as usu')
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
+                info($request->display);
             } else if ($request->display == "activo") {
                 info("else");
-               
+                $usuarios = DB::table('inv_usuarios as usu')
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
+                info($request->display);
              
             } else if($request->display == "inactivo"){
-               
+                $usuarios = DB::table('inv_usuarios as usu')
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
             } else if($request->display == "administrador"){
+                $usuarios = DB::table('inv_usuarios as usu')
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
 
             } else if($request->display == "bodeguero"){
+                $usuarios = DB::table('inv_usuarios as usu')
+                ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
+                ->join('roles as r', 'ru.id', '=', 'r.id')
+                ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
+                ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
+                ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
+                ->orderby('usu.usu_nombre','desc')
+                ->paginate($pag);
                 
             }
             return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);    

@@ -26,11 +26,11 @@ class UsersTableSeeder extends Seeder
             'usu_updated_at' => Carbon::now()
         ]);
         DB::table('inv_usuarios')->insert([
-            'usu_cedula' => '1004003456',
+            'usu_cedula' => '1003088653',
             'usu_nombre' => 'Admin',
             'usu_apellido' => 'usuario',
             'usu_fechaN' => '1998/11/13',
-            'usu_direccion' => 'Otavlo',
+            'usu_direccion' => 'Otavalo',
             'usu_telefono' => '087654312',
             'usu_celular' => '0898653425',
             'usu_email' => 'admin@hotmail.com',
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             'usu_updated_at' => Carbon::now()
         ]);
         DB::table('inv_usuarios')->insert([
-            'usu_cedula' => '107634953',
+            'usu_cedula' => '1003840541',
             'usu_nombre' => 'Bodeguero',
             'usu_apellido' => 'usuario',
             'usu_fechaN' => '1992/1/3',
