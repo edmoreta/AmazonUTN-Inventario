@@ -24,11 +24,20 @@ class ProveedoresController extends Controller
             if ($pag=="") {
                 $pag=7;
             }
-            $proveedores = DB::table('inv_proveedores as ip')
-            ->orWhere('ip.prv_nombre', 'ILIKE', '%' . $query . '%')
-            ->orWhere('ip.prv_identificacion', 'ILIKE', '%' . $query . '%')
-            ->orderby('prv_updated_at','desc')
-            ->paginate($pag);
+            $estado=$request->get('estado');
+            if ($estado!="0"&$estado!="1") {
+                $proveedores = DB::table('inv_proveedores as ip')
+                ->orWhere('ip.prv_nombre', 'ILIKE', '%' . $query . '%')
+                ->orWhere('ip.prv_identificacion', 'ILIKE', '%' . $query . '%')
+                ->orderby('prv_updated_at','desc')
+                ->paginate($pag);
+            }else{
+                $proveedores = DB::table('inv_proveedores as ip')
+                ->orWhere('ip.prv_nombre', 'ILIKE', '%' . $query . '%')->where('ip.prv_estado', '=',$estado)
+                ->orWhere('ip.prv_identificacion', 'ILIKE', '%' . $query . '%')->where('ip.prv_estado', '=',$estado)
+                ->orderby('prv_updated_at','desc')
+                ->paginate($pag);
+            }
             return view('proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
     }
