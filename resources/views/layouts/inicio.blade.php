@@ -54,40 +54,6 @@
                 <!-- <small class="">Online</small> -->
                   <span class="hidden-xs">{{ Auth::user()->usu_nombre }}</span>
                 </a>
-<<<<<<< HEAD
-                            <ul class="dropdown-menu">
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-
-                                    <div class="pull-right">
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cerrar Sesión</a>
-                                    </div>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                @endauth
-            </nav>
-        </header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-
-                    <li class="header"></li>
-
-                    <li>
-                        <a href="{{ url('home') }}">
-=======
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
                   <li class="user-footer">
@@ -160,7 +126,6 @@
             
             <li>
               <a href="{{ url('home') }}">
->>>>>>> a72e3a4548ec0f174787e2c36805ac4bcb8d33c3
                 <span>Inicio</span>
                 <small class="label pull-right"><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>
