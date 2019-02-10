@@ -71,9 +71,12 @@ class UserController extends Controller
         return view("usuarios.create", compact('roles'));
 
     }
-    public function setting(){
-        
+    public function settings()
+    {
+       // $usuario = Auth::user();
+        return view('usuarios.changePassword');
     }
+
 
     /**
      * Store a newly created resource in storage.
