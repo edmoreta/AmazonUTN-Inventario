@@ -64,4 +64,17 @@ class ProductoRequest extends FormRequest
                 break;
         }        
     }
+
+    public function messages()
+    {
+        return [
+            'pro_codigo.unique' => 'El producto ya ha sido ingresado',
+            'cat_id.required' => 'El campo categoría no debe estar vacío',
+            'pro_nombre.required' => 'El campo nombre no debe estar vacío',
+            'pro_descripcion.required' => 'El campo descripción no debe estar vacío',
+            'pro_caracteristicas.required' => 'El campo características no debe estar vacío',
+            'pro_precio.required' => 'El campo precio no debe estar vacío',
+            'pro_costo.required' => 'El campo costo no debe estar vacío',
+        ];
+    }
 }
