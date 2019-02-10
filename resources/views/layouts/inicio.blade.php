@@ -54,7 +54,6 @@
                 <!-- <small class="">Online</small> -->
                   <span class="hidden-xs">{{ Auth::user()->usu_nombre }}</span>
                 </a>
-                
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
                   <li class="user-footer">

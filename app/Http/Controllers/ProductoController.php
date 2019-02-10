@@ -71,6 +71,8 @@ class ProductoController extends Controller
                     $producto->save();
                 }
                 
+            } else {
+                return back()->withErrors(['El campo categoría no debe estar vacío']);
             }
             return redirect('productos')->with('success','Producto creado');
         }catch(Exception | QueryException $e){
