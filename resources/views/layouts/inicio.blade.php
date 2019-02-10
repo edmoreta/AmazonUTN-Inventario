@@ -24,9 +24,7 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-
         <header class="main-header">
-
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -34,13 +32,12 @@
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>AmazonUTN</b></span>
             </a>
-
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Navegación</span>
-          </a>
+                    <span class="sr-only">Navegación</span>
+                </a>
                 <!-- Navbar Right Menu -->
                 @auth
                 <div class="navbar-custom-menu">
@@ -50,100 +47,38 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-circle" style="color:green" aria-hidden="true"></i>
-                <!-- <small class="">Online</small> -->
-                  <span class="hidden-xs">{{ Auth::user()->usu_nombre }}</span>
-                </a>
-<<<<<<< HEAD
+                                <i class="fa fa-circle" style="color:green" aria-hidden="true"></i>
+                                <!-- <small class="">Online</small> -->
+                                <span class="hidden-xs">{{ Auth::user()->usu_nombre }}</span>
+                            </a>
                             <ul class="dropdown-menu">
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-
                                     <div class="pull-right">
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                                        <a href="{{ route('Config') }}" class="btn btn-info btn-flat" style="font-size:16px">
+                                        Configuración 
+                                            <i class="material-icons" style="font-size:16px">
+                                            settings
+                                            </i>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-right">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();" class="btn btn-info btn-flat" style="font-size:16px">
+                                    Cerrar Sesión
+                                    <span class="glyphicon glyphicon-off"></span>
+                                    </a>
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
+                                    @csrf
                                     </form>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
+                        </li>            
+                    </ul>                    
                 </div>
-                @endauth
-            </nav>
-        </header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-
-                    <li class="header"></li>
-
-                    <li>
-                        <a href="{{ url('home') }}">
-=======
-                <ul class="dropdown-menu">
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-right">
-                    <a href="{{ route('Config') }}" class="btn btn-info btn-flat" style="font-size:16px">
-                    Configuración 
-                    <i class="material-icons" style="font-size:16px">
-                    settings
-                    </i>
-                    </a>
-                    </div>
-                  </li>
-                  <li class="user-footer">
-                    <div class="pull-right">
-                      <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();" class="btn btn-info btn-flat" style="font-size:16px">
-                      Cerrar Sesión
-                      <span class="glyphicon glyphicon-off"></span>
-                      </a>
-                    </div>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                    </form>
-                  </li>
-                </ul>
-              </li>
-
-              
-
-            </ul>
-                <ul class="nav navbar-nav">
-                  <li class="dropdown user user-menu">
-            
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ ('ddd') }}</a> 
-                   <ul class="dropdown-menu">
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    
-                    <div class="pull-right">
-                      <a href="#" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Cambiar contraseña</a>
-                    </div>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                    </form>
-                  </li>
-                </ul>
-              </li>
-
-                 
-                 
-                 
-                 
-                  </li> 
-                </ul>
-                  </div>
           @endauth
         </nav>
       </header>
@@ -160,7 +95,6 @@
             
             <li>
               <a href="{{ url('home') }}">
->>>>>>> a72e3a4548ec0f174787e2c36805ac4bcb8d33c3
                 <span>Inicio</span>
                 <small class="label pull-right"><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>

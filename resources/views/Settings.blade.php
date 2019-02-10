@@ -69,7 +69,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
-                <a class="btn btn-info" href="#">Cambiar Contraseña</a>
+                <a class="btn btn-info" href="{{route('change_password')}}">Cambiar Contraseña</a>
             </div>
         </div>
     </div>
