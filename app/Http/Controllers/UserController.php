@@ -61,6 +61,16 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Config()
+    {
+        return view('Settings');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -156,8 +166,6 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-           
-           
             $user->fill($request->all());
             $user->usu_estado = $request->get('usu_estado'); 
             $user->usu_foto = $request->get('usu_foto'); 
@@ -167,8 +175,26 @@ class UserController extends Controller
         } catch (Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
+    }
 
-
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function Updates(Request $request)
+    {
+        try {
+            $user = User::findOrFail(Auth::user()->usu_id);
+            $user->fill($request->all());
+            $user->roles()->sync($request->idRol);
+            $user->save();
+            return redirect('home')->with('success', 'Usuario actualizado');
+        } catch (Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
