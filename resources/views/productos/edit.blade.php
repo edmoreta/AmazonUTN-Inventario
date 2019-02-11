@@ -121,6 +121,22 @@
         <div class="row">            
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                    <label for="pro_estado">Estado</label> <label for="pro_estado" style="color:red"></label>
+                    <select name="pro_estado" class="form-control selectpicker" id="pro_estado">
+                        @if ($producto->pro_estado == true)
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Inactivo</option>
+                        @else
+                            <option value="1">Activo</option>
+                            <option value="0" selected>Inactivo</option>
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">            
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
                     <a class="btn btn-danger" href="{{url('productos')}}">Cancelar</a>
                     <button class="btn btn-primary" type="submit">Guardar</button>
                 </div>

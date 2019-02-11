@@ -17,13 +17,24 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        $productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
+        $pag = trim($request->get('pag'));
+        if ($pag=="") {  
+            $pag=7;
+        }
+        if ($pag != null) {
+            $productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
+        } else {
+            $productos = Producto::orderByDesc('pro_updated_at')->paginate($pag);
+        }        
+        //$productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
         if ($request->display == 'activos') {
             $productos = Producto::where('pro_estado',1)->orderByDesc('pro_updated_at')->paginate(7);
         } else if ($request->display == 'inactivos') {
             $productos = Producto::where('pro_estado',0)->orderByDesc('pro_updated_at')->paginate(7);
         }
-        return view('productos.index',compact('productos'));
+        
+        $prods = $productos;
+        return view('productos.index',compact('productos','pag','prods'));
     }
 
     public function search(Request $request)
@@ -119,8 +130,6 @@ class ProductoController extends Controller
     {
         try{
             $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->all());
-            //$producto->generos()->sync($request->idGenero);
-            //$producto->actores()->sync($request->idActor);
             if ($request->hasFile('pro_foto')) {
                 $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
                 $producto->save();
