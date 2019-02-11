@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
             'usu_direccion'=>'max:100',
             'usu_telefono'=>'nullable|digits:9',
             'usu_celular'=>'required|digits:10',
+            'usu_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
         ];
     }
     public function messages()
@@ -42,7 +43,7 @@ class UserRequest extends FormRequest
             'usu_nombre.required' => 'El campo Nombre no debe estar vacío',
             'usu_apellido.required' => 'El campo Apellido no debe estar vacío',
             'usu_cedula.required' => 'El campo Cédula no debe estar vacío',
-            'usu_cedula.digits' => 'Formato de Cédual incorrecto',
+            'usu_cedula.digits' => 'Formato de Cédula incorrecto',
             'usu_email.required' => 'El campo e-mail no debe estar vacío',
             'usu_email.email' => 'Formato de correo electrónico incorrecto',
             'idRol.required' => 'Debe seleccionar un Rol',

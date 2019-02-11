@@ -2,14 +2,15 @@
 @section ('contenido')
 <div class="card-header"> <a class="btn btn-success" href="{{url('usuarios')}}" title="Regresar al listado" role="button">
 	<i class="fa fa-reply" aria-hidden="true"></i>
-</a></div>
+</a>
+</div>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 			<h3>Editar Usuario</h3>			
 				@include('includes.messages')				
 		</div>
 	</div>
-	{!! Form::open(['route' => ['usuarios.update', $usuario->usu_id],'method' => 'PATCH']) !!}				
+	{!! Form::open(['route' => ['usuarios.update', $usuario->usu_id],'method' => 'PATCH','files' => 'true']) !!}				
 	<div class="row">	
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
@@ -82,12 +83,12 @@
                                 </div>
                             </div>										
 			
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_foto">Foto</label> <label for="usu_foto" ></label>
-                                    <input type="file" name="usu_foto"   value="{{$usuario->usu_foto}}" class="form-control">
+                                    <input type="file" name="usu_foto" id="usu_foto" class="form-control">
                                 </div>
-                         </div>                         
+                            </div>                        
 						 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_estado">Estado</label> <label for="usu_estado" style="color:red">*</label>
@@ -102,6 +103,16 @@
 									</select>
                                 </div>
                             </div>	
+                            <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @if($usuario->usu_foto == null)
+                                        -								
+                                    @else
+                                        <img src="{{\Storage::url($usuario->usu_foto)}}" style="max-width:250px;">
+                                    @endif
+                                </div>
+                            </div>
+                           
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="form-group">
 						<a class="btn btn-danger" href="{{url('usuarios')}}">Cancelar</a>
