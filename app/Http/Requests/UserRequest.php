@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
             'usu_direccion'=>'max:100',
             'usu_telefono'=>'nullable|digits:9',
             'usu_celular'=>'required|digits:10',
+            'usu_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
         ];
     }
     public function messages()

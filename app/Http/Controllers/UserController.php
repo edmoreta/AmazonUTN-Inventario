@@ -150,6 +150,10 @@ class UserController extends Controller
         try {
             $user = new User;
             $user->fill($request->except('idRol'));
+            if ($request->hasFile('usu_foto')) {
+                $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
+               
+            }
             $faker = Faker\Factory::create();
             $password = $faker->password();
             $data = array(
@@ -218,8 +222,15 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->fill($request->all());
             $user->usu_estado = $request->get('usu_estado'); 
-            $user->usu_foto = $request->get('usu_foto'); 
+           
+            //$user->usu_foto = $request->get('usu_foto'); 
             $user->roles()->sync($request->idRol);
+            info('no entro');
+            if ($request->hasFile('usu_foto')) {
+                $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
+                info('si entro');
+               
+            }
             $user->save();
             return redirect('usuarios')->with('success', 'Usuario actualizado');
         } catch (Exception $e) {

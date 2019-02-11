@@ -79,18 +79,18 @@
                                 </div>
                             </div>
                         			
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="usu_foto">Foto</label> <label for="usu_direccion" ></label>
-                                    <input type="file" name="usu_foto"   value="{{old('usu_direccion')}}" class="form-control">
+                                    <label for="usu_foto">Foto</label> <label for="usu_foto" ></label>
+                                    <input type="file" name="usu_foto" id="usu_foto" class="form-control">
                                 </div>
-                         </div>
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="form-group">
-						<a class="btn btn-danger" href="{{url('usuarios')}}">Cancelar</a>
-						<button class="btn btn-primary" type="submit">Guardar</button>
-					</div>
-				</div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                <a class="btn btn-danger" href="{{url('usuarios')}}">Cancelar</a>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                             </div>
+                            </div>
                         {!! Form::close() !!}
                     </div>
                 </div>
