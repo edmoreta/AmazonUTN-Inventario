@@ -231,6 +231,11 @@ class UserController extends Controller
                 info('si entro');
                
             }
+            $validatorEc = new ValidatorEcPackage();
+            $isValid = $validatorEc->validarCedula($user->usu_cedula);
+            if (!$isValid) {
+                return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
+            }
             $user->save();
             return redirect('usuarios')->with('success', 'Usuario actualizado');
         } catch (Exception $e) {
