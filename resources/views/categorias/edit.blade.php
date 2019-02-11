@@ -54,7 +54,7 @@ role="dialog" tabindex="-2" id="modalEdit">
                             <select name="cat_estado" class="form-control selectpicker" id="cat_estado">                                
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>                                                                 
-                            </select>                            
+                            </select>
                         </div>
                     </div>
                 </div>

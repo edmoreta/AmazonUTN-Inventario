@@ -39,6 +39,7 @@ class ProductoRequest extends FormRequest
                     'pro_precio' => 'required|numeric|min:0.01',
                     'pro_costo' => 'required|numeric|min:0.01',
                     //'pro_stock' => 'required|integer',
+                    'pro_estado' => 'required|boolean',
                     'pro_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
                 ];
                 

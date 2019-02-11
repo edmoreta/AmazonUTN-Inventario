@@ -119,8 +119,6 @@ class ProductoController extends Controller
     {
         try{
             $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->all());
-            //$producto->generos()->sync($request->idGenero);
-            //$producto->actores()->sync($request->idActor);
             if ($request->hasFile('pro_foto')) {
                 $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
                 $producto->save();
