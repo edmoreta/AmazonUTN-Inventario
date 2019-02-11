@@ -39,10 +39,20 @@ class ProductoController extends Controller
 
     public function search(Request $request)
     {
+        $pag = trim($request->get('pag'));
+        if ($pag=="") {  
+            $pag=7;
+        }
         $buscar = $request->get('buscar');        
-        $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
+        if ($pag != null) {
+            $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
+        } else {
+            $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate($pag);
+        }  
+        
+        
 
-        return view('productos.index',compact('productos'));
+        return view('productos.index',compact('productos','pag'));
     }
 
     /**

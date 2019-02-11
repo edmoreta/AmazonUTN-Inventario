@@ -21,6 +21,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',
+            'pro_created_at' => '2019-02-11 00:01:00',
+            'pro_updated_at' => '2019-02-11 00:01:00',
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-9',
@@ -29,7 +31,9 @@ class ProductosSeeder extends Seeder
             'pro_descripcion' => 'descripcion',
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
-            'pro_precio' => '12',          
+            'pro_precio' => '12',     
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-8',
@@ -38,7 +42,9 @@ class ProductosSeeder extends Seeder
             'pro_descripcion' => 'descripcion',
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
-            'pro_precio' => '12',           
+            'pro_precio' => '12',   
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',             
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-7',
@@ -48,6 +54,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',           
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-6',
@@ -57,6 +65,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',            
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-5',
@@ -66,6 +76,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',            
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-4',
@@ -75,6 +87,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',         
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-3',
@@ -84,6 +98,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',           
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([            
             'pro_codigo' => 'PRO-2',
@@ -93,6 +109,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',           
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
         Producto::create([
             'pro_codigo' => 'PRO-1',
@@ -102,6 +120,8 @@ class ProductosSeeder extends Seeder
             'pro_caracteristicas' => 'caracteristicas',
             'pro_costo' => '10',
             'pro_precio' => '12',
+            'pro_created_at' => '2019-02-11 00:00:00',
+            'pro_updated_at' => '2019-02-11 00:00:00',     
         ]);
     }
 }
