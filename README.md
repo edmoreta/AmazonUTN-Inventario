@@ -102,6 +102,10 @@ Instalar la librería de Validación de Cedula Ecuatoriana
 ```
 composer require tavo1987/laravel-ec-validator
 ```
+Instalar la librería Image
+```
+composer require intervention/image
+```
 Cada vez que se instala una nueva librería utilizar el siguiente comando
 ```
 composer dump-autoload
