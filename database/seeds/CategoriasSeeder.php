@@ -23,7 +23,7 @@ class CategoriasSeeder extends Seeder
         Categoria::create([            
             'cat_codigo' => 'CAT-9',
             'cat_codigop' => null,
-            'cat_nombre' => 'Ropa',            
+            'cat_nombre' => 'Zapatos',            
         ]);
         Categoria::create([            
             'cat_codigo' => 'CAT-8',
