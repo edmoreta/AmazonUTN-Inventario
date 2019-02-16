@@ -24,7 +24,10 @@ class CreateProductosTable extends Migration
             $table->double('pro_precio', 10, 2);            
             $table->integer('pro_stock')->default(0);
             $table->boolean('pro_estado')->default(1);
-            $table->string('pro_foto',255)->nullable();
+            //$table->string('pro_foto',255)->nullable();
+            $table->text('pro_foto')->nullable()->default(NULL);
+            $table->text('pro_fototype')->nullable()->default(NULL);
+
             $table->timestamp('pro_created_at');
             $table->timestamp('pro_updated_at');
             $table->foreign('cat_id')->references('cat_id')->on('inv_categorias');

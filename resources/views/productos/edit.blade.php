@@ -112,7 +112,8 @@
                     @if($producto->pro_foto == null)
                         -								
                     @else
-                        <img src="{{\Storage::url($producto->pro_foto)}}" style="max-width:250px;">
+                        {{-- <img src="{{\Storage::url($producto->pro_foto)}}" style="max-width:250px;"> --}}
+                        <img src="{{ "data:image/" . $producto->pro_fototype . ";base64," . $producto->pro_foto }}" style="max-width:250px;">
                     @endif
                 </div>
             </div>

@@ -30,8 +30,8 @@
                     <select name="cat_id" id="pro_id" class="form-control selectpicker" data-live-search="true">
                         <option value="-1">--   Seleccione  --</option>
                         @if($categorias != null)
-                            @foreach ($categorias as $c)
-                                <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                            @foreach ($categorias as $c)                            
+                                <option value="{{$c->cat_id}}" {{ (old('cat_id') == $c->cat_id ? "selected":"") }}>{{$c->cat_nombre}}</option>
                             @endforeach
                         @endif
                     </select>                    
@@ -81,7 +81,7 @@
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_foto">Foto</label> <label for="pro_foto" ></label>
-                    <input type="file" name="pro_foto" id="pro_foto" class="form-control">
+                    <input type="file" name="pro_foto" id="pro_foto" class="form-control" value="{{old('pro_foto')}}">
                 </div>
             </div>
         {{-- </div> --}}

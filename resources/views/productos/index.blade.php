@@ -67,7 +67,8 @@
 							@if($pro->pro_foto == null)
 								-								
 							@else
-								<img src="{{\Storage::url($pro->pro_foto)}}" style="max-width:75px;">
+								{{-- <img src="{{\Storage::url($pro->pro_foto)}}" style="max-width:75px;"> --}}
+								<img src="{{ "data:image/" . $pro->pro_fototype . ";base64," . $pro->pro_foto }}" style="max-width:75px;">
 							@endif
 						</td>
 						<td>{{ $pro->pro_created_at }}</td>
