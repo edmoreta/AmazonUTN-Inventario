@@ -234,7 +234,7 @@ DB_DATABASE=d83o11dd9ed4p7
 DB_USERNAME=wgazpmlfxdpujx
 DB_PASSWORD=a6b029fba1a7d597adb3f31b410d2ca88a6b706385355efd5f9f77a1dda2e314
 
-# el Api Key se debe dejar con su propia  no la del .env 
+# el Api Key se debe dejar con su propia, no la del .env 
 
 
 
