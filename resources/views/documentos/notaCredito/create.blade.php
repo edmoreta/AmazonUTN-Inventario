@@ -1,12 +1,11 @@
 @extends ('layouts.inicio')
 @section ('contenido')
-<div class="card-header"> <a class="btn btn-success" href="{{url('documentos')}}" title="Regresar al listado"
-        role="button">
+<div class="card-header"> <a class="btn btn-success" href="{{url('documentos')}}" title="Regresar al listado" role="button">
         <i class="fa fa-reply" aria-hidden="true"></i>
     </a></div>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        @include('includes.messages')
+    @include('includes.messages')
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <h3>Nueva Nota de Crédito</h3>
@@ -14,8 +13,7 @@
 </div>
 <?php
 $p="";
-?> {!!Form::open(array('url'=>'notas_de_credito','method'=>'POST','autocomplete'=>'off'))!!}
-{{Form::token()}}
+?> {!!Form::open(array('url'=>'notas_de_credito','method'=>'POST','autocomplete'=>'off'))!!} {{Form::token()}}
 <div class="row">
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
         <div class="form-group">
@@ -39,7 +37,7 @@ $p="";
                     $p=0;
                     $tot=0;
                 ?>
-                <!--  
+                <!--
                {{-- <option value="{{$doc->doc_codigo}}_{{$doc->prv_nombre}}_{{$doc->doc_fecha}}_{{$doc->pro_nombre}}_{{$doc->mov_cantidad}}_{{$doc->mov_costo}}_{{$doc->mov_precio}}">{{$doc->doc_codigo}}</option>
                   @endforeach --}} -->
             </select>
@@ -49,30 +47,19 @@ $p="";
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
         <div class="form-group">
             <label for="proveedor">Proveedor</label>
-            <input type="text" required disabled name="proveedor" id="proveedor"
-                <?php foreach ($documentosJoin as $d) {
-                if ($id==$d->doc_codigo) {
-                    echo 'value="'.$d->prv_nombre.'"';
-                }
-            }?>
-                class="form-control" placeholder="Proveedor">
+            <input type="text" required disabled name="proveedor" id="proveedor" <?php foreach ($documentosJoin as $d) { if ($id==$d->doc_codigo)
+            { echo 'value="'.$d->prv_nombre.'"'; } }?> class="form-control" placeholder="Proveedor">
         </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
         <div class="form-group">
             <label for="num_comprobante">Fecha</label>
-            <input type="date" name="doc_fecha" id="doc_fecha" required disabled
-                <?php foreach ($documentosJoin as $d) {
-                if ($id==$d->doc_codigo) {
-                    $fe=$d->doc_fecha;
-                    echo 'value="'.$d->doc_fecha.'"';
-                }
-            }?>
-                class="form-control">
+            <input type="date" name="doc_fecha" id="doc_fecha" required disabled <?php foreach ($documentosJoin as $d) { if ($id==$d->doc_codigo)
+            { $fe=$d->doc_fecha; echo 'value="'.$d->doc_fecha.'"'; } }?> class="form-control">
         </div>
     </div>
     <script>
-    let valo = document.getElementById('prv_id').value;
+        let valo = document.getElementById('prv_id').value;
     console.log("log", valo);
     </script>
     <input type="hidden" name="fechia" value="{{ $fe }}">
@@ -103,49 +90,44 @@ $p="";
                         <?php
                             $num=0;
                         ?>
-                        @if($documentosJo!=null)
-                        @foreach($documentosJo as $dc)
-                        <?php
+                            @if($documentosJo!=null) @foreach($documentosJo as $dc)
+                            <?php
                             $doc_id=$dc->doc_id;
                             $id_prov=$dc->prv_id;
                             $num+=1;
                             $tot+=$dc->mov_precio*$dc->mov_cantidad;
                         ?>
-                        <tr>
-                            <input type="hidden" value="{{ $dc->pro_id }}" <?php echo 'id=pro_id' .$num; ?>>
-                            <td><input type="txt" value="{{ $dc->pro_nombre }}" disabled class="form-control"
-                                    <?php
-                                    echo 'id=nom' .$num; ?>></td>
+                                <tr>
+                                    <input type="hidden" value="{{ $dc->pro_id }}" <?php echo 'id=pro_id' .$num; ?>>
+                                    <td><input type="txt" value="{{ $dc->pro_nombre }}" disabled class="form-control" <?php echo
+                                            'id=nom' .$num; ?>></td>
 
-                            <td><input type="number" name="mov_cantidad" value="{{ $dc->mov_cantidad }}" min="1"
-                                    max="{{ $dc->mov_cantidad }}" class="form-control" <?php echo 'id=cant' .$num; ?>>
-                                <input type="hidden" value="{{ $dc->mov_cantidad }}" <?php echo 'id=cantR' .$num; ?>>
-                            </td>
+                                    <td><input type="number" name="mov_cantidad" value="{{ $dc->mov_cantidad }}" min="1" max="{{ $dc->mov_cantidad }}"
+                                            class="form-control" <?php echo 'id=cant' .$num; ?>>
+                                        <input type="hidden" value="{{ $dc->mov_cantidad }}" <?php echo 'id=cantR' .$num; ?>>
+                                    </td>
 
-                            <td><input type="txt" value="{{ $dc->mov_costo }}" disabled class="form-control"
-                                    <?php
-                                    echo 'id=pc' .$num; ?>></td>
-                            <td><input type="txt" value="{{ $dc->mov_precio }}" disabled class="form-control"
-                                    <?php
-                                    echo 'id=pv' .$num; ?>></td>
-                            <td><button class="btn btn-danger" type="button" onclick="AgregarA(this)"
-                                    <?php echo 'id="'.$num.'"'; ?>>Agregar</button></td>
-                            <td>{{ $dc->mov_precio*$dc->mov_cantidad }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        <tfoot>
-                            <th>TOTAL</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>
-                                <h4>$/ {{ $tot }}</h4>
-                            </th>
-                        </tfoot>
-                        <tbody>
-                        </tbody>
+                                    <td><input type="txt" value="{{ $dc->mov_costo }}" disabled class="form-control" <?php echo
+                                            'id=pc' .$num; ?>></td>
+                                    <td><input type="txt" value="{{ $dc->mov_precio }}" disabled class="form-control" <?php echo
+                                            'id=pv' .$num; ?>></td>
+                                    <td><button class="btn btn-danger" type="button" onclick="AgregarA(this)" <?php echo
+                                            'id="'.$num. '"'; ?>>Agregar</button></td>
+                                    <td>{{ $dc->mov_precio*$dc->mov_cantidad }}</td>
+                                </tr>
+                                @endforeach @endif
+                                <tfoot>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        <h4>$/ {{ $tot }}</h4>
+                                    </th>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
                     </table>
                 </div>
             </div>
@@ -196,10 +178,9 @@ $p="";
     </div>
 </div>
 <p id="demo4" value="2"></p>
-{!!Form::close()!!}
-@push ('scripts')
+{!!Form::close()!!} @push ('scripts')
 <script>
-$('#prv_id').change(mostrarValores);
+    $('#prv_id').change(mostrarValores);
 
 function mostrarValores() {
     console.log('mostrarValores()');
@@ -209,7 +190,7 @@ function mostrarValores() {
     $('#doc_fecha').val(datosArticulo[2]);
     $('#proveedor').val(datosArticulo[1]);
     $('#doc_codigo').val(datosArticulo[0]);
-    $('#btn_aceptar').attr("href", "http://localhost:8000/notas_de_credito/" + datosArticulo[0]);
+    $('#btn_aceptar').attr("href", "http://app-inventario-amazonutn.herokuapp.com/notas_de_credito/" + datosArticulo[0]);
 }
 
 subtotal = [];
@@ -286,7 +267,9 @@ function eliminar(id) {
     $("#fila" + id).remove();
     evaluar();
 }
+
 </script>
+
 
 
 

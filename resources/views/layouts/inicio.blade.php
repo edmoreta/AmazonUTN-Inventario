@@ -56,7 +56,7 @@
                                 <li class="user-footer">
                                     <div class="pull-right">
                                         <a href="{{ route('Config') }}" class="btn btn-info btn-flat" style="font-size:16px">
-                                        Configuración 
+                                        Configuración
                                             <i class="material-icons" style="font-size:16px">
                                             settings
                                             </i>
@@ -65,36 +65,36 @@
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();" class="btn btn-info btn-flat" style="font-size:16px">
                                     Cerrar Sesión
                                     <span class="glyphicon glyphicon-off"></span>
                                     </a>
                                     </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
+                                        @csrf
                                     </form>
                                 </li>
                             </ul>
-                        </li>            
-                    </ul>                    
+                        </li>
+                    </ul>
                 </div>
-          @endauth
-        </nav>
-      </header>
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-          <!-- Sidebar user panel -->
-                    
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-        
-            <li class="header"></li>
-            
-            <li>
-              <a href="{{ url('home') }}">
+                @endauth
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+
+                    <li class="header"></li>
+
+                    <li>
+                        <a href="{{ url('home') }}">
                 <span>Inicio</span>
                 <small class="label pull-right"><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>
