@@ -198,9 +198,24 @@ class ProveedoresController extends Controller
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
             $proveedor->prv_estado = $request->get('prv_estado');
-            if ($proveedor->prv_tipo_identificacion=='CI' & strlen($proveedor->prv_identificacion)>10) {
-                return back()->with('error_prov', 'La cedula exede el maximo de 10 caracteres')->withInput();
+
+
+
+            $validatorEc = new ValidatorEcPackage();
+            if ($proveedor->prv_tipo_identificacion=='CI') {
+                $isValid = $validatorEc->validarCedula($proveedor->prv_identificacion);
+                if (!$isValid) {
+                    return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
+                }
+                $proveedor->update();
+                return redirect('proveedores')->with('success', 'Proveedor Actualizado con éxito');
             }else{
+                $isValid1 = $validatorEc->validarRucPersonaNatural($proveedor->prv_identificacion);
+                $isValid2 = $validatorEc->validarRucSociedadPublica($proveedor->prv_identificacion);
+                $isValid3 = $validatorEc->validarRucSociedadPrivada($proveedor->prv_identificacion);
+                if (!$isValid1&&!$isValid2&&!$isValid3) {
+                    return back()->with('error_prov', 'El RUC es INCORRECTA')->withInput();
+                }
                 $proveedor->update();
                 return redirect('proveedores')->with('success', 'Proveedor Actualizado con éxito');
             }
