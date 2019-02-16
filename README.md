@@ -224,3 +224,5 @@ Para que funcione el almacenamiento de fotos en el CRUD de Productos se debe hac
 php artisan storage:link
 ```
 
+# Configuración Sprint 3
+
