@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Producto;
 use App\Categoria;
 use App\Http\Requests\ProductoRequest;
+use Image;
 
 class ProductoController extends Controller
 {
@@ -48,10 +49,7 @@ class ProductoController extends Controller
             $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
         } else {
             $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate($pag);
-        }  
-        
-        
-
+        }                  
         return view('productos.index',compact('productos','pag'));
     }
 
@@ -88,7 +86,18 @@ class ProductoController extends Controller
                 //$producto->save();
 
                 if ($request->hasFile('pro_foto')) {
-                    $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                    //$producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                    //$producto->save();
+
+                    $image = $request->file( 'pro_foto' );
+                    $imageType = $image->getClientOriginalExtension();
+                    $imageStr = (string) Image::make( $image )->
+                                            resize( 300, null, function ( $constraint ) {
+                                                $constraint->aspectRatio();
+                                            })->encode( $imageType );
+
+                    $producto->pro_foto = base64_encode( $imageStr );
+                    $producto->pro_fototype = $imageType;
                     $producto->save();
                 }
                 
@@ -141,7 +150,18 @@ class ProductoController extends Controller
         try{
             $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->all());
             if ($request->hasFile('pro_foto')) {
-                $producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                //$producto->pro_foto = $request->file('pro_foto')->store('public/productos');
+                //$producto->save();
+
+                $image = $request->file( 'pro_foto' );
+                $imageType = $image->getClientOriginalExtension();
+                $imageStr = (string) Image::make( $image )->
+                                        resize( 300, null, function ( $constraint ) {
+                                            $constraint->aspectRatio();
+                                        })->encode( $imageType );
+
+                $producto->pro_foto = base64_encode( $imageStr );
+                $producto->pro_fototype = $imageType;
                 $producto->save();
             }
             return redirect('productos')->with('success','Producto actualizado');
