@@ -14,7 +14,7 @@ class Producto extends Model
     const CREATED_AT="pro_created_at";
     const UPDATED_AT="pro_updated_at";
 
-    protected $fillable = ['pro_codigo','cat_id','pro_nombre','pro_descripcion','pro_caracteristicas','pro_precio','pro_costo','pro_estado'];
+    protected $fillable = ['pro_codigo','cat_id','pro_nombre','pro_descripcion','pro_caracteristicas','pro_precio','pro_costo','pro_estado','pro_foto','pro_fototype'];
 
     protected $hidden = ['pro_id'];
 
