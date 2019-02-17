@@ -29,7 +29,6 @@
                 <div class="form-group">
                     <label for="cat_id">Categoría</label> <label for="cat_id" style="color:red">*</label>
                     <select name="cat_id" id="pro_id" class="form-control selectpicker" data-live-search="true">
-                        <option value="-1">--   Seleccione  --</option>
                         @if($categorias != null)
                             @foreach ($categorias as $c)
                                 @if($c->cat_id == $producto->cat_id)
