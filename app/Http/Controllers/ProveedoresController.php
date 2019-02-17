@@ -38,7 +38,6 @@ class ProveedoresController extends Controller
                 ->orderby('prv_updated_at','desc')
                 ->paginate($pag);
             }
-            dd("yo");
             return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
     }
