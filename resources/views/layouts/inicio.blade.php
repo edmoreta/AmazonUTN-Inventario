@@ -79,23 +79,6 @@
                         </li>
                     </ul>
                 </div>
-<<<<<<< HEAD
-          @endauth
-        </nav>
-      </header>
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-          <!-- Sidebar user panel -->
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-        
-            <li class="header"></li>
-            
-            <li>
-              <a href="{{ url('home') }}">
-=======
                 @endauth
             </nav>
         </header>
@@ -112,7 +95,6 @@
 
                     <li>
                         <a href="{{ url('home') }}">
->>>>>>> 3c70ef68f930ad3abf7adc3d1a4701506a16c829
                 <span>Inicio</span>
                 <small class="label pull-right"><i class="fa fa-home" style="font-size: 18px;"></i></small>
               </a>

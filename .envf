@@ -28,8 +28,8 @@ MAIL_DRIVER=smtp
 # smtp-mail.outlook.com
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=alexpatricio698@gmail.com
-MAIL_PASSWORD=GM_@lexander_15?
+MAIL_USERNAME=
+MAIL_PASSWORD=
 MAIL_ENCRYPTION=tls
 
 PUSHER_APP_ID=
