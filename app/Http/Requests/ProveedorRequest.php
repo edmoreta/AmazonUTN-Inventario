@@ -31,8 +31,8 @@ class ProveedorRequest extends FormRequest
             'prv_tipo_identificacion' => 'required|max:20',
             'prv_direccion' => 'required|max:100',
             'prv_email' => 'required|max:50|email',
-            'prv_celular' => 'nullable|digits:10',
-            'prv_telefono' => 'nullable|digits:9'
+            'prv_celular' => 'nullable|max:13',
+            'prv_telefono' => 'nullable|max:12'
         ];
 
     }
@@ -48,8 +48,8 @@ class ProveedorRequest extends FormRequest
             'prv_email.required' => 'El campo e-mail no debe estar vacío',
             'prv_email.unique' => 'El e-mail ya ha sido ingresado',
             'prv_email.email' => 'Formato de correo electrónico incorrecto',
-            'prv_celular.digits' => 'Celular incorrecto',
-            'prv_telefono.digits' => 'Teléfono incorrecto',
+            'prv_celular.digits_between' => 'Celular incorrecto',
+            'prv_telefono.digits_between' => 'Teléfono incorrecto',
         ];
     }
 }

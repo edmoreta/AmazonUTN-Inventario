@@ -21,6 +21,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('proveedores', 'ProveedoresController');
     Route::get('User/Updates', 'UserController@Updates')->name('Updates');
     Route::get('User/Config', 'UserController@Config')->name('Config');
+    Route::get('User/Resend/{id}', 'UserController@passw')->name('Resend');
     Route::resource('usuarios', 'UserController')->middleware('role:administrador|root');
     Route::get('categorias/search', 'CategoriaController@search');
     Route::resource('categorias', 'CategoriaController');
@@ -33,6 +34,8 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('facturas_ingreso', 'FacturaIngresoController');
     Route::get('User/change_password', 'UserController@change_password')->name('change_password');
     Route::post('User/update_password', 'UserController@update_password')->name('change_password.update');
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::get('/inicio', function () {
         return view('layouts/inicio');
     });

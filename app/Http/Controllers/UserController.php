@@ -93,7 +93,6 @@ class UserController extends Controller
                 
             }
             return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);    
-
         }
     }
 
@@ -130,11 +129,11 @@ class UserController extends Controller
             $user = Auth::user();
             $user->usu_password = bcrypt($request->password);
             info($user->usu_password);
-            $user->save();
+            $user->update();
 
             return redirect('User/change_password')->with('success', 'Contraseña actualizada');
-        } catch (Exception | QueryException $e) {
-            return back()->withErrors(['exception' => $e->getMessage()]);
+        } catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
 
@@ -152,7 +151,6 @@ class UserController extends Controller
             $user->fill($request->except('idRol'));
             if ($request->hasFile('usu_foto')) {
                 $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
-               
             }
             $faker = Faker\Factory::create();
             $password = $faker->password();
@@ -167,14 +165,14 @@ class UserController extends Controller
             if (!$isValid) {
                 return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
             }
-            $user->save();
             $user->roles()->attach($request->idRol);
             Mail::send('emails.sentpassword', $data, function ($m) {
                 $m->from('example@gmail.com', 'Su contraseña');
                 $m->to($this->email, "User")->subject('Your Reminder!');
             });
+            $user->save();
             return redirect('usuarios')->with('success', 'Usuario registrado');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
 
@@ -236,9 +234,38 @@ class UserController extends Controller
             if (!$isValid) {
                 return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
             }
-            $user->save();
+            $user->update();
             return redirect('usuarios')->with('success', 'Usuario actualizado');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function passw($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $faker = Faker\Factory::create();
+            $password = $faker->password();
+            $data = array(
+                "password" => $password,
+            );
+            $this->email=$user->usu_email;
+            $user->usu_password = bcrypt($password);
+            Mail::send('emails.sentpassword', $data, function ($m) {
+                $m->from('example@gmail.com', 'Su contraseña');
+                $m->to($this->email, "User")->subject('Your Reminder!');
+            });
+            $user->update();
+            return redirect('usuarios')->with('success', 'Contraseña restablecida y enviada con exito');
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -258,7 +285,7 @@ class UserController extends Controller
             $user->roles()->sync($request->idRol);
             $user->save();
             return redirect('home')->with('success', 'Usuario actualizado');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
