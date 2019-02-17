@@ -26,9 +26,9 @@
             <label for="prv_nombre">Nombre</label> <label for="prv_nombre" style="color:red">*</label>
             <input type="text" name="prv_nombre" id="nombre" maxlength="100" minlength="3"
                 pattern="[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]+"
-                oninvalid="setCustomValidity('El nombre solo debe contener letras mayusculas y minusculas ej. Juan Perez y debe contener mas de 3 letras')"
+                oninvalid="setCustomValidity('El nombre solo debe contener letras mayúsculas y minúsculas ej. Juan Perez y debe contener más de 3 letras')"
 				oninput="setCustomValidity('')"
-				title="Solo debe contener letras mayusculas y minusculas ej. Juan Perez"
+				title="Solo debe contener letras mayúsculas y minúsculas ej. Juan Perez"
                 value="{{old('prv_nombre')}}" required class="form-control" placeholder="Ej: Juan Perez">
         </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="prv_email">Correo Electrónico</label><label for="prv_email" style="color:red">*</label>
             <input type="email" name="prv_email" maxlength="50" 
-				pattern="[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})"
+				pattern="[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
 				oninvalid="setCustomValidity('El correo debe contener el nombre de usuario, el signo @ y el dominio Ej: juan@dominio.com')"
 				oninput="setCustomValidity('')"
 				title="Debe contener el nombre de usuario, el signo @ y el dominio Ej: juan@dominio.com"
