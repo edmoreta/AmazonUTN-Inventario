@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Auth;
 USE DB;
-use Faker;
 use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
@@ -152,8 +151,7 @@ class UserController extends Controller
             if ($request->hasFile('usu_foto')) {
                 $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
             }
-            $faker = Faker\Factory::create();
-            $password = $faker->password();
+            $password = str_random(8);
             $data = array(
                 "password" => $password,
             );
@@ -165,12 +163,12 @@ class UserController extends Controller
             if (!$isValid) {
                 return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
             }
-            $user->roles()->attach($request->idRol);
             Mail::send('emails.sentpassword', $data, function ($m) {
                 $m->from('example@gmail.com', 'Su contraseña');
                 $m->to($this->email, "User")->subject('Your Reminder!');
             });
             $user->save();
+            $user->roles()->attach($request->idRol);
             return redirect('usuarios')->with('success', 'Usuario registrado');
         } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
@@ -252,8 +250,8 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            $faker = Faker\Factory::create();
-            $password = $faker->password();
+            
+            $password = str_random(8);
             $data = array(
                 "password" => $password,
             );
