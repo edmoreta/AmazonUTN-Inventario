@@ -3,6 +3,9 @@
 <div class="card-header"> <a class="btn btn-success" href="{{url('usuarios')}}" title="Regresar al listado" role="button">
 	<i class="fa fa-reply" aria-hidden="true"></i>
 </a>
+<div align="right">
+<a class="btn btn-info" href="{{ url('User/Resend/'.$usuario->usu_id) }}">Restablecer contraseña</a> 
+</div>
 </div>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
