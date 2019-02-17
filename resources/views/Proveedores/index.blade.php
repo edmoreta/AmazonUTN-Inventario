@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
         <h3>Proveedores <a href="{{ url('proveedores/create') }}"><button class="btn btn-success">Nuevo</button></a></h3>
-    @include('proveedores.search')
+    @include('Proveedores.search')
     </div>
 </div>
 <div class="row">
