@@ -224,3 +224,19 @@ Para que funcione el almacenamiento de fotos en el CRUD de Productos se debe hac
 php artisan storage:link
 ```
 
+# Configuración Sprint 3
+Para que funcione en el Host de la BDD , se debe modificar su archivo .env 
+```
+DB_CONNECTION=pgsql
+DB_HOST=ec2-54-83-50-174.compute-1.amazonaws.com
+DB_PORT=5432
+DB_DATABASE=d83o11dd9ed4p7
+DB_USERNAME=wgazpmlfxdpujx
+DB_PASSWORD=a6b029fba1a7d597adb3f31b410d2ca88a6b706385355efd5f9f77a1dda2e314
+```
+# el Api Key se debe dejar con su propia, no la del .env 
+
+
+
+
+

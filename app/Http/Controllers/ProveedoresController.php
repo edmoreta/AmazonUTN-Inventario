@@ -59,7 +59,8 @@ class ProveedoresController extends Controller
      */
     public function create(Request $request)
     {
-        $proveedores = DB::select('SELECT * FROM inv_proveedores ORDER BY prv_id');
+        try {
+            $proveedores = DB::select('SELECT * FROM inv_proveedores ORDER BY prv_id');
         $proveedor="0";
         foreach ($proveedores as $prv) {
             $proveedor=$prv;
@@ -71,6 +72,9 @@ class ProveedoresController extends Controller
         }
         
         return view('proveedores.create', ["cod" => $cod]);
+        } catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
@@ -133,7 +137,7 @@ class ProveedoresController extends Controller
                 $proveedor->save();
                 return redirect('proveedores')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -159,7 +163,7 @@ class ProveedoresController extends Controller
                 return redirect('proveedores')->with('success', 'Proveedor Activado con éxito');
             }
             
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -172,8 +176,12 @@ class ProveedoresController extends Controller
      */
     public function edit($id)
     {
-        $proveedor = Proveedor::findOrFail($id);
+        try {
+            $proveedor = Proveedor::findOrFail($id);
         return view("proveedores.edit", compact('proveedor'));
+        } catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
@@ -198,9 +206,6 @@ class ProveedoresController extends Controller
             $proveedor->prv_telefono = $request->get('prv_telefono');
             $proveedor->prv_celular = $request->get('prv_celular');
             $proveedor->prv_estado = $request->get('prv_estado');
-
-
-
             $validatorEc = new ValidatorEcPackage();
             if ($proveedor->prv_tipo_identificacion=='CI') {
                 $isValid = $validatorEc->validarCedula($proveedor->prv_identificacion);
@@ -219,7 +224,7 @@ class ProveedoresController extends Controller
                 $proveedor->update();
                 return redirect('proveedores')->with('success', 'Proveedor Actualizado con éxito');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
