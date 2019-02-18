@@ -16,7 +16,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.7",
         "tavo1987/laravel-ec-validator": "^1.1",
-        "zizaco/entrust": "^1.9"        
+        "zizaco/entrust": "^1.9"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
