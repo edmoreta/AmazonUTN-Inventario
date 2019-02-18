@@ -280,7 +280,6 @@ class UserController extends Controller
         try {
             $user = User::findOrFail(Auth::user()->usu_id);
             $user->fill($request->all());
-            $user->roles()->sync($request->idRol);
             $user->save();
             return redirect('home')->with('success', 'Usuario actualizado');
         } catch (\Exception $e) {
