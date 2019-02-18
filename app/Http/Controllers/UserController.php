@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Auth;
 USE DB;
-use Faker;
 use App\Http\Requests\UserRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
@@ -37,28 +36,25 @@ class UserController extends Controller
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
             if($request->display=="todos"){
-                info("if");
                 $usuarios = DB::table('inv_usuarios as usu')
                 ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
                 ->join('roles as r', 'ru.id', '=', 'r.id')
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
-                info($request->display);
             } else if ($request->display == "activo") {
-                info("else");
                 $usuarios = DB::table('inv_usuarios as usu')
                 ->join('role_user as ru', 'usu.usu_id', '=', 'ru.usu_id')
                 ->join('roles as r', 'ru.id', '=', 'r.id')
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',true)
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
                 info($request->display);
              
@@ -69,7 +65,7 @@ class UserController extends Controller
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('usu.usu_estado','=',false)
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
             } else if($request->display == "administrador"){
                 $usuarios = DB::table('inv_usuarios as usu')
@@ -78,7 +74,7 @@ class UserController extends Controller
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('ru.id','=','2')
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
 
             } else if($request->display == "bodeguero"){
@@ -88,7 +84,7 @@ class UserController extends Controller
                 ->orWhere('usu.usu_nombre', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
                 ->orWhere('usu.usu_email', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
                 ->orWhere('usu.usu_cedula', 'ILIKE', '%' . $query . '%')->where('ru.id','=','3')
-                ->orderby('usu.usu_nombre','desc')
+                ->orderby('usu.usu_updated_at','desc')
                 ->paginate($pag);
                 
             }
@@ -152,8 +148,7 @@ class UserController extends Controller
             if ($request->hasFile('usu_foto')) {
                 $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
             }
-            $faker = Faker\Factory::create();
-            $password = $faker->password();
+            $password = str_random(8);
             $data = array(
                 "password" => $password,
             );
@@ -165,12 +160,12 @@ class UserController extends Controller
             if (!$isValid) {
                 return back()->with('error_prov', 'La cédula es INCORRECTA')->withInput();
             }
-            $user->roles()->attach($request->idRol);
             Mail::send('emails.sentpassword', $data, function ($m) {
                 $m->from('example@gmail.com', 'Su contraseña');
                 $m->to($this->email, "User")->subject('Your Reminder!');
             });
             $user->save();
+            $user->roles()->attach($request->idRol);
             return redirect('usuarios')->with('success', 'Usuario registrado');
         } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
@@ -252,8 +247,8 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            $faker = Faker\Factory::create();
-            $password = $faker->password();
+            
+            $password = str_random(8);
             $data = array(
                 "password" => $password,
             );
@@ -282,7 +277,6 @@ class UserController extends Controller
         try {
             $user = User::findOrFail(Auth::user()->usu_id);
             $user->fill($request->all());
-            $user->roles()->sync($request->idRol);
             $user->save();
             return redirect('home')->with('success', 'Usuario actualizado');
         } catch (\Exception $e) {

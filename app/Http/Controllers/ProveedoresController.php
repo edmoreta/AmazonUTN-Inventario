@@ -38,7 +38,7 @@ class ProveedoresController extends Controller
                 ->orderby('prv_updated_at','desc')
                 ->paginate($pag);
             }
-            return view('proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
+            return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
     }
 
@@ -71,7 +71,7 @@ class ProveedoresController extends Controller
             $cod+=1;
         }
         
-        return view('proveedores.create', ["cod" => $cod]);
+        return view('Proveedores.create', ["cod" => $cod]);
         } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
@@ -178,7 +178,7 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor = Proveedor::findOrFail($id);
-        return view("proveedores.edit", compact('proveedor'));
+        return view("Proveedores.edit", compact('proveedor'));
         } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
