@@ -28,7 +28,7 @@ class FacturaIngresoRequest extends FormRequest
 
         return [
             'prv_id' => 'required|numeric',
-            'doc_codigo' => 'required|digits_between:3,40|[0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9]*',
+            'doc_codigo' => 'required|regex:/[0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9]*/',
             'doc_fecha' => 'required|date',
             'pro_id' => 'required',
             'cantidad' => 'required',
