@@ -119,8 +119,8 @@
         <div class="form-group">
             <label for="prv_celular">Celular</label>
             <input type="text" name="prv_celular" maxlength="13" minlength="10" pattern="([+]593|0)([0-9]{9})"
-                oninvalid="setCustomValidity('El celular debe contener solo números y +593 Ej: 0985645723 o +593985645723')"
-                oninput="setCustomValidity('')" title="Debe contener solo números y +593 Ej: 0985645723 o +593985645723"
+                oninvalid="setCustomValidity('El celular debe contener solo números Ej: 0985645723 o +593985645723')"
+                oninput="setCustomValidity('')" title="Debe contener solo números Ej: 0985645723 o +593985645723"
                 value="{{ $proveedor->prv_celular }}" class="form-control">
         </div>
     </div>
@@ -128,12 +128,11 @@
         <div class="form-group">
             <label for="prv_telefono">Teléfono</label>
             <input type="text" name="prv_telefono" maxlength="12" minlength="9" pattern="([+]593|0)([0-9]{8})"
-                oninvalid="setCustomValidity('Si el teléfono contiene +593 debe tener 12 caracteres, si no debe contener 9 digitos Ej: 068954569 o +59368954569')"
-                oninput="setCustomValidity('')" title="Debe contener solo números y +593 Ej: 068954569 o +59368954569"
+                oninvalid="setCustomValidity('El teléfono debe contener solo números Ej: 068954569 o +59368954569')"
+                oninput="setCustomValidity('')" title="Debe contener solo números Ej: 068954569 o +59368954569"
                 value="{{ $proveedor->prv_telefono }}" class="form-control">
         </div>
     </div>
-
     <input type="hidden" name="prv_codigo" value="{{ $proveedor->prv_codigo }}">
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
