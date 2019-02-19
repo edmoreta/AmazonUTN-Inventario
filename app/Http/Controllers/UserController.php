@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator as LaravelValidator;
 use Tavo\ValidadorEc as ValidatorEcPackage;
+use Image;
 
 class UserController extends Controller
 {
@@ -146,8 +147,18 @@ class UserController extends Controller
             $user = new User;
             $user->fill($request->except('idRol'));
             if ($request->hasFile('usu_foto')) {
-                $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
+                $image = $request->file( 'usu_foto' );
+                $imageType = $image->getClientOriginalExtension();
+                $imageStr = (string) Image::make( $image )->
+                                        resize( 300, null, function ( $constraint ) {
+                                            $constraint->aspectRatio();
+                                        })->encode( $imageType );
+
+                $user->usu_foto = base64_encode( $imageStr );
+                $user->usu_fototype = $imageType;
+               
             }
+            
             $password = str_random(8);
             $data = array(
                 "password" => $password,
@@ -218,10 +229,17 @@ class UserController extends Controller
            
             //$user->usu_foto = $request->get('usu_foto'); 
             $user->roles()->sync($request->idRol);
-            info('no entro');
+            
             if ($request->hasFile('usu_foto')) {
-                $user->usu_foto = $request->file('usu_foto')->store('public/usuarios');
-                info('si entro');
+                $image = $request->file( 'usu_foto' );
+                $imageType = $image->getClientOriginalExtension();
+                $imageStr = (string) Image::make( $image )->
+                                        resize( 300, null, function ( $constraint ) {
+                                            $constraint->aspectRatio();
+                                        })->encode( $imageType );
+
+                $user->usu_foto = base64_encode( $imageStr );
+                $user->usu_fototype = $imageType;
                
             }
             $validatorEc = new ValidatorEcPackage();

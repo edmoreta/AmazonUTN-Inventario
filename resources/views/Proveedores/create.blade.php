@@ -47,7 +47,8 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
             <label for="prv_email">Correo Electrónico</label><label for="prv_email" style="color:red">*</label>
-            <input type="email" name="prv_email" maxlength="50" 
+            <input type="email" name="prv_email" 
+                maxlength="50" 
 				pattern="[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
 				oninvalid="setCustomValidity('El correo debe contener el nombre de usuario, el signo @ y el dominio Ej: juan@dominio.com')"
 				oninput="setCustomValidity('')"
@@ -106,7 +107,7 @@
             <label for="prv_telefono">Teléfono</label>
             <input type="text" name="prv_telefono"  maxlength="12" minlength="9"
 				pattern="([+]593|0)([0-9]{8})"
-				oninvalid="setCustomValidity('Si el teléfono contiene +593 debe tener 12 caracteres, si no debe contener 10 digitos Ej: 068954569 o +59368954569')"
+				oninvalid="setCustomValidity('Si el teléfono contiene +593 debe tener 12 caracteres, si no debe contener 9 digitos Ej: 068954569 o +59368954569')"
 				oninput="setCustomValidity('')"
 				title="Debe contener solo números y +593 Ej: 068954569 o +59368954569"
                 value="{{old('prv_telefono')}}" class="form-control" placeholder="Ej: 068954569 o +59368954569">

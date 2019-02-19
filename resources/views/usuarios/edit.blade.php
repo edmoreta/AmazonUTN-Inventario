@@ -111,7 +111,8 @@
                                     @if($usuario->usu_foto == null)
                                         -								
                                     @else
-                                        <img src="{{\Storage::url($usuario->usu_foto)}}" style="max-width:250px;">
+                                        
+                                        <img src="{{ "data:image/" . $usuario->usu_fototype . ";base64," . $usuario->usu_foto }}" style="max-width:250px;">
                                     @endif
                                 </div>
                             </div>

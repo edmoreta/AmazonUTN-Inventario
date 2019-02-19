@@ -18,7 +18,7 @@
         </span>
     @endif
     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-            <input id="usu_email" type="email" name="usu_email" class="input100 form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+            <input id="usu_email" name="email"  type="email"  class="input100 form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
