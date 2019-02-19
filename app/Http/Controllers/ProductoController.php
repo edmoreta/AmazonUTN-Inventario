@@ -148,18 +148,14 @@ class ProductoController extends Controller
     public function update(ProductoRequest $request, $id)
     {
         try{
-            $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->all());
+            $producto = Producto::updateOrCreate(['pro_id'=>$id],$request->except('pro_foto'));
             if ($request->hasFile('pro_foto')) {
-                //$producto->pro_foto = $request->file('pro_foto')->store('public/productos');
-                //$producto->save();
-
                 $image = $request->file( 'pro_foto' );
                 $imageType = $image->getClientOriginalExtension();
                 $imageStr = (string) Image::make( $image )->
                                         resize( 300, null, function ( $constraint ) {
                                             $constraint->aspectRatio();
                                         })->encode( $imageType );
-
                 $producto->pro_foto = base64_encode( $imageStr );
                 $producto->pro_fototype = $imageType;
                 $producto->save();
