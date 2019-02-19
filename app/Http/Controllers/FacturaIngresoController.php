@@ -87,12 +87,15 @@ class FacturaIngresoController extends Controller
                     $movimiento->mov_cantidad = $cantidad[$cont];
                     $movimiento->mov_costo = $costo[$cont];
                     $movimiento->mov_precio = $precio[$cont];
-                    $movimiento->save();
+                    
                     //Modificando producto JEJE xd
                     $producto = Producto::findOrFail($pro_id[$cont]);
                     $producto->pro_costo = $costo[$cont];
                     $producto->pro_precio = $precio[$cont];
                     $producto->pro_stock = $producto->pro_stock + $cantidad[$cont];
+                    
+                    $movimiento->mov_stock=$producto->pro_stock;
+                    $movimiento->save();
                     $producto->update();
                     $cont = $cont + 1;
                 }
