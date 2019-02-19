@@ -118,7 +118,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        
+        echo "Claro que llego";
     }
 
     /**
