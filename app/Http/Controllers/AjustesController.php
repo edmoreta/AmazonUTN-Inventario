@@ -47,7 +47,7 @@ class AjustesController extends Controller
             return view('documentos.ajustes.create', ["proveedores" => $proveedores, "codigo"=>$codigo, "productos" => $productos, "fecha_actual" => $fecha_actual]);
     
             
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
            }
@@ -122,7 +122,7 @@ class AjustesController extends Controller
                 DB::commit();
                 return redirect('documentos')->with('success', 'Ajuste ' . $ajuste->doc_codigo . ' registrado con éxito');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
