@@ -23,7 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('usu_direccion',100)->nullable();
             $table->string('usu_telefono',10)->nullable();
             $table->string('usu_celular',10);                        
-            $table->string('usu_foto', 250)->nullable();
+            $table->text('usu_foto')->nullable()->default(NULL);
+            $table->text('usu_fototype')->nullable()->default(NULL);
             $table->string('usu_password');
             $table->boolean('usu_estado')->default(1);            
             $table->rememberToken();

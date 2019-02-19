@@ -48,13 +48,7 @@
             {{ __('Iniciar sesión') }}
         </button>
     </div>
-    <div class="text-center p-t-12">
-        @if (Route::has('password.request'))
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('¿Olvidaste tu contraseña?') }}
-            </a>
-        @endif
-    </div>
+   
     <div class="text-center p-t-136">
     </div>
 </form>

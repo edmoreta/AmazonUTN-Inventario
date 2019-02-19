@@ -100,15 +100,18 @@ class AjustesController extends Controller
                     $movimiento->mov_ajuste = $tipo_ajuste[$cont];
 
                     echo $costo[$cont];
-                    $movimiento->save();
+                    
                 //Modificando producto JEJE xd
                     $producto = Producto::findOrFail($pro_id[$cont]);
                     $producto->pro_precio = $precio[$cont];
                     if ($tipo_ajuste[$cont] == "Positivo") {
                         $producto->pro_stock = $producto->pro_stock + $cantidad[$cont];
+                        $movimiento->mov_stock=$producto->pro_stock;
                     } else {
                         $producto->pro_stock = $producto->pro_stock - $cantidad[$cont];
+                        $movimiento->mov_stock=$producto->pro_stock;
                     }
+                    $movimiento->save();
                     $producto->update();
 
                     $cont = $cont + 1;
