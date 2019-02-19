@@ -3,36 +3,37 @@
 <div class="card-header"> <a class="btn btn-success" href="{{url('documentos')}}" title="Regresar al listado" role="button">
 		<i class="fa fa-reply" aria-hidden="true"></i>
 	</a></div>
- <div class="row">
+<div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			@include('includes.messages')
-	</div>
-	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    @include('includes.messages')
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <h3>Nuevo Ajuste</h3>
     </div>
- </div>
+</div>
 
- {!!Form::open(array('url'=>'ajustes','method'=>'POST','autocomplete'=>'off'))!!}
- {{Form::token()}}
+{!!Form::open(array('url'=>'ajustes','method'=>'POST','autocomplete'=>'off'))!!} {{Form::token()}}
 <div class="row">
-	<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
 
-	 </div>
-	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+    </div>
+    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 
-	 </div>
-	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-			   <div class="form-group">
-					  <label for="serieComprobante">Código De Ajuste</label>
-					  <input type="text" name="doc_codig" id="doc_codig" disabled value="AJ-{{$codigo}}"  required value="{{old('doc_codigo')}}" class="form-control" placeholder="Serie del Comprobante..">
-			   </div>
-	 </div>
-	 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-			   <div class="form-group">
-					 <label for="doc_fecha">Fecha De Ajuste</label>
-					 <input type="date" name="doc_fecha" id="doc_fecha" required value="{{$fecha_actual}}" max="{{$fecha_actual}}" class="form-control" placeholder="Numero del Comprobante..">
-			   </div>
-	 </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+        <div class="form-group">
+            <label for="serieComprobante">Código De Ajuste</label>
+            <input type="text" name="doc_codig" id="doc_codig" disabled value="AJ-{{$codigo}}" required value="{{old('doc_codigo')}}"
+                class="form-control" placeholder="Serie del Comprobante..">
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+        <div class="form-group">
+            <label for="doc_fecha">Fecha De Ajuste</label>
+            <input type="date" name="doc_fecha" id="doc_fecha" required value="{{$fecha_actual}}" max="{{$fecha_actual}}" class="form-control"
+                placeholder="Numero del Comprobante..">
+        </div>
+    </div>
 </div>
 <div class="row">
 	 <div class="panel panel-primary">
@@ -41,6 +42,7 @@
 								<div class="form-group">
 									<label>Producto</label>
 									<select name="ppro_id" id="ppro_id" class="form-control selectpicker" data-live-search="true">
+										<option value="default"> xxxxxxxx </option>
 										@foreach($productos as $prod)
 										<option value="{{$prod->pro_id}}_{{$prod->pro_stock}}_{{$prod->pro_costo}}_{{$prod->pro_precio}}">{{$prod->pro_nombre}}</option>
 										@endforeach
@@ -50,7 +52,7 @@
 						<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								  <div class="form-group">
 									  <label for="pcantidad">Cantidad</label>
-									  <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad">
+									  <input type="number" name="pcantidad" onkeypress="comprueba(this)" min="1" pattern="^[0-9]+" id="pcantidad" class="form-control" placeholder="Cantidad">
 								  </div>
 						</div>
 						<input type="hidden" name="doc_codigo" id="doc_codigo" value="AJ-{{$codigo}}"  required value="{{old('doc_codigo')}}" class="form-control">
@@ -69,7 +71,7 @@
 					   <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								  <div class="form-group">
 										<label for="pprecio">Precio</label>
-										<input type="number"   name="pprecio" id="pprecio" class="form-control" placeholder="Precio..">
+										<input type="number"   name="pprecio" onkeypress="comprueba(this)" id="pprecio" class="form-control" placeholder="Precio..">
 								  </div>
 					   </div>
 
@@ -80,46 +82,52 @@
 											<option value="Positivo">Positivo</option>
 											<option value="Negativo">Negativo</option>
 									</select>
-								  </div>
-					   </div>
-					   <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
-						</div>
-					   <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-								   <div class="form-group">
-										<button class="btn btn-danger" type="button" id="bt_add">Agregar</button>
-								   </div>
-					   </div>
-					   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								 <div class="table-responsive">
-										 <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
-											  <thead style="background-color: #dd4b39">
-												   <th>Opciones</th>
-												   <th>Producto</th>
-												   <th>Cantidad</th>
-												   <th>Stock</th>
-												   <th>Costo</th>
-												   <th>Precio</th>
-												   <th>Tipo Ajuste</th>
-											 </thead>
-											  <tbody>
-											  </tbody>
-										  </table>
-								   </div>
-						 </div>
-		</div>
-  </div>
-  <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
-		  <div class="form-group">
-				   <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>
-				   <button class="btn btn-danger" type="reset">Cancelar</button>
-				   <button class="btn btn-primary" type="submit">Guardar</button>
-		  </div>
-  </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
+            </div>
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="form-group">
+                    <button class="btn btn-danger" type="button" id="bt_add">Agregar</button>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="table-responsive">
+                    <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+                        <thead style="background-color: #dd4b39">
+                            <th>Opciones</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Stock</th>
+                            <th>Costo</th>
+                            <th>Precio</th>
+                            <th>Tipo Ajuste</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
+        <div class="form-group">
+            <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
+    </div>
 </div>
-{!!Form::close()!!}
+{!!Form::close()!!} @push ('scripts')
+<script>
+        var pcantidad = document.getElementById('numero');
 
-
-@push ('scripts')
+        function comprueba(valor){
+          if(valor.value < 0 || valor.value >9999){
+            valor.value = 1;
+          }
+        }
+    </script>
 <script>
 	$(document).ready(function(){
 		$('#bt_add').click(function(){
@@ -143,13 +151,16 @@ function agregar(){
   datosArticulo2=document.getElementById('ppro_id').value.split('_');
   pro_id=datosArticulo2[0];
   producto=$("#ppro_id option:selected").text();
-  cantidad=$("#pcantidad").val();
+  cantidad3=$("#pcantidad").val();
+  cantidad=parseInt(cantidad3);
+  
   tipo_ajuste=$("#ptipo_ajuste").val();
   precio=$("#pprecio").val();
   costo=$("#pcosto").val();
   stock=$('#pstock').val();
   if (pro_id!="" && cantidad!="" && cantidad>=1  && tipo_ajuste!="" && precio!="" && costo!="")
   {
+	  
 	  if(tipo_ajuste=="Positivo"){
 
 		  var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" disabled name="cantida[]" value="'+cantidad+'"><input type="hidden" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" disabled name="stoc[]" value="'+stock+'"><input type="hidden" name="stock[]" value="'+stock+'"></td><td><input type="number" disabled name="cost[]" value="'+costo+'"><input type="hidden" name="costo[]" value="'+costo+'"></td><td><input type="number" disabled name="preci[]" value="'+precio+'"><input type="hidden" name="precio[]" value="'+precio+'"></td><td><input type="text" disabled name="tipo_ajust[]" value="'+tipo_ajuste+'"><input type="hidden" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
@@ -187,7 +198,16 @@ function limpiar(){
   $("#pstock").val("");
 
   $("#pcosto").val("");
+
+  reset();
+
 }
+function reset(){
+
+	var printStr = document.getElementById("ppro_id").options[0].value
+	
+	document.getElementById("ppro_id").selectedIndex = 0;
+	}
 
 function evaluar()
 {
@@ -208,7 +228,9 @@ function evaluar()
   evaluar();
 
 }
+
 </script>
+
 
 
 @endpush
