@@ -117,28 +117,23 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
         try {
 
 
 
 
-            if ($request) {
-                $query = trim($request->get('searchText'));
-                $pag = trim($request->get('pag'));
-                if ($pag == "") {
-                    $pag = 7;
-                }
+
                 $documentos = DB::table('inv_documentos as doc')
                     ->leftJoin('inv_proveedores as p', 'doc.prv_id', '=', 'p.prv_id')
                     ->select('p.prv_nombre', 'doc_codigo', 'doc.doc_tipo', 'doc_fecha', 'doc.doc_id')
-                    ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
-                    ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
+                    
+                    ->where('doc.doc_tipo', '=',$id)
                     ->orderby('doc.doc_created_at', 'desc')
                     ->paginate($pag);
                 return view('productos.kardex', ["documentos" => $documentos, "searchText" => $query, "pag" => $pag]);
-            }
+            
         } catch (\Throwable $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
