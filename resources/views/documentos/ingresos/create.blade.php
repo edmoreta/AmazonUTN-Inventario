@@ -112,6 +112,7 @@
  {!!Form::close()!!}  
 
 @push ('scripts')
+
   <script>
         $(document).ready(function(){
             $('#bt_add').click(function(){
