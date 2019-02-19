@@ -41,6 +41,7 @@
 								<div class="form-group">
 									<label>Producto</label>
 									<select name="ppro_id" id="ppro_id" class="form-control selectpicker" data-live-search="true">
+										<option value="default"> xxxxxxxx </option>
 										@foreach($productos as $prod)
 										<option value="{{$prod->pro_id}}_{{$prod->pro_stock}}_{{$prod->pro_costo}}_{{$prod->pro_precio}}">{{$prod->pro_nombre}}</option>
 										@endforeach
@@ -50,7 +51,7 @@
 						<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								  <div class="form-group">
 									  <label for="pcantidad">Cantidad</label>
-									  <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="Cantidad">
+									  <input type="number" name="pcantidad" onkeypress="comprueba(this)" min="1" pattern="^[0-9]+" id="pcantidad" class="form-control" placeholder="Cantidad">
 								  </div>
 						</div>
 						<input type="hidden" name="doc_codigo" id="doc_codigo" value="AJ-{{$codigo}}"  required value="{{old('doc_codigo')}}" class="form-control">
@@ -69,7 +70,7 @@
 					   <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 								  <div class="form-group">
 										<label for="pprecio">Precio</label>
-										<input type="number"   name="pprecio" id="pprecio" class="form-control" placeholder="Precio..">
+										<input type="number"   name="pprecio" onkeypress="comprueba(this)" id="pprecio" class="form-control" placeholder="Precio..">
 								  </div>
 					   </div>
 
@@ -121,6 +122,15 @@
 
 @push ('scripts')
 <script>
+        var pcantidad = document.getElementById('numero');
+
+        function comprueba(valor){
+          if(valor.value < 0 || valor.value >9999){
+            valor.value = 1;
+          }
+        }
+    </script>
+<script>
 	$(document).ready(function(){
 		$('#bt_add').click(function(){
 	   agregar();
@@ -143,13 +153,16 @@ function agregar(){
   datosArticulo2=document.getElementById('ppro_id').value.split('_');
   pro_id=datosArticulo2[0];
   producto=$("#ppro_id option:selected").text();
-  cantidad=$("#pcantidad").val();
+  cantidad3=$("#pcantidad").val();
+  cantidad=parseInt(cantidad3);
+  
   tipo_ajuste=$("#ptipo_ajuste").val();
   precio=$("#pprecio").val();
   costo=$("#pcosto").val();
   stock=$('#pstock').val();
   if (pro_id!="" && cantidad!="" && cantidad>=1  && tipo_ajuste!="" && precio!="" && costo!="")
   {
+	  
 	  if(tipo_ajuste=="Positivo"){
 
 		  var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button"  class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="pro_id[]" value="'+pro_id+'">'+producto+'</td><td><input type="number" disabled name="cantida[]" value="'+cantidad+'"><input type="hidden" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" disabled name="stoc[]" value="'+stock+'"><input type="hidden" name="stock[]" value="'+stock+'"></td><td><input type="number" disabled name="cost[]" value="'+costo+'"><input type="hidden" name="costo[]" value="'+costo+'"></td><td><input type="number" disabled name="preci[]" value="'+precio+'"><input type="hidden" name="precio[]" value="'+precio+'"></td><td><input type="text" disabled name="tipo_ajust[]" value="'+tipo_ajuste+'"><input type="hidden" name="tipo_ajuste[]" value="'+tipo_ajuste+'"></td></tr>';
@@ -187,7 +200,16 @@ function limpiar(){
   $("#pstock").val("");
 
   $("#pcosto").val("");
+
+  reset();
+
 }
+function reset(){
+
+	var printStr = document.getElementById("ppro_id").options[0].value
+	
+	document.getElementById("ppro_id").selectedIndex = 0;
+	}
 
 function evaluar()
 {
