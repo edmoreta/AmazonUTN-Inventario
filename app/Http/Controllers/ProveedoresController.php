@@ -18,6 +18,7 @@ class ProveedoresController extends Controller
      */
     public function index(Request $request)
     {
+        try{
         if ($request) {
             $query = trim($request->get('searchText'));
             $pag = trim($request->get('pag'));
@@ -40,6 +41,9 @@ class ProveedoresController extends Controller
             }
             return view('Proveedores.index', ["proveedores" => $proveedores, "searchText" => $query,"pag" => $pag]);
         }
+    }catch (\Exception $e) {
+        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+    }
     }
 
     /**
@@ -138,6 +142,7 @@ class ProveedoresController extends Controller
                 return redirect('proveedores')->with('success', 'Proveedor ' . $proveedor->prv_nombre . ' registrado con éxito');
             }
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -162,7 +167,6 @@ class ProveedoresController extends Controller
             }else{
                 return redirect('proveedores')->with('success', 'Proveedor Activado con éxito');
             }
-            
         } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
@@ -224,7 +228,8 @@ class ProveedoresController extends Controller
                 $proveedor->update();
                 return redirect('proveedores')->with('success', 'Proveedor Actualizado con éxito');
             }
-        } catch (\Exception $e) {
+        }catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }

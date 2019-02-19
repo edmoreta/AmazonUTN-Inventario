@@ -24,7 +24,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {    
+    {
+        try{
         if ($request) {
             $query = trim($request->get('searchText'));
             $pag = trim($request->get('pag'));
@@ -91,6 +92,9 @@ class UserController extends Controller
             }
             return view('usuarios.index', ["usuarios"  => $usuarios,"searchText" => $query,"pag" => $pag]);    
         }
+    }catch (\Exception $e) {
+        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+    }
     }
 
     /**
@@ -100,7 +104,11 @@ class UserController extends Controller
      */
     public function Config()
     {
-        return view('Settings');
+        try{
+            return view('Settings');
+        }catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
@@ -110,14 +118,20 @@ class UserController extends Controller
      */
     public function create()
     {
+        try{
         $roles = Role::orderBy('name')->get();
         return view("usuarios.create", compact('roles'));
-
+        }catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
     public function change_password()
     {
-       // $usuario = Auth::user();
+        try{
         return view('usuarios.changePassword');
+        }catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     public function update_password(PasswordRequest $request)
@@ -127,9 +141,9 @@ class UserController extends Controller
             $user->usu_password = bcrypt($request->password);
             info($user->usu_password);
             $user->update();
-
             return redirect('User/change_password')->with('success', 'Contraseña actualizada');
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -179,6 +193,7 @@ class UserController extends Controller
             $user->roles()->attach($request->idRol);
             return redirect('usuarios')->with('success', 'Usuario registrado');
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
 
@@ -203,6 +218,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        try{
         if ($id==1) {
             return redirect('usuarios');
         }
@@ -211,6 +227,10 @@ class UserController extends Controller
         $roles = Role::orderBy('name')->get();
         /*$rol = collect($usuario->roles)->sortBy('id')->toArray(); */
         return view('usuarios.edit', compact('usuario', 'roles'));
+        }catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
@@ -250,6 +270,7 @@ class UserController extends Controller
             $user->update();
             return redirect('usuarios')->with('success', 'Usuario actualizado');
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -279,6 +300,7 @@ class UserController extends Controller
             $user->update();
             return redirect('usuarios')->with('success', 'Contraseña restablecida y enviada con exito');
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -298,6 +320,7 @@ class UserController extends Controller
             $user->save();
             return redirect('home')->with('success', 'Usuario actualizado');
         } catch (\Exception $e) {
+            DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
