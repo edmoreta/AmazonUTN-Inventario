@@ -27,6 +27,7 @@
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Costo</th>
+                    <th>Stock</th>
 
                 </thead>
                 @foreach ($movimientos as $mov)
@@ -34,7 +35,7 @@
                     @if($mov->tipo=='FA')
                     <td>FACTURA</td>
                     @elseif($mov->tipo=='AJ')
-                    <td>AJUSTE</td>
+                    <td>AJUSTE {{ $mov->ajuste }}</td>
                     @elseif($mov->tipo=='NC')
                     <td>NOTA DE CREDITO</td>
                     @else
@@ -46,6 +47,7 @@
                     <td>{{ $mov->cantidad}}</td>
                     <td>$ {{ $mov->precio}}</td>
                     <td>$ {{ $mov->costo}}</td>
+                    <td>{{ $mov->stock}}</td>
                 </tr>
                 @endforeach
             </table>
