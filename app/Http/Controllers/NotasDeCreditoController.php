@@ -30,9 +30,13 @@ class NotasDeCreditoController extends Controller
      */
     public function create()
     {
+        try{
         $documentosJoin = DB::select('SELECT * FROM inv_documentos d INNER JOIN inv_proveedores p ON  d.prv_id=p.prv_id  AND d.doc_tipo = ?', ['FA']);
        // $documentosJoin = DB::select('SELECT * FROM inv_documentos d INNER JOIN inv_proveedores p ON  d.prv_id=p.prv_id LEFT JOIN inv_movimientos m on d.doc_id=m.doc_id LEFT JOIN inv_productos prod on m.pro_id=prod.pro_id  AND d.doc_tipo = ?', ['FA']);
         return view('documentos.notaCredito.create', ["documentosJoin" => $documentosJoin,"documentosJo" => null,"id"=>null]);
+        }catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
@@ -43,6 +47,7 @@ class NotasDeCreditoController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         if ($request->get('cantidad')!=null) {
             $docs = DB::select('SELECT * FROM inv_documentos d WHERE d.doc_tipo=? ORDER BY doc_id',["NC"]);
             $doc="0";
@@ -94,7 +99,10 @@ class NotasDeCreditoController extends Controller
         }else{
             return back()->with('error_prov', 'No ha agregado los productos')->withInput();
         }
-        
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
     
 
@@ -106,11 +114,15 @@ class NotasDeCreditoController extends Controller
      */
     public function show($id)
     {
+        try{
         $documentosJo = DB::select('SELECT p.pro_id, p.pro_nombre,m.mov_cantidad, m.mov_costo, m.mov_precio, d.prv_id, d.doc_id
         FROM inv_productos p, inv_movimientos m, inv_documentos d
         WHERE p.pro_id=m.pro_id AND d.doc_id=m.doc_id AND d.doc_tipo=? AND d.doc_codigo=? AND m.mov_estado=true', ["FA",$id]);
         $documentosJoin = DB::select('SELECT * FROM inv_documentos d INNER JOIN inv_proveedores p ON  d.prv_id=p.prv_id  AND d.doc_tipo = ?', ['FA']);
         return view('documentos.notaCredito.create', ["documentosJoin" => $documentosJoin,"documentosJo" => $documentosJo,"id"=>$id]);
+        }catch (\Exception $e) {
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+        }
     }
 
     /**
