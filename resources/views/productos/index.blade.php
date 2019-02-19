@@ -36,7 +36,7 @@
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
-					<th style="width:130px">Opciones</th>                    
+					<th style="width:155px">Opciones</th>                    
                     <th>Estado</th>
                     <th>Código</th>					
 					<th>Nombre</th>
@@ -52,6 +52,8 @@
 					<tr>
 						<td>														
 							<a href="{{route('productos.edit',$pro->pro_id)}}"><button class="btn btn-success">Editar</button></a>
+																							
+							<a href="{{route('productos.show',$pro->pro_id)}}"><button class="btn btn-success">Kardex</button></a>
 						</td>						
 						@if($pro->pro_estado)						
 							<td>Activo</td>

@@ -14,7 +14,8 @@
 		</div>
 	</div>
 	{!! Form::open(['route' => ['usuarios.update', $usuario->usu_id],'method' => 'PATCH','files' => 'true']) !!}				
-	<div class="row">	
+	<input type="hidden" name="usu_id" value="{{ $usuario->usu_id }}">
+    <div class="row">	
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_cedula">Cédula</label> <label for="usu_cedula" style="color:red">*</label>
@@ -24,7 +25,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_telefono">Teléfono</label> <label for="usu_telefono"></label>
-                                    <input type="text" name="usu_telefono" maxlength="9" minlength="9" pattern="[0-9]+" value="{{$usuario->usu_telefono}}" class="form-control" >
+                                    <input type="text" name="usu_telefono" 
+                                    maxlength="12" minlength="9" 
+                                    pattern="([+]593|0)([0-9]{8})"
+                                    oninvalid="setCustomValidity('Si el número de teléfono contiene +593 debe tener 12 caracteres, si no debe contener 9 digitos Ej: 068954569 o +59368954569')"
+                                    oninput="setCustomValidity('')"
+                                    title="Debe contener solo números y +593 Ej: 068954569 o +59368954569"
+                                    value="{{$usuario->usu_telefono}}" class="form-control" >
                                 </div>
                             </div>						
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -37,7 +44,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_celular">Celular</label> <label for="usu_celular" style="color:red">*</label>
-                                    <input type="text" name="usu_celular" maxlength="10" minlength="10" pattern="[0-9]+" value="{{$usuario->usu_celular}}" required class="form-control" >
+                                    <input type="text" name="usu_celular" 
+                                    maxlength="13" minlength="10"
+                                    pattern="([+]593|0)([0-9]{9})"
+                                        oninvalid="setCustomValidity('El celular debe contener solo números y +593 Ej: 0985645723 o +593985645723')"
+                                        oninput="setCustomValidity('')"
+                                        title="Debe contener solo números y +593 Ej: 0985645723 o +593985645723"
+                                    value="{{$usuario->usu_celular}}" required class="form-control" >
                                 </div>
                             </div>
  
@@ -52,7 +65,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_direccion">Dirección</label> <label for="usu_direccion" style="color:red">*</label>
-                                    <input type="text" name="usu_direccion" maxlength="100" value="{{$usuario->usu_direccion}}" class="form-control" >
+                                    <input type="text" name="usu_direccion" 
+                                    pattern="[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]+"
+                                    oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
+                                    oninput="setCustomValidity('')"
+                                    title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
+                                    id="direccion" maxlength="100" required value="{{old('usu_direccion')}}" class="form-control"
+                                   
+                                     value="{{$usuario->usu_direccion}}" class="form-control" >
                                 </div>
                             </div>
                            
@@ -82,7 +102,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_email">Email</label> 
-                                    <input type="email" name="usu_email" maxlength="50" value="{{$usuario->usu_email}}" required class="form-control" >
+                                    <input type="email" name="usu_email" 
+                                    maxlength="50" 
+                                    pattern="[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
+                                    oninvalid="setCustomValidity('El correo debe contener el nombre de usuario, el signo @ y el dominio Ej: juan@dominio.com')"
+                                    oninput="setCustomValidity('')"
+                                    title="Debe contener el nombre de usuario, el signo @ y el dominio Ej: juan@dominio.com"
+                                    value="{{$usuario->usu_email}}" required class="form-control" >
                                 </div>
                             </div>										
 			
