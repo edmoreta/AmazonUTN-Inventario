@@ -86,6 +86,7 @@ class NotasDeCreditoController extends Controller
                 $movimiento->mov_cantidad = $cantidad[$in];
                 $movimiento->mov_costo = $costo[$in];
                 $movimiento->mov_precio = $precio[$in];
+                $movimiento->mov_stock =$produc->pro_stock;
                 $movimiento->save();
                 $in++;
             }
