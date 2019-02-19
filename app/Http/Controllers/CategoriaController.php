@@ -17,6 +17,7 @@ class CategoriaController extends Controller
      */
     public function index(Request $request)
     {
+        try{
         $categorias = Categoria::orderByDesc('cat_updated_at')->paginate(7);
         
         if ($request->display == 'activos') {
@@ -39,10 +40,14 @@ class CategoriaController extends Controller
             }
         }
         return view('categorias.index',compact('categorias','cod','cats','id'));
+    }catch (\Exception $e) {
+        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+    }
     }
 
     public function search(Request $request)
     {
+        try{
         $buscar = $request->get('buscar');        
         $categorias=Categoria::where('cat_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
 
@@ -54,6 +59,9 @@ class CategoriaController extends Controller
         }
         $cats = Categoria::doesntHave('categoriasuperior')->get();
         return view('categorias.index',compact('categorias','cod','cats'));
+    }catch (\Exception $e) {
+        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
+    }
     }
 
     /**
@@ -86,8 +94,9 @@ class CategoriaController extends Controller
             //info($request->cat_codigo);
             $categoria->save();                        
             return redirect('categorias')->with('success','Categoría creada');
-        }catch(Exception | QueryException $e){
-            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
 
@@ -138,8 +147,9 @@ class CategoriaController extends Controller
             }
             
             return redirect('categorias')->with('success','Categoría actualizada');
-        }catch(Exception | QueryException $e){
-            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
 
