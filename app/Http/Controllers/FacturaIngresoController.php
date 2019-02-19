@@ -40,7 +40,7 @@ class FacturaIngresoController extends Controller
                 ->get();
             $fecha_actual = date("Y-m-d");
             return view('documentos.ingresos.create', ["proveedores" => $proveedores, "productos" => $productos, "fecha_actual" => $fecha_actual]);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
@@ -53,8 +53,6 @@ class FacturaIngresoController extends Controller
      */
     public function store(FacturaIngresoRequest $request)
     {
-
-
         try {
             //Registrando Cabecera jiji
             DB::beginTransaction();
@@ -104,9 +102,7 @@ class FacturaIngresoController extends Controller
                 return redirect('documentos')->with('success', 'Factura ' . $ingreso->doc_codigo . ' registrada con éxito');
 
             }
-
-
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }

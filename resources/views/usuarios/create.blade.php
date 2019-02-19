@@ -65,18 +65,18 @@
                                     <label for="usu_direccion">Dirección</label>
                                     <input type="text" name="usu_direccion" 
                                     pattern="[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]+"
-                oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
-				oninput="setCustomValidity('')"
-				title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
-                id="direccion" maxlength="100" required value="{{old('usu_direccion')}}" class="form-control"
-                placeholder="Ej: Av. 13 de Octubre - Otavalo">
+                                    oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
+                                    oninput="setCustomValidity('')"
+                                    title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
+                                    id="direccion" maxlength="100" required value="{{old('usu_direccion')}}" class="form-control"
+                                    placeholder="Ej: Av. 13 de Octubre - Otavalo">
                                 </div>
                             </div>
                             
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_fechaN">Fecha de nacimiento</label> <label for="usu_fechaN" style="color:red">*</label>
-                                    <input type="date" name="usu_fechaN" min="1950-01-01" max="2000-01-01" value="{{old('usu_fechaN')}}" required class="form-control" placeholder="Fecha de N...">
+                                    <input type="date" name="usu_fechaN" min="1950-01-01" max="2000-01-01" value="2000-01-01" required class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
