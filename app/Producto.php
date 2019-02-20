@@ -23,4 +23,10 @@ class Producto extends Model
         return $this->belongsTo('App\Categoria','cat_id');
     }
 
+    public function movimientos()
+    {
+        return $this->hasMany('App\DetalleDocumento','pro_id');
+    }
+
+
 }

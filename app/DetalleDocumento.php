@@ -14,7 +14,7 @@ class DetalleDocumento extends Model
 
 
     //atributos llenados por un formulario
-    protected $fillable = ['mov_cantidad','mov_costo','mov_precio','mov_estado'];
+    protected $fillable = ['mov_cantidad','mov_costo','mov_precio','mov_estado','pro_id'];
 
     protected $hidden = ['mov_id'];
 
@@ -22,6 +22,11 @@ class DetalleDocumento extends Model
     public function documento()
     {
         return $this->belongsTo('App\Documento', 'doc_id');
+    }
+
+    public function producto()
+    {
+        return $this->belongsTo('App\Producto','pro_id');
     }
 
 }

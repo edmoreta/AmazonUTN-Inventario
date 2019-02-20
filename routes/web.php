@@ -28,6 +28,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('productos', 'ProductoController');
     Route::resource('documentos', 'DocumentoController');
     Route::get('stock', 'DocumentoController@stock');
+    Route::get('kardex/excel', 'ReporteKardexController@reporteUsuariosExcel')->name('reporte.kardex.excel');
     Route::resource('ajustes', 'AjustesController');
     Route::resource('notas_de_credito', 'NotasDeCreditoController');
     Route::resource('facturas_ingreso', 'FacturaIngresoController');

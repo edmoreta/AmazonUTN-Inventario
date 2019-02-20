@@ -47,7 +47,7 @@ class DocumentoController extends Controller
                 $movimientos = DB::table('inv_movimientos as mov')
                     ->join('inv_documentos as doc', 'mov.doc_id', '=', 'doc.doc_id')
                     ->join('inv_productos as pro', 'mov.pro_id', '=', 'pro.pro_id')
-                    ->select('doc.doc_tipo as tipo','doc.doc_codigo as codigo', 'doc.doc_fecha as fecha', 'pro.pro_nombre as producto', 'mov_cantidad as cantidad','mov_ajuste as ajuste','mov_stock as stock', 'mov_precio as precio', 'mov_costo as costo')
+                    ->select('doc.doc_tipo as tipo','doc.doc_codigo as codigo', 'doc.doc_fecha as fecha','pro.pro_codigo as codigo_pro', 'pro.pro_nombre as producto', 'mov_cantidad as cantidad','mov_ajuste as ajuste','mov_stock as stock', 'mov_precio as precio', 'mov_costo as costo')
                     ->orWhere('doc.doc_codigo', 'LIKE', '%' . $query . '%')
                     ->orWhere('doc.doc_tipo', 'LIKE', '%' . $query . '%')
                     ->orderby('doc.doc_created_at', 'desc')
