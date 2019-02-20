@@ -21,16 +21,20 @@
                     <input type="text" name="codigo" value="{{ 'PRO-'.$cod }}" disabled class="form-control">
                 </div>
             </div>
-        </div>
-
+        </div>        
         <div class="row">								
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="cat_id">Categoría</label> <label for="cat_id" style="color:red">*</label>
                     <select name="cat_id" id="pro_id" class="form-control selectpicker" data-live-search="true">
+                        
                         @if($categorias != null)
-                            @foreach ($categorias as $c)                            
-                                <option value="{{$c->cat_id}}" {{ (old('cat_id') == $c->cat_id ? "selected":"") }}>{{$c->cat_nombre}}</option>
+                            @foreach ($categorias as $c)                                
+                                @if($c->categoriasuperior != null)
+                                    <option value="{{$c->cat_id}}" {{ (old('cat_id') == $c->cat_id ? "selected":"") }}>{{$c->categoriasuperior->cat_nombre}} - {{$c->cat_nombre}}</option>
+                                @else
+                                    <option value="{{$c->cat_id}}" {{ (old('cat_id') == $c->cat_id ? "selected":"") }}>{{$c->cat_nombre}}</option>
+                                @endif
                             @endforeach
                         @endif
                     </select>                    
@@ -42,7 +46,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_nombre">Nombre</label> <label for="pro_nombre" style="color:red">*</label>
-                    <input type="text" name="pro_nombre" maxlength="200" value="{{old('pro_nombre')}}" required class="form-control" placeholder="Nombre...">
+                    <input type="text" name="pro_nombre" maxlength="200" value="{{old('pro_nombre')}}" required class="form-control" placeholder="Ej: Mouse">
                 </div>
             </div>
         </div>
@@ -50,7 +54,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="pro_descripcion">Descripción</label> <label for="pro_descripcion" style="color:red">*</label>
-                    <input type="text" name="pro_descripcion" maxlength="300" value="{{old('pro_descripcion')}}" required class="form-control" placeholder="Descripción...">
+                    <input type="text" name="pro_descripcion" maxlength="300" value="{{old('pro_descripcion')}}" required class="form-control" placeholder="Ej: Mouse azul recargable">
                 </div>
             </div>
         </div>
@@ -72,7 +76,7 @@
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_costo">Costo</label> <label for="pro_costo" style="color:red">*</label>
-                    <input type="number" name="pro_costo" value="{{old('pro_costo')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Costo...">
+                    <input type="number" name="pro_costo" value="{{old('pro_costo')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Ej: 0.01">
                 </div>
             </div>
         {{-- </div> --}}
@@ -88,7 +92,7 @@
             <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_precio">Precio</label> <label for="pro_precio" style="color:red">*</label>
-                    <input type="number" name="pro_precio" value="{{old('pro_precio')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Precio...">
+                    <input type="number" name="pro_precio" value="{{old('pro_precio')}}" step="0.01" min="0.01" max="99999999.99" required class="form-control" placeholder="Ej: 0.01">
                 </div>                
 
                 {{-- <div class="row"> 

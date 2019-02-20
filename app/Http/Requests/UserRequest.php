@@ -38,8 +38,8 @@ class UserRequest extends FormRequest
                 'idRol'=>'required|integer|exists:roles,id',
                 'usu_fechaN'=>'required|date',
                 'usu_direccion'=>'max:100',
-                'usu_telefono'=>'nullable|digits:9',
-                'usu_celular'=>'required|digits:10',
+                'usu_telefono'=>'nullable|max:12',
+                'usu_celular'=>'required|max:13',
                 'usu_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
             ];               
                
@@ -57,11 +57,10 @@ class UserRequest extends FormRequest
                 'idRol'=>'required|integer|exists:roles,id',
                 'usu_fechaN'=>'required|date',
                 'usu_direccion'=>'max:100',
-                'usu_telefono'=>'nullable|digits:9',
-                'usu_celular'=>'required|digits:10',
+                'usu_telefono'=>'nullable|max:12',
+                'usu_celular'=>'required|max:13',
                 'usu_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
             ];    
-               
                 
                 break; 
             default:
@@ -83,7 +82,7 @@ class UserRequest extends FormRequest
             'usu_fechaN.email' => 'Formato de Fecha incorrecto',
             'usu_telefono.digits' => 'Teléfono incorrecto',
             'usu_celular.required' => 'El campo Celular no debe estar vacío',
-            'usu_celular.digits' => 'Celular incorrecto',
+            'usu_celular.max' => 'Celular incorrecto',
         ];
     }
 

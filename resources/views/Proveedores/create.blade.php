@@ -24,7 +24,8 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
             <label for="prv_nombre">Nombre</label> <label for="prv_nombre" style="color:red">*</label>
-            <input type="text" name="prv_nombre" id="nombre" maxlength="100" minlength="3"
+            <input type="text" name="prv_nombre" id="nombre" 
+            maxlength="100" minlength="3"
                 pattern="[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]+"
                 oninvalid="setCustomValidity('El nombre solo debe contener letras mayúsculas y minúsculas ej. Juan Perez y debe contener más de 3 letras')"
                 oninput="setCustomValidity('')" title="Solo debe contener letras mayúsculas y minúsculas ej. Juan Perez"

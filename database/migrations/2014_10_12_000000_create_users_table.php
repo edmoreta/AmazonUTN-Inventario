@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('usu_apellido',50);
             $table->date('usu_fechaN',50);
             $table->string('usu_direccion',100)->nullable();
-            $table->string('usu_telefono',10)->nullable();
-            $table->string('usu_celular',10);                        
+            $table->string('usu_telefono',12)->nullable();
+            $table->string('usu_celular',13);                        
             $table->text('usu_foto')->nullable()->default(NULL);
             $table->text('usu_fototype')->nullable()->default(NULL);
             $table->string('usu_password');

@@ -18,39 +18,44 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        $pag = trim($request->get('pag'));
-        if ($pag=="") {  
-            $pag=7;
+        try{
+            $pag = trim($request->get('pag'));
+            if ($pag=="") {  
+                $pag=7;
+                $productos = Producto::orderByDesc('pro_updated_at')->paginate($pag);
+            }        
+            if ($pag != null) {
+                $productos = Producto::orderByDesc('pro_updated_at')->paginate($pag);
+            } 
+            if ($request->display == 'activos') {
+                $productos = Producto::where('pro_estado',1)->orderByDesc('pro_updated_at')->paginate($pag);
+            } else if ($request->display == 'inactivos') {
+                $productos = Producto::where('pro_estado',0)->orderByDesc('pro_updated_at')->paginate($pag);
+            }
+            
+            $prods = $productos;
+            return view('productos.index',compact('productos','pag','prods'));
+        }catch(\Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
         }
-        if ($pag != null) {
-            $productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
-        } else {
-            $productos = Producto::orderByDesc('pro_updated_at')->paginate($pag);
-        }        
-        //$productos = Producto::orderByDesc('pro_updated_at')->paginate(7);
-        if ($request->display == 'activos') {
-            $productos = Producto::where('pro_estado',1)->orderByDesc('pro_updated_at')->paginate(7);
-        } else if ($request->display == 'inactivos') {
-            $productos = Producto::where('pro_estado',0)->orderByDesc('pro_updated_at')->paginate(7);
-        }
-        
-        $prods = $productos;
-        return view('productos.index',compact('productos','pag','prods'));
     }
 
     public function search(Request $request)
     {
-        $pag = trim($request->get('pag'));
-        if ($pag=="") {  
-            $pag=7;
+        try{
+            $pag = trim($request->get('pag'));
+            $buscar = $request->get('buscar');
+            if ($pag=="") {  
+                $pag=7;
+            }   
+            $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate($pag);     
+            if ($pag != null) {
+                $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate($pag);
+            }                 
+            return view('productos.index',compact('productos','pag'));
+        }catch(\Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
         }
-        $buscar = $request->get('buscar');        
-        if ($pag != null) {
-            $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
-        } else {
-            $productos=Producto::where('pro_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate($pag);
-        }                  
-        return view('productos.index',compact('productos','pag'));
     }
 
     /**
@@ -60,14 +65,19 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::orderByDesc('cat_updated_at')->get();
-        if (Producto::all()->isEmpty()) {
-            $cod = 1;                       
-        } else {
-            $pro = Producto::latest()->first();            
-            $cod = substr($pro->pro_codigo,4) + 1;            
+        try{
+            $categorias = Categoria::orderByDesc('cat_updated_at')->with('categoriasuperior')->get();
+            info($categorias);
+            if (Producto::all()->isEmpty()) {
+                $cod = 1;                       
+            } else {
+                $pro = Producto::latest()->first();            
+                $cod = substr($pro->pro_codigo,4) + 1;            
+            }
+            return view('productos.create',compact('cod','categorias'));
+        }catch(\Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
         }
-        return view('productos.create',compact('cod','categorias'));
     }
 
     /**
@@ -105,7 +115,7 @@ class ProductoController extends Controller
                 return back()->withErrors(['El campo categoría no debe estar vacío']);
             }
             return redirect('productos')->with('success','Producto creado');
-        }catch(Exception | QueryException $e){
+        }catch(\Exception | QueryException $e){
             return back()->withErrors(['exception'=>$e->getMessage()]);
         }
     }
@@ -130,10 +140,10 @@ class ProductoController extends Controller
     public function edit($id)
     {
         try{
-            $categorias = Categoria::orderByDesc('cat_updated_at')->get();
+            $categorias = Categoria::orderByDesc('cat_updated_at')->with('categoriasuperior')->get();
             $producto = Producto::findOrFail($id);
             return view('productos.edit',compact('producto','categorias'));
-        }catch(Exception | QueryException $e){
+        }catch(\Exception | QueryException $e){
             return back()->withErrors(['exception'=>$e->getMessage()]);
         }
     }
@@ -161,7 +171,7 @@ class ProductoController extends Controller
                 $producto->save();
             }
             return redirect('productos')->with('success','Producto actualizado');
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return back()->withErrors(['exception'=>$e->getMessage()])->withInput();
         }
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Documento;
+use Carbon\Carbon;
 
 class AjusteSeeder extends Seeder
 {
@@ -12,25 +13,12 @@ class AjusteSeeder extends Seeder
      */
     public function run()
     {
-        //
         Documento::create([
             'doc_codigo' => 'AJ-2',
-            'doc_tipo' => "",
-          // 'cat_nombre' => 'Smartphones',
+            'doc_tipo' => "AJ",
+            'doc_fecha' => "2019-02-11",
+            'doc_created_at' => Carbon::now(),
+            'doc_updated_at' => Carbon::now(),
         ]);
-
-
-
-        $table->increments('doc_id');
-        $table->integer('prv_id')->nullable();
-        $table->string('doc_codigo', 50);
-        $table->char('doc_tipo', 2);
-        $table->date('doc_fecha');
-        $table->timestamp('doc_created_at');
-        $table->timestamp('doc_updated_at')->nullable();
-
-        $table->foreign('prv_id')->references('prv_id')->on('inv_proveedores');
-        $table->unique(['prv_id', 'doc_codigo', 'doc_tipo']);
-
     }
 }
