@@ -18,50 +18,50 @@ class CategoriaController extends Controller
     public function index(Request $request)
     {
         try{
-        $categorias = Categoria::orderByDesc('cat_updated_at')->paginate(7);
-        
-        if ($request->display == 'activos') {
-            $categorias = Categoria::where('cat_estado',1)->orderByDesc('cat_updated_at')->paginate(7);
-        } else if ($request->display == 'inactivos') {
-            $categorias = Categoria::where('cat_estado',0)->orderByDesc('cat_updated_at')->paginate(7);
-        }
-
-        if (Categoria::all()->isEmpty()) {
-            $cod = 1;
-            $cats = null;
-            $id = null;
-        } else {
-            $cat = Categoria::latest()->first();
-            $id = $cat->cat_id;
-            $cod = substr($cat->cat_codigo,4) + 1;
-            $cats = Categoria::doesntHave('categoriasuperior')->get();
-            foreach ($cats as $c) {
-                //info($c);
+            $categorias = Categoria::orderByDesc('cat_updated_at')->paginate(7);
+            
+            if ($request->display == 'activos') {
+                $categorias = Categoria::where('cat_estado',1)->orderByDesc('cat_updated_at')->paginate(7);
+            } else if ($request->display == 'inactivos') {
+                $categorias = Categoria::where('cat_estado',0)->orderByDesc('cat_updated_at')->paginate(7);
             }
+
+            if (Categoria::all()->isEmpty()) {
+                $cod = 1;
+                $cats = null;
+                $id = null;
+            } else {
+                $cat = Categoria::latest()->first();
+                $id = $cat->cat_id;
+                $cod = substr($cat->cat_codigo,4) + 1;
+                $cats = Categoria::doesntHave('categoriasuperior')->get();
+                foreach ($cats as $c) {
+                    //info($c);
+                }
+            }
+            return view('categorias.index',compact('categorias','cod','cats','id'));
+        }catch(\Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
         }
-        return view('categorias.index',compact('categorias','cod','cats','id'));
-    }catch (\Exception $e) {
-        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
-    }
     }
 
     public function search(Request $request)
     {
         try{
-        $buscar = $request->get('buscar');        
-        $categorias=Categoria::where('cat_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
+            $buscar = $request->get('buscar');        
+            $categorias=Categoria::where('cat_nombre','ILIKE','%' . $buscar . '%')->latest()->paginate(7);
 
-        if (Categoria::all()->isEmpty()) {
-            $cod = 1;
-        } else {
-            $cat = Categoria::latest()->first();
-            $cod = substr($cat->cat_codigo,4) + 1;
+            if (Categoria::all()->isEmpty()) {
+                $cod = 1;
+            } else {
+                $cat = Categoria::latest()->first();
+                $cod = substr($cat->cat_codigo,4) + 1;
+            }
+            $cats = Categoria::doesntHave('categoriasuperior')->get();
+            return view('categorias.index',compact('categorias','cod','cats'));
+        }catch(\Exception | QueryException $e){
+            return back()->withErrors(['exception'=>$e->getMessage()]);
         }
-        $cats = Categoria::doesntHave('categoriasuperior')->get();
-        return view('categorias.index',compact('categorias','cod','cats'));
-    }catch (\Exception $e) {
-        return back()->withErrors(['exception' => $e->getMessage()])->withInput();
-    }
     }
 
     /**

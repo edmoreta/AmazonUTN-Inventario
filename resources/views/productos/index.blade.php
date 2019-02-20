@@ -83,37 +83,27 @@
 		{{$productos->render()}}
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 			<div class="form-group">
-				<select style="width:70px" name="formal" class="form-control" onchange="javascript:handleSelect(this)">
-					<option value="productos?pag=7"<?php 
-						if ($pag=='7') {
-							echo 'selected';
-						}?>>7</option>
-						<option value="productos?pag=15"<?php 
-						if ($pag=='15') {
-							echo 'selected';
-						}?>>15</option>
-						<option value="productos?pag=25"<?php 
-						if ($pag=='25') {
-							echo 'selected';
-						}?>>25</option>
-						<option value="productos?pag=50"<?php 
-						if ($pag=='50') {
-							echo 'selected';
-						}?>>50</option>
-						<option value="productos?pag=100"<?php 
-						if ($pag=='100') {
-							echo 'selected';
-						}?>>100</option>
+				<select style="width:70px" id="pag" class="form-control" onchange="handleSelect(this)">
+					<option value="productos?pag=7" {{$pag == 7 ? "selected" : ""}}>7</option>
+					<option value="productos?pag=15" {{$pag == 15 ? "selected" : ""}}>15</option>
+					<option value="productos?pag=25" {{$pag == 25 ? "selected" : ""}}>25</option>
+					<option value="productos?pag=100" {{$pag == 100 ? "selected" : ""}}>100</option>
 				</select>
 			</div>
 		</div>
 	</div>
 </div>
 @endsection
-@section ('script')
+@section('script')
 	<script type="text/javascript">
-		function handleSelect(elm){
-			window.location = elm.value+"";
+	    function handleSelect(elm){
+			var url = window.location;
+			var pos = url.search('search');
+			if (pos != -1) {
+				window.location = elm.value+"";	
+			} else {
+				window.location = url+"&"+elm.value;
+			}
 		}
 	</script>
 @endsection

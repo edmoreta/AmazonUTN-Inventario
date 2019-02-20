@@ -24,7 +24,7 @@ role="dialog" tabindex="-1" id="modalCreate">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="cat_nombre">Nombre</label> <label for="cat_nombre" style="color:red">*</label>
-                            <input type="text" name="cat_nombre" maxlength="100" value="{{old('cat_nombre')}}" required class="form-control" placeholder="Nombre...">
+                            <input type="text" name="cat_nombre" maxlength="100" value="{{old('cat_nombre')}}" required class="form-control" placeholder="Ej: Libros">
                         </div>
                     </div>
                 </div>

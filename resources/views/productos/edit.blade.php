@@ -32,9 +32,17 @@
                         @if($categorias != null)
                             @foreach ($categorias as $c)
                                 @if($c->cat_id == $producto->cat_id)
-                                    <option value="{{$c->cat_id}}" selected>{{$c->cat_nombre}}</option>
+                                    @if($c->categoriasuperior != null)
+                                        <option value="{{$c->cat_id}}" selected>{{$c->categoriasuperior->cat_nombre}} - {{$c->cat_nombre}}</option>
+                                    @else
+                                        <option value="{{$c->cat_id}}" selected>{{$c->cat_nombre}}</option>
+                                    @endif
                                 @else
-                                    <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                                    @if($c->categoriasuperior != null)
+                                        <option value="{{$c->cat_id}}">{{$c->categoriasuperior->cat_nombre}} - {{$c->cat_nombre}}</option>
+                                    @else
+                                        <option value="{{$c->cat_id}}">{{$c->cat_nombre}}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         @endif
@@ -118,11 +126,12 @@
             </div>
 
         </div> {{-- row costo --}}
+        
         <div class="row">            
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="pro_estado">Estado</label> <label for="pro_estado" style="color:red"></label>
-                    <select name="pro_estado" class="form-control selectpicker" id="pro_estado">
+                    <select name="pro_estado" class="form-control selectpicker" id="pro_estado" {{Auth::user()->hasRole(['administrador','root'])? "enabled":"disabled"}}>
                         @if ($producto->pro_estado == true)
                             <option value="1" selected>Activo</option>
                             <option value="0">Inactivo</option>
@@ -134,6 +143,8 @@
                 </div>
             </div>
         </div>
+        
+
         <div class="row">            
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
