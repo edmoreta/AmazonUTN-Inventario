@@ -40,7 +40,7 @@ class ProductoRequest extends FormRequest
                     'pro_costo' => 'required|numeric|min:0.01',
                     //'pro_stock' => 'required|integer',
                     'pro_estado' => 'required|boolean',
-                    'pro_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
+                    'pro_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=200,min_height=200,max_width=4000,max_height=4000|max:2048',
                 ];
                 
                 break; 
@@ -57,7 +57,7 @@ class ProductoRequest extends FormRequest
                     'pro_precio' => 'required|numeric|min:0.01',
                     'pro_costo' => 'required|numeric|min:0.01',
                     //'pro_stock' => 'required|integer',
-                    'pro_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=400,min_height=400,max_width=2000,max_height=2000|max:2048',
+                    'pro_foto'=>'nullable|file|mimes:jpeg,png,jpg,JPG|dimensions:min_width=200,min_height=200,max_width=4000,max_height=4000|max:2048',
                 ];
                 
                 break; 
