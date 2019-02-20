@@ -52,7 +52,7 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
             <label for="prv_direccion">Dirección</label> <label for="prv_direccion" style="color:red">*</label>
-            <input type="text" name="prv_direccion" pattern="[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]+"
+            <input type="text" name="prv_direccion" pattern="([A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]|[-]|[.])+"
                 oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
                 oninput="setCustomValidity('')"
                 title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
