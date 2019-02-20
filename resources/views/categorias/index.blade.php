@@ -85,7 +85,7 @@
 </div>
 @endsection
 
-@prepend('modals')
+@push('modals')
 <script type="text/javascript">
 	$(document).ready(function () {       
         $('#modalCreate').on('show.bs.modal', function (event) {
@@ -124,4 +124,4 @@
         });
     });
 </script>
-@endprepend
+@endpush
