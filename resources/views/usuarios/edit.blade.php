@@ -30,14 +30,21 @@
                                     pattern="([+]593|0)([0-9]{8})"
                                     oninvalid="setCustomValidity('Si el número de teléfono contiene +593 debe tener 12 caracteres, si no debe contener 9 digitos Ej: 068954569 o +59368954569')"
                                     oninput="setCustomValidity('')"
-                                    title="Debe contener solo números y +593 Ej: 068954569 o +59368954569"
+                                    title="Debe contener solo números o iniciar con +593 Ej: 068954569 o +59368954569"
+                                    placeholder="Ej: 068954569 o +59368954569"
                                     value="{{$usuario->usu_telefono}}" class="form-control" >
                                 </div>
                             </div>						
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_nombre">Nombre</label> <label for="usu_nombre" style="color:red">*</label>
-                                    <input type="text" name="usu_nombre" maxlength="50" minlength="3" pattern="([a-zA-Z]| |ñ|Ñ|á|Á|é|É|í|Í|ó|Ó|ú|Ú)+" value="{{$usuario->usu_nombre}}" required class="form-control" >
+                                    <input type="text" name="usu_nombre" 
+                                    maxlength="100" minlength="3"
+                                    pattern="[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]+"
+                                    oninvalid="setCustomValidity('El nombre solo debe contener letras mayúsculas y minúsculas ej. Juan Perez y debe contener más de 3 letras')"
+                                    oninput="setCustomValidity('')"
+                                    title="Solo debe contener letras mayúsculas y minúsculas ej. José"
+                                    value="{{$usuario->usu_nombre}}" required class="form-control" >
                                 </div>
                             </div>
                           
@@ -47,9 +54,9 @@
                                     <input type="text" name="usu_celular" 
                                     maxlength="13" minlength="10"
                                     pattern="([+]593|0)([0-9]{9})"
-                                        oninvalid="setCustomValidity('El celular debe contener solo números y +593 Ej: 0985645723 o +593985645723')"
+                                        oninvalid="setCustomValidity('El celular debe tener solo números o iniciar con +593 Ej: 0985645723 o +593985645723')"
                                         oninput="setCustomValidity('')"
-                                        title="Debe contener solo números y +593 Ej: 0985645723 o +593985645723"
+                                        title="El celular debe tener solo números o iniciar con +593 Ej: 0985645723 o +593985645723"
                                     value="{{$usuario->usu_celular}}" required class="form-control" >
                                 </div>
                             </div>
@@ -58,7 +65,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_apellido">Apellido</label> <label for="usu_apellido" style="color:red">*</label>
-                                    <input type="text" name="usu_apellido" maxlength="50" minlength="3" pattern="([a-zA-Z]| |ñ|Ñ|á|Á|é|É|í|Í|ó|Ó|ú|Ú)+" value="{{$usuario->usu_apellido}}" required class="form-control" >
+                                    <input type="text" name="usu_apellido" 
+                                    maxlength="100" minlength="3"
+                                    pattern="[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]+"
+                                    oninvalid="setCustomValidity('El nombre solo debe contener letras mayúsculas y minúsculas ej. Juan Perez y debe contener más de 3 letras')"
+                                    oninput="setCustomValidity('')"
+                                    title="Solo debe contener letras mayúsculas y minúsculas ej. Fernadez"
+                                    
+                                    value="{{$usuario->usu_apellido}}" required class="form-control" >
                                 </div>
                             </div>
                             
@@ -70,8 +84,7 @@
                                     oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
                                     oninput="setCustomValidity('')"
                                     title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
-                                    id="direccion" maxlength="100" required value="{{old('usu_direccion')}}" class="form-control"
-                                   
+                                    id="direccion" maxlength="100" required
                                      value="{{$usuario->usu_direccion}}" class="form-control" >
                                 </div>
                             </div>
@@ -79,8 +92,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usu_fechaN">Fecha de nacimiento</label> <label for="usu_fechaN" style="color:red">*</label>
-                                    <input type="date" name="usu_fechaN" min="1950-01-01" max="2000-01-01" value="{{$usuario->usu_fechaN}}" required class="form-control" >
-                                </div>
+                                    @if(old('usu_fechaN')=="")
+                                        <input type="date" name="usu_fechaN" min="1950-01-01" max="2000-01-01" value="2000-01-01"  required class="form-control">
+                                    @else
+                                        <input type="date" name="usu_fechaN" min="1950-01-01" max="2000-01-01" value="{{old('usu_fechaN')}}"  required class="form-control">
+                                    @endif
+                                    
+                                      </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
