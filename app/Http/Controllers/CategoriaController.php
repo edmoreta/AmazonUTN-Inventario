@@ -94,8 +94,9 @@ class CategoriaController extends Controller
             //info($request->cat_codigo);
             $categoria->save();                        
             return redirect('categorias')->with('success','Categoría creada');
-        }catch(\Exception | QueryException $e){
-            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
 
@@ -146,8 +147,9 @@ class CategoriaController extends Controller
             }
             
             return redirect('categorias')->with('success','Categoría actualizada');
-        }catch(\Exception | QueryException $e){
-            return back()->withErrors(['exception'=>$e->getMessage()]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['exception' => $e->getMessage()])->withInput();
         }
     }
 
