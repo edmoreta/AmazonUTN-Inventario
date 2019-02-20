@@ -120,19 +120,15 @@ class ProductoController extends Controller
     public function show($id)
     {
         try {
-
-
-
-
-
-                $documentos = DB::table('inv_documentos as doc')
-                    ->leftJoin('inv_proveedores as p', 'doc.prv_id', '=', 'p.prv_id')
-                    ->select('p.prv_nombre', 'doc_codigo', 'doc.doc_tipo', 'doc_fecha', 'doc.doc_id')
-                    
-                    ->where('doc.doc_tipo', '=',$id)
-                    ->orderby('doc.doc_created_at', 'desc')
-                    ->paginate($pag);
-                return view('productos.kardex', ["documentos" => $documentos, "searchText" => $query, "pag" => $pag]);
+            $producto = Producto::findOrFail($id);
+            $movimientos = DB::table('inv_movimientos as mov')
+            ->join('inv_documentos as doc', 'mov.doc_id', '=', 'doc.doc_id')
+            ->join('inv_productos as pro', 'mov.pro_id', '=', 'pro.pro_id')
+            ->select('doc.doc_tipo as tipo','doc.doc_codigo as codigo', 'doc.doc_fecha as fecha', 'pro.pro_nombre as producto', 'mov_cantidad as cantidad','mov_ajuste as ajuste','mov_stock as stock', 'mov_precio as precio', 'mov_costo as costo')
+            ->where('mov.pro_id', '=',$id)
+            ->orderby('doc.doc_created_at', 'desc')
+            ->paginate(7);
+        return view('productos.kardex', ["movimientos" => $movimientos,"producto"=>$producto]);
             
         } catch (\Throwable $e) {
             return back()->withErrors(['exception' => $e->getMessage()])->withInput();
