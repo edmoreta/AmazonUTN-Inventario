@@ -77,11 +77,12 @@
                                 <div class="form-group">
                                     <label for="usu_direccion">Dirección</label><label for="usu_fechaN" style="color:red">*</label>
                                     <input type="text" name="usu_direccion" 
-                                    pattern="[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]+"
+                                    pattern="([A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü ]|[-]|[.])+"
                                     oninvalid="setCustomValidity('La dirección solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra')"
                                     oninput="setCustomValidity('')"
                                     title="Solo debe contener letras, números, guiones medios y puntos Ej: Av. 13 de Julio - Ibarra"
-                                    id="direccion" maxlength="100" required value="{{old('usu_direccion')}}" class="form-control"
+                                    id="usu_direccion" maxlength="100" required 
+                                    value="{{old('usu_direccion')}}" class="form-control"
                                     placeholder="Ej: Av. 13 de Octubre - Otavalo">
                                 </div>
                             </div>
